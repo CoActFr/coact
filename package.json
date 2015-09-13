@@ -7,7 +7,7 @@
   "scripts": {
     "postinstall": "bower install --production --allow-root --config.interactive=false && gulp build",
     "start": "gulp watch",
-    "deploy:prod": "shipit prod deploy"
+    "deploy": "shipit prod deploy"
   },
   "dependencies": {
     "bower": "*",
