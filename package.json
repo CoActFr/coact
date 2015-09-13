@@ -6,7 +6,8 @@
   },
   "scripts": {
     "postinstall": "bower install --production --allow-root --config.interactive=false && gulp build",
-    "start": "gulp watch"
+    "start": "gulp watch",
+    "deploy:prod": "shipit prod deploy"
   },
   "dependencies": {
     "bower": "*",
@@ -27,5 +28,10 @@
     "main-bower-files": "^2.5.0",
     "require-dir": "^0.1.0",
     "wiredep": "*"
+  },
+  "devDependencies": {
+    "shipit-cli": "^1.2.1",
+    "shipit-deploy": "^2.0.0",
+    "shipit": "~0.1.16"
   }
 }
