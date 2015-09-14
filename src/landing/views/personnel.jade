@@ -1,51 +1,55 @@
-.jumbotron
-  .container
-    .row
-      .col-md-12
-        h1 La dimension humaine de la collaboration
-        p
-        | Le premier enjeu de toute collaboration au sein d’une organisation quelle
-        | qu’elle soit est de parvenir à faire en sorte que l’ensemble des personnes
-        | qui la composent soient en capacité d’avoir un bon niveau de communication
-        | et d’interaction. Et pourtant, nous le savons et l’expérimentons au quotidien,
-        | nous sommes tous différents, par notre passé, notre éducation, notre caractère
-        | et bien d’autres critères. Certains préféreraient plus d’homogénéité là où
-        | d’autres y voient une richesse. Le véritable enjeu n’est donc pas de juger
-        | si cela est bien ou pas, mais bien de faire fonctionner ensemble et
-        | efficacement des personnes différentes.
-        p Tel est l’objectif que nous nous sommes fixés chez CoAct – The Collabor’action Factory !
-        p
-        | Toutes nos actions de formations ou d’animations de séminaires sont résolument
-        | collaboratives. Comment ? Depuis plus de 15 ans, nous créons et animons des
-        | Collaborative Trainings qui permettent aux participants de véritablement
-        | travailler en équipe pour progresser dans leurs pratiques et d’initier
-        | une démarche collaborative pérenne au sein de votre organisation.
-.jumbotron.blue
-  .container.marketing
-    .row
-      .col-lg-4
-        .thumbnail
-          .caption
-            p
-              a.btn.btn-xl(href='#/personnel') Passer à l’action
-            p
-              | Expérimentez un Collaborative Training
-              | (thème Management) sur 2 heures pour 4 à 6 personnes
-      .col-lg-4
-        .thumbnail
-          .caption
-            p
-              a.btn.btn-xl(href='#/personnel') Faite évoluer vos formatations
-            p
-              | Vous avez déjà des programmes de formations en place et vous recherchez
-              | un format innovant qui marquera vos participants, contactez-nous pour
-              | connaitre comment transformer une formation « classique »
-              | en Collaborative training
-      .col-lg-4
-        .thumbnail
-          .caption
-            p
-              a.btn.btn-xl(href='#/personnel') Explorer vos possibilités
-            p
-              | Vous vous interroger sur les thèmes abordés et les applications
-              | possibles des Collaborative Trainings, découvrez quelques exemples
+extends ./header.jade
+block vars
+  - var nav = 'personnel'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h1 La dimension humaine de la collaboration
+          p
+          | Le premier enjeu de toute collaboration au sein d’une organisation quelle
+          | qu’elle soit est de parvenir à faire en sorte que l’ensemble des personnes
+          | qui la composent soient en capacité d’avoir un bon niveau de communication
+          | et d’interaction. Et pourtant, nous le savons et l’expérimentons au quotidien,
+          | nous sommes tous différents, par notre passé, notre éducation, notre caractère
+          | et bien d’autres critères. Certains préféreraient plus d’homogénéité là où
+          | d’autres y voient une richesse. Le véritable enjeu n’est donc pas de juger
+          | si cela est bien ou pas, mais bien de faire fonctionner ensemble et
+          | efficacement des personnes différentes.
+          p Tel est l’objectif que nous nous sommes fixés chez CoAct – The Collabor’action Factory !
+          p
+          | Toutes nos actions de formations ou d’animations de séminaires sont résolument
+          | collaboratives. Comment ? Depuis plus de 15 ans, nous créons et animons des
+          | Collaborative Trainings qui permettent aux participants de véritablement
+          | travailler en équipe pour progresser dans leurs pratiques et d’initier
+          | une démarche collaborative pérenne au sein de votre organisation.
+  .jumbotron.blue
+    .container.marketing
+      .row
+        .col-lg-4
+          .thumbnail
+            .caption
+              p
+                a.btn.btn-primary(href='#/personnel') Passer à l’action
+              p
+                | Expérimentez un Collaborative Training
+                | (thème Management) sur 2 heures pour 4 à 6 personnes
+        .col-lg-4
+          .thumbnail
+            .caption
+              p
+                a.btn.btn-primary(href='#/personnel') Faite évoluer vos formatations
+              p
+                | Vous avez déjà des programmes de formations en place et vous recherchez
+                | un format innovant qui marquera vos participants, contactez-nous pour
+                | connaitre comment transformer une formation « classique »
+                | en Collaborative training
+        .col-lg-4
+          .thumbnail
+            .caption
+              p
+                a.btn.btn-primary(href='#/personnel') Explorer vos possibilités
+              p
+                | Vous vous interroger sur les thèmes abordés et les applications
+                | possibles des Collaborative Trainings, découvrez quelques exemples

@@ -1,18 +1,22 @@
-.jumbotron.blue
-  .container
-    .row
-      .col-md-8 &nbsp;
-    .row
-      .col-md-8
-        h1 Contactez-nous !
-.jumbotron
-  .container
-    .row
-      .col-md-5
-        h2 Par email
-        p
-          a(href="mailto:contact@thecollaboractionfactory.com?Subject=Contact%20Coact" target="_top") contact@thecollaboractionfactory.com
-      .col-md-5.col-md-offset-2
-        h2 Par téléphone
-        p 06 58 50 68 14
+extends ./header.jade
+block vars
+  - var nav = 'contact'
+block component
+  .jumbotron.blue
+    .container
+      .row
+        .col-md-8 &nbsp;
+      .row
+        .col-md-8
+          h1 Contactez-nous !
+  .jumbotron
+    .container
+      .row
+        .col-md-5
+          h2 Par email
+          p
+            a(href="mailto:contact@thecollaboractionfactory.com?Subject=Contact%20Coact" target="_top") contact@thecollaboractionfactory.com
+        .col-md-5.col-md-offset-2
+          h2 Par téléphone
+          p 06 58 50 68 14
 

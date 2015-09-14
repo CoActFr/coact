@@ -11,33 +11,8 @@ html(lang="fr", ng-app="%module%")
         //- noContentTimeout: 10000 (see #528)
       }
     link(rel="stylesheet", href="%styles%/main.css")
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
     meta(name="viewport", content="initial-scale=1.0, width:device-width")
   body.coactcss
-
-    nav.navbar.navbar-default.navbar-fixed-top
-      .container-fluid
-        .navbar-header
-          a.navbar-brand(href="#/")
-            img(src="img/CoAct.svg" onerror="this.onerror=null; this.src='img/CoAct.png'")
-        #navbar.navbar-collapse.collapse
-          ul.nav.navbar-nav.navbar-right
-            li.active
-              a(href="#/") Accueil
-            li.dropdown
-              a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
-                | Former
-                span.caret
-              ul.dropdown-menu
-                li
-                  a(href="#/personnel") votre personel
-                li
-                  a(href="#/") vos organisations
-                li
-                  a(href="#/") votre technlogie
-            li
-              a(href="#/contact") Contact
-
     ui-view
     script(src="%scripts%/vendor.js")
     script(src="%scripts%/app.js")

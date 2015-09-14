@@ -1,5 +1,8 @@
 @import '../../../bower_components/bootstrap/less/bootstrap.less';
 
+@coactBlue: rgba(38, 173, 228, 1);
+@coactBlueDarker: rgba(23, 158, 213, 1);
+
 .space-left {
   margin-left: 5px;
 }
@@ -21,6 +24,19 @@ body {
     text-align: center;
   }
 
+  img.img-circle {
+    width: 85px;
+    padding-top: 20px;
+  }
+
+  p {
+    font-size: 17px !important;
+  }
+
+  .thumbnail {
+    text-align: center;
+  }
+
   /* Nav
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -37,23 +53,62 @@ body {
     }
   }
 
-  img.img-circle {
-    width: 85px;
-    float:left;
-    padding-top: 20px;
-    margin: 2px 20px;
-  }
 
-  p {
-    font-size: 17px !important;
+  .navbar-default .navbar-nav>.active>a{
+    &, &:focus, &:hover {
+      background-color: rgba(38, 173, 228, 0.5);
+      color: #fff;
+    }
+  }
+  .dropdown-menu > .active > a{
+    &, &:focus, &:hover {
+      color: #fff;
+      text-decoration: none;
+      outline: 0;
+      background-color: @coactBlue;
+    }
   }
 
 
   /* Row
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
   .jumbotron.blue {
-    background-color: #26ADE4;
+    background-color: @coactBlue;
     color: #fff;
+  }
+
+  /* Buttons
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+  .btn-primary {
+    color: #ffffff;
+    background-color: @coactBlue;
+    border-color: #2e6da4;
+    width: 90%;
+    margin: 0 5%;
+    &:focus, &.focus {
+      color: #ffffff;
+      background-color: @coactBlueDarker;
+      border-color: #122b40;
+    }
+    &:hover {
+      color: #ffffff;
+      background-color: @coactBlueDarker;
+      border-color: #204d74;
+    }
+    &:active,
+    &.active,
+    .open > .dropdown-toggle& {
+      color: #ffffff;
+      background-color: @coactBlueDarker;
+      border-color: #204d74;
+      background-image: none;
+      &:hover, &:focus, &.focus {
+        color: #ffffff;
+        background-color: #204d74;
+        border-color: #122b40;
+      }
+    }
   }
 
 }
