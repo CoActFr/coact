@@ -13,6 +13,10 @@ angular.module '%module%.landing'
     url: '/organisation'
     templateUrl: 'landing/views/organisation.html'
     parent: 'app'
+  .state 'technologie',
+    url: '/technologie'
+    templateUrl: 'landing/views/technologie.html'
+    parent: 'app'
   .state 'contact',
     url: '/contact'
     templateUrl: 'landing/views/contact.html'

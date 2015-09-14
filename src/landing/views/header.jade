@@ -8,7 +8,7 @@ nav.navbar.navbar-default.navbar-fixed-top
       ul.nav.navbar-nav.navbar-right
         li(class=nav === 'landing' ? 'active' : '')
           a(href="#/") Accueil
-        li.dropdown(class=nav === 'personnel' || nav === 'organisation' ? 'active' : '')
+        li.dropdown(class=nav === 'personnel' || nav === 'organisation' || nav === 'technologie' ? 'active' : '')
           a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
             | Former
             span.caret
@@ -17,8 +17,8 @@ nav.navbar.navbar-default.navbar-fixed-top
               a(href="#/personnel") votre personel
             li(class=nav === 'organisation' ? 'active' : '')
               a(href="#/organisation") vos organisations
-            li
-              a(href="#/") votre technlogie
+            li(class=nav === 'technologie' ? 'active' : '')
+              a(href="#/technologie") votre technlogie
         li(class=nav === 'contact' ? 'active' : '')
           a(href="#/contact") Contact
 
