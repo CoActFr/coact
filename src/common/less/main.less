@@ -73,15 +73,16 @@ body {
   /* Row
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
   .jumbotron.cta {
-    background-color: @coactBlue;
+    background-color: #999;
     color: #fff;
   }
 
-  .jumbotron.pillars {
-    background-color: #999;
+  .jumbotron.pillars, .jumbotron.catch {
+    background-color: @coactBlue;
     h2 {
       text-align: center;
       margin-bottom: 50px;
+      font-size: 42px;
     }
   }
 
@@ -95,6 +96,7 @@ body {
     border-color: #2e6da4;
     width: 90%;
     margin: 0 5%;
+    font-size: 20px;
     &:focus, &.focus {
       color: #ffffff;
       background-color: @coactBlueDarker;
