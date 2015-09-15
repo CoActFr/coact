@@ -2,46 +2,66 @@ extends ./header.jade
 block vars
   - var nav = 'landing'
 block component
-  .container
+  #logo.container
     .page-header
       img.img-responsive(src="img/CoAct.svg" onerror="this.onerror=null; this.src='img/CoAct.png'")
 
-  .jumbotron.catch
-    .container
-      .row
-        .col-md-12
-          h1 Pourquoi Travailler avec nous ?
-          p
-            | Notre savoir-faire : maximiser l'efficacité de vos collaborateurs en développant les pratiques collaboratives au sein de vos organisations.
-  .jumbotron.cta
-    .container.marketing
-      .row
-        .col-md-4
-          .thumbnail
-            img.img-circle(src='img/Puce.svg' onerror='this.onerror=null;' this.src='img/Puce.png')
-            .caption
-              h2 Former votre personel
+  carousel#landing-carousel(wrap=false)
+    slide#catch(active="landingCarousel.catch")
+      .jumbotron.catch
+        .container.marketing
+          .row
+            .col-md-12
+              h1 Travaillons ensemble
               p
-                | Une meilleure connaissance de soi, de son propre fonctionnement en condition normale et sous stress,
-                | de nos attentes vis-à-vis de notre environnement et des personnes avec lesquelles nous communiquons
+              | Dopez l'efficacité des équipes en développant les pratiques
+              | collaboratives au sein de votre organisation.
+          .row.three-fork
+            .col-md-4
+              img(src='img/personnel.svg' onerror='this.onerror=null;' this.src='img/personnel.png')
               p
-                a.btn.btn-cta(href='#/personnel') En apprendre plus
-        .col-md-4
-          .thumbnail
-            img.img-circle(src='img/Puce.svg' onerror='this.onerror=null;' this.src='img/Puce.png')
-            .caption
-              h2 Enrichir vos organisation
+                a.btn.btn-default(ng-click='landingCarousel.goTo("personnel")') Dopez les equipes
+            .col-md-4
+              img(src='img/personnel.svg' onerror='this.onerror=null;' this.src='img/personnel.png')
               p
-                | Par la mise en place de processus collaboratifs prenant en compte les besoins de plus en plus rapides de gestion du changement
-
+                a.btn.btn-default(ng-click='landingCarousel.goTo("organisation")' style='white-space:pre;')
+                  | Rendez votre organisation
+                  | "apprenante"
+            .col-md-4
+              img(src='img/personnel.svg' onerror='this.onerror=null;' this.src='img/personnel.png')
               p
-                a.btn.btn-cta(href='#/organisation') En apprendre plus
-        .col-md-4
-          .thumbnail
-            img.img-circle(src='img/Puce.svg' onerror='this.onerror=null;' this.src='img/Puce.png')
-            .caption
-              h2 Adapter votre technologie
+                a.btn.btn-default(ng-click='landingCarousel.goTo("technologie")') Adaptez votre technologie
+    slide#personnel(active="landingCarousel.personnel")
+      .jumbotron.appeal
+        .container.marketing
+          .row
+            .col-md-12
+              h2 Dopez les equipes
               p
-                | Par la mise en place de technologies favorisant la collaboration dès lors que celles-ci sont soutenues par les collaborateurs
+                | Grâce à une meilleure connaissance de soi, de son propre fonctionnement
+                | en condition normale et sous stress, de nos attentes vis-à-vis de notre
+                | environnement et des personnes avec lesquelles nous communiquons
               p
-                a.btn.btn-cta(href='#/technologie') En apprendre plus
+                a.btn.btn-default(href='#/personnel') En apprendre plus
+    slide#organisation(active="landingCarousel.organisation")
+      .jumbotron.appeal
+        .container.marketing
+          .row
+            .col-md-12
+              h2 Rendez votre organisation "apprenante"
+              p
+                | Par la mise en place de processus collaboratifs prenant en compte
+                | les besoins de plus en plus rapides de gestion du changement
+              p
+                a.btn.btn-default(href='#/personnel') En apprendre plus
+    slide#technologie(active="landingCarousel.technologie")
+      .jumbotron.appeal
+        .container.marketing
+          .row
+            .col-md-12
+              h2 Adaptez votre technologie
+              p
+                | Par la mise en place de technologies favorisant la collaboration dès
+                | lors que celles-ci sont soutenues par les collaborateurs
+              p
+                a.btn.btn-default(href='#/personnel') En apprendre plus

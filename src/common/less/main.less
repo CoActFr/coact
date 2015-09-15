@@ -24,9 +24,13 @@ body {
     text-align: center;
   }
 
-  img.img-circle {
-    width: 85px;
-    padding-top: 20px;
+  .three-fork{
+    text-align: center;
+    img {
+      width: 100px;
+      margin: 5px 0 25px;
+      padding-top: 20px;
+    }
   }
 
   p {
@@ -35,6 +39,12 @@ body {
 
   .thumbnail {
     text-align: center;
+  }
+
+  #landing-carousel {
+    &, & .carousel-inner, & .carousel-inner>div, & .carousel-inner>div>div{
+      min-height: 530px;
+    }
   }
 
   /* Nav
@@ -77,13 +87,23 @@ body {
     color: #fff;
   }
 
-  .jumbotron.pillars, .jumbotron.catch {
+  .jumbotron.pillars, .jumbotron.catch, .jumbotron.appeal {
     background-color: @coactBlue;
     h2 {
       text-align: center;
       margin-bottom: 50px;
       font-size: 42px;
     }
+    .btn-default {
+      width: 90%;
+      margin: 0 5%;
+      font-size: 20px;
+    }
+  }
+
+  .jumbotron.appeal p {
+    font-size: 35px !important;
+    margin-bottom: 35px;
   }
 
   }
