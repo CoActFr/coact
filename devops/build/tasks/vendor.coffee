@@ -1,6 +1,8 @@
 gulp = require 'gulp'
 concat = require 'gulp-concat'
 filter = require 'gulp-filter'
+plumber = require 'gulp-plumber'
+flatten = require 'gulp-flatten'
 mainBowerFiles = require 'main-bower-files'
 wiredep = require 'wiredep'
 
@@ -17,14 +19,15 @@ gulp.task 'vendor', ->
   .pipe gulp.dest parameters.paths.www.scripts
 
   # Fonts
-  gulp.src mainBowerFiles()
-  .pipe filter [
-      '**/*.woff'
-      '**/*.svg'
-      '**/*.eot'
-      '**/*.ttf'
-      '**/*.otf'
-    ]
+  gulp.src [
+    "#{parameters.paths.src.bower}/**/*.woff"
+    "#{parameters.paths.src.bower}/**/*.svg"
+    "#{parameters.paths.src.bower}/**/*.eot"
+    "#{parameters.paths.src.bower}/**/*.ttf"
+    "#{parameters.paths.src.bower}/**/*.otf"
+  ]
+  .pipe plumber()
+  .pipe flatten()
   .pipe gulp.dest "#{parameters.paths.www.main}/fonts"
 
   gulp.src 'bower_components/ng-file-upload/FileAPI.min.js'

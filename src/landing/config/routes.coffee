@@ -3,6 +3,7 @@ angular.module '%module%.landing'
   $stateProvider
   .state 'landing',
     url: '/'
+    controller: 'landingCtrl'
     templateUrl: 'landing/views/landing.html'
     parent: 'app'
   .state 'personnel',
