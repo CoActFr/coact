@@ -6,7 +6,7 @@ block component
     .page-header
       img.img-responsive(src="img/CoAct.svg" onerror="this.onerror=null; this.src='img/CoAct.png'")
 
-  carousel#landing-carousel(wrap=false)
+  carousel#landing-carousel(no-wrap="true" data-interval="false")
     slide#catch(active="landingCarousel.catch")
       .jumbotron.catch
         .container.marketing
