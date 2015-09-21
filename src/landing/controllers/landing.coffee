@@ -1,12 +1,8 @@
 angular.module '%module%.landing'
-.controller 'landingCtrl',  ($scope) ->
+.controller 'landingCtrl',  ($scope, Slider) ->
 
-  $scope.landingCarousel =
-    slides :
-      catch:true
-      personnel:false
-      organisation:false
-      technologie:false
-    goTo : (label) ->
-      @slides[label] = true
-      return
+  $scope.landingCarousel = Slider.create
+    catch:true
+    personnel:false
+    organisation:false
+    technologie:false

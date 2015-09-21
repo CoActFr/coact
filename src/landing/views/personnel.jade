@@ -7,49 +7,60 @@ block component
       .row
         .col-md-12
           h1 La dimension humaine de la collaboration
-          p
-          | Le premier enjeu de toute collaboration au sein d’une organisation quelle
-          | qu’elle soit est de parvenir à faire en sorte que l’ensemble des personnes
-          | qui la composent soient en capacité d’avoir un bon niveau de communication
-          | et d’interaction. Et pourtant, nous le savons et l’expérimentons au quotidien,
-          | nous sommes tous différents, par notre passé, notre éducation, notre caractère
-          | et bien d’autres critères. Certains préféreraient plus d’homogénéité là où
-          | d’autres y voient une richesse. Le véritable enjeu n’est donc pas de juger
-          | si cela est bien ou pas, mais bien de faire fonctionner ensemble et
-          | efficacement des personnes différentes.
-          p Tel est l’objectif que nous nous sommes fixés chez CoAct – The Collabor’action Factory !
-          p
-          | Toutes nos actions de formations ou d’animations de séminaires sont résolument
-          | collaboratives. Comment ? Depuis plus de 15 ans, nous créons et animons des
-          | Collaborative Trainings qui permettent aux participants de véritablement
-          | travailler en équipe pour progresser dans leurs pratiques et d’initier
-          | une démarche collaborative pérenne au sein de votre organisation.
-  .jumbotron.cta
+          p.explain
+            | Le premier enjeu de toute collaboration au sein d’une organisation
+            | est de faire en sorte que l’ensemble des personnes
+            | qui la composent communiquent et interagissent aisément.
+          p.explain
+            | Et pourtant, nos différences rendent cette enjeu difficile.
+          p.explain
+            | Le véritable enjeu est donc de prendre en compte ces différences
+            | pour faire fonctionner ensemble et
+            | efficacement des personnes différentes.
+          p.explain Chez CoAct – The Collabor’action Factory, Cet enjeu est notre objectif !
+          p.explain
+            | Toutes nos actions de formations ou d’animations de séminaires sont résolument
+            | collaboratives. Nous créons et animons des
+            | Collaborative Trainings qui permettent aux participants de véritablement
+            | travailler en équipe pour progresser dans leurs pratiques et d’initier
+            | une démarche collaborative pérenne au sein de votre organisation.
+  .jumbotron.appeal
     .container.marketing
       .row
-        .col-lg-4
+        .col-md-4
           .thumbnail
             .caption
               p
-                a.btn.btn-cta(href='#/personnel') Passez à l’action
+                a.btn.btn-cta(
+                  ng-click='personnelSlider.goTo("takeAction")'
+                  ng-class='{active: personnelSlider.slides.takeAction}'
+                  ) Passez à l’action
               p
-                | Expérimentez un Collaborative Training
-                | sur 2 heures pour 4 à 6 personnes
-        .col-lg-4
-          .thumbnail
-            .caption
+                a.btn.btn-cta(
+                  ng-click='personnelSlider.goTo("transform")'
+                  ng-class='{active: personnelSlider.slides.transform}'
+                  ) Faites évoluer vos formations
               p
-                a.btn.btn-cta(href='#/personnel') Faites évoluer vos formations
-              p
-                | Vous avez déjà des programmes de formations en place et vous recherchez
-                | un format innovant qui marquera vos participants, contactez-nous pour
-                | connaitre comment transformer une formation « classique »
-                | en Collaborative training
-        .col-lg-4
-          .thumbnail
-            .caption
-              p
-                a.btn.btn-cta(href='#/personnel') Explorez vos possibilités
-              p
-                | Vous vous interrogez sur les thèmes abordés et les applications
-                | possibles des Collaborative Trainings, découvrez quelques exemples
+                a.btn.btn-cta(
+                  ng-click='personnelSlider.goTo("discover")'
+                  ng-class='{active: personnelSlider.slides.discover}'
+                  ) Explorez vos possibilités
+        .col-md-8
+          #take-action(ng-show="personnelSlider.slides.takeAction")
+            p
+              | Expérimentez un Collaborative Training
+              | sur 2 heures pour 4 à 6 personnes
+          #transform(ng-show="personnelSlider.slides.transform")
+            p
+              | Vous avez déjà des programmes de formations en place et vous recherchez
+              | un format innovant qui marquera vos participants ?
+            p
+              | Transformez une formation « classique »
+              | en Collaborative training
+          #discover(ng-show="personnelSlider.slides.discover")
+            p
+              | Vous vous interrogez sur les thèmes abordés et les applications
+              | possibles des Collaborative Trainings ?
+      .row
+        .col-md-12
+          a.btn.btn-default.large(href="#/contact") Contactez-nous
