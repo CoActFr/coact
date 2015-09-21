@@ -7,7 +7,7 @@ block component
       img.img-responsive(src="img/CoAct.svg" onerror="this.onerror=null; this.src='img/CoAct.png'")
 
   carousel#landing-carousel(no-wrap="true" data-interval="false")
-    slide#catch(active="landingCarousel.catch")
+    slide#catch(active="landingCarousel.slides.catch")
       .jumbotron.catch
         .container.marketing
           .row
@@ -31,7 +31,7 @@ block component
               img(src='img/personnel.svg' onerror='this.onerror=null;' this.src='img/personnel.png')
               p
                 a.btn.btn-default(ng-click='landingCarousel.goTo("technologie")') Adaptez votre technologie
-    slide#personnel(active="landingCarousel.personnel")
+    slide#personnel(active="landingCarousel.slides.personnel")
       .jumbotron.appeal
         .container.marketing
           .row
@@ -43,7 +43,7 @@ block component
                 | environnement et des personnes avec lesquelles nous communiquons
               p
                 a.btn.btn-default(href='#/personnel') En apprendre plus
-    slide#organisation(active="landingCarousel.organisation")
+    slide#organisation(active="landingCarousel.slides.organisation")
       .jumbotron.appeal
         .container.marketing
           .row
@@ -54,7 +54,7 @@ block component
                 | les besoins de plus en plus rapides de gestion du changement
               p
                 a.btn.btn-default(href='#/organisation') En apprendre plus
-    slide#technologie(active="landingCarousel.technologie")
+    slide#technologie(active="landingCarousel.slides.technologie")
       .jumbotron.appeal
         .container.marketing
           .row
