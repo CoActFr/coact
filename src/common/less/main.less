@@ -136,19 +136,6 @@ body {
         font-size: 14px !important;
       }
     }
-    .btn-default {
-      &.large {
-        width: 100%;
-        margin: 0;
-        font-size: 28px;
-      }
-      width: 90%;
-      margin: 0 5%;
-      @media(max-width: 640px) {
-        font-size: 14px;
-      }
-      font-size: 20px;
-    }
   }
 
   .jumbotron.appeal p {
@@ -161,8 +148,31 @@ body {
   }
 
   }
-  /* CTA
+  /* BTN
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+  .jumbotron.pillars, .jumbotron.catch, .jumbotron.appeal {
+    .btn-default {
+      &.btn-higlight {
+        background-color: #0004AD;
+        border-color: #00008B;
+        border-width: thick;
+        color: #fff;
+        width: 100%;
+        margin: 0;
+        font-size: 28px;
+        @media(max-width: 640px) {
+          font-size: 22px;
+        }
+      }
+      width: 90%;
+      margin: 0 5%;
+      @media(max-width: 640px) {
+        font-size: 14px;
+      }
+      font-size: 20px;
+    }
+  }
 
   .btn-cta {
     color: #ffffff;
