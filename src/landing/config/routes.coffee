@@ -8,6 +8,7 @@ angular.module '%module%.landing'
     parent: 'app'
   .state 'personnel',
     url: '/personnel'
+    controller: 'personnelCtrl'
     templateUrl: 'landing/views/personnel.html'
     parent: 'app'
   .state 'organisation',
