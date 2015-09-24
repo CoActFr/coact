@@ -14,6 +14,7 @@ angular.module '%module%.landing'
   .state 'organisation',
     url: '/organisation'
     templateUrl: 'landing/views/organisation.html'
+    controller: 'organisationCtrl'
     parent: 'app'
   .state 'technologie',
     url: '/technologie'

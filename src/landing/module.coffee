@@ -11,3 +11,5 @@ angular.module '%module%.landing', [
   'ng'
   'ui.router'
 ]
+
+

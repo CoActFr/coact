@@ -8,61 +8,67 @@ block component
         .col-md-12
           h1 La dimension organisationnelle de la collaboration
           p
-          | La collaboration au sein des organisations est souvent fantasmée à travers
-          | le « on travaille tous ensemble ». La réalité, le quotidien amène certains
-          | à travailler avec d’autres, soit de manière récurrente ou régulière, soit de
-          | manière plus épisodique.
+            | La collaboration au sein des organisations est souvent fantasmée à travers
+            | le « on travaille tous ensemble ». La réalité, le quotidien amène certains
+            | à travailler avec d’autres, soit de manière récurrente ou régulière, soit de
+            | manière plus épisodique.
 
           p
-          | Loin d’une vision utopiste, notre parti-pris au sein de
-          | CoAct – The Collabor’action Factory est de n’activer les ressorts de la
-          | collaboration que lorsqu’ils sont nécessaires.
-
-  .jumbotron.pillars
-    h2 Les 3 piliers d’une organisation collaborative
-    .container.marketing
-      .row
-        .col-lg-4
-          .thumbnail
-            .caption
-              p
-                | Une définition extrêmement claire des rôles présents au sein de
-                | l’organisation, de leur raison d’être et de ce qui est attendu de leur part
-        .col-lg-4
-          .thumbnail
-            .caption
-              p
-                | Une attribution claire de ces rôles afin de savoir exactement
-                | « qui fait quoi » pour ne plus entendre de « ah mais je pensais
-                | que c’était à toi de faire ça », « ce n’est pas à moi de le faire »
-                | ou tout autre phrase marquant un constat de manque de clarté voire
-                | de faille dans l’organisation
-        .col-lg-4
-          .thumbnail
-            .caption
-              p
-                | Une organisation apprenante qui se remet en question régulièrement
-                | pour réduire les écarts entre « ce qui est » et « ce qui devrait être »,
-                | un fonctionnement agile
-  .jumbotron.cta
-    .container.marketing
-      .row
+            | Loin d’une vision utopiste, notre parti-pris au sein de
+            | CoAct – The Collabor’action Factory est de n’activer les ressorts de la
+            | collaboration que lorsqu’ils sont nécessaires.
+  #organisation-cta
+    .container
+      .row.cta
         .col-lg-6
-          .thumbnail
-            .caption
-              p
-                a.btn.btn-cta(href='#/organisation') Découvrez nos ateliers
+          p
+            a.btn.btn-cta(
+                    ng-click='organisationSlider.goTo("workshop")'
+                    ng-class='{active: organisationSlider.slides.workshop}'
+                    ) Découvrez nos ateliers
+        .col-lg-6
+          p
+            a.btn.btn-cta(
+                    ng-click='organisationSlider.goTo("transform")'
+                    ng-class='{active: organisationSlider.slides.transform}'
+                    ) Transformer votre organisation
+    .jumbotron(
+      ng-show='organisationSlider.slides.workshop || organisationSlider.slides.transform')
+      .container
+        .row
+          .col-lg-12
+            div(ng-show='organisationSlider.slides.workshop')
+              h2 Découvrez nos ateliers
               p
                 | Vous envisagez de repenser l’organisation managériale de votre
                 | entreprise, vous recherchez des méthodes pour apporter de la souplesse
                 | et de l’agilité à votre organisation, découvrez nos ateliers découverte
                 | en innovation organisationnelle
-        .col-lg-6
-          .thumbnail
-            .caption
-              p
-                a.btn.btn-cta(href='#/organisation') Transformer votre organisation
+            div(ng-show='organisationSlider.slides.transform')
+              h2 Transformer votre organisation
               p
                 | Vous avez un projet de transformation de votre organisation,
                 | remplissez notre mini-questionnaire de maturité au changement
                 | pour connaitre quelles seront les prochaines étapes de ce projet
+        .row
+          .col-md-12
+            a.btn.btn-default.btn-higlight(href="#/contact") Contactez-nous
+
+  .jumbotron.pillars
+    h2 Les 3 piliers d’une organisation collaborative
+    .container
+      .row
+        .col-lg-10.col-lg-offset-1
+          carousel#pillars-carousel(data-interval="10000")
+            slide#catch(active="pillarCarousel.slides.first")
+              .col-lg-8.col-lg-offset-2
+                h3 Une définition extrêmement claire des rôles de l’organisation
+                p de leur raison d’être et de ce qui est attendu de leur part
+            slide#catch(active="pillarCarousel.slides.second")
+              .col-lg-8.col-lg-offset-2
+                h3 Une attribution claire de ces rôles
+                p répondre à la question « qui fait quoi ?»
+            slide#catch(active="pillarCarousel.slides.third")
+              .col-lg-8.col-lg-offset-2
+                h3 Une remise en question de ces rôles
+                p pour réduire les écarts entre « ce qui est » et « ce qui devrait être »

@@ -2,6 +2,7 @@
 
 @coactBlue: rgba(38, 173, 228, 1);
 @coactBlueDarker: rgba(23, 158, 213, 1);
+@coactGrey: #999;
 
 .space-left {
   margin-left: 5px;
@@ -21,6 +22,11 @@ body {
 
 .explain {
   font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.ng-hide-add, .ng-hide-remove {
+  /* ensure visibility during the transition */
+  display: block !important; /* yes, important */
 }
 
 .coactcss{
@@ -64,6 +70,32 @@ body {
       margin-bottom: 0;
     }
     margin-top: -25px;
+  }
+
+  #pillars-carousel {
+    background-color: @coactBlue;
+    border-color: #fff;
+    border-width: 15px;
+    border-style: solid;
+    border-radius: 15px;
+
+    color: #fff;
+
+    .item>div {
+      margin-top: 20px;
+    }
+    &, & .carousel-inner, & .carousel-inner>div, & .carousel-inner>div>div{
+      @media(min-height: 641px) {
+        height: 280px;
+      }
+      margin-bottom: 0;
+    }
+  }
+
+  #organisation-cta {
+    .jumbotron {
+      margin-bottom: 0;
+    }
   }
 
   /* Slider
@@ -113,23 +145,46 @@ body {
     }
   }
 
-
   /* Row
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .jumbotron {
+    h1 {
+      font-size: 50px !important;
+    }
+  }
+
   .jumbotron.cta {
-    background-color: #999;
+    background-color: @coactGrey;
     color: #fff;
   }
 
-  .jumbotron.pillars, .jumbotron.catch, .jumbotron.appeal {
+  .row.cta{
+    margin-bottom: 30px;
+  }
+
+  .jumbotron.pillars {
+    background-color: @coactBlueDarker;
+  }
+
+  .jumbotron.catch, .jumbotron.appeal {
     background-color: @coactBlue;
+  }
+
+  .jumbotron.pillars, .jumbotron.catch, .jumbotron.appeal {
     h2 {
-      text-align: center;
-      margin-bottom: 50px;
       font-size: 42px;
     }
+    h3 {
+      font-size: 30px;
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
     @media(max-width: 640px) {
-      h1, h2 {
+      h1, h2, h3 {
         font-size: 25px !important;
       }
       p {
@@ -146,12 +201,10 @@ body {
     margin-bottom: 35px;
     padding-top: 20px;
   }
-
-  }
   /* BTN
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-  .jumbotron.pillars, .jumbotron.catch, .jumbotron.appeal {
+  .jumbotron {
     .btn-default {
       &.btn-higlight {
         background-color: #0004AD;
@@ -204,5 +257,6 @@ body {
         border-color: #122b40;
       }
     }
+  }
 
 }

@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "*",
+    "angular-bootstrap": "0.13.0",
+    "angular-local-storage": "0.2.2",
     "angular-translate": "*",
     "angular-ui-router": "*",
-    "lodash": "*",
-    "angular-local-storage": "0.2.2",
-    "angular-bootstrap": "0.13.0",
     "bootstrap": "3.3.5",
+    "lodash": "*",
     "ng-file-upload": "~5.0.9"
   }
 }
