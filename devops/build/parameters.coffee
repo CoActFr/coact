@@ -9,9 +9,11 @@ srcPath = 'src'
 assetsPlaceholder = '%assets%'
 assetsFolder = 'common/assets'
 lessFolder = 'common/less'
+fontsFolder = 'common/fonts'
 imagesFolder = 'common/images'
 assetsPath = "#{srcPath}/#{assetsFolder}"
 lessPath = "#{srcPath}/#{lessFolder}"
+fontsPath = "#{srcPath}/#{fontsFolder}"
 imagesPath = "#{srcPath}/#{imagesFolder}"
 bowerComponentsPath = "bower_components"
 
@@ -33,6 +35,7 @@ config =
       assets: assetsPath
       i18n: 'i18n'
       less: lessPath
+      fonts: fontsPath
       images: imagesPath
       bower: bowerComponentsPath
     www:

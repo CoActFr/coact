@@ -22,3 +22,15 @@ gulp.task 'assets', ->
       .pipe less
         paths: [ parameters.paths.src.bower ]
       .pipe gulp.dest parameters.paths.www.styles
+
+  # Fonts
+  gulp.src [
+    "#{parameters.paths.src.fonts}/**/*.woff"
+    "#{parameters.paths.src.fonts}/**/*.svg"
+    "#{parameters.paths.src.fonts}/**/*.eot"
+    "#{parameters.paths.src.fonts}/**/*.ttf"
+    "#{parameters.paths.src.fonts}/**/*.otf"
+  ]
+  .pipe plumber()
+  .pipe flatten()
+  .pipe gulp.dest "#{parameters.paths.www.main}/fonts"

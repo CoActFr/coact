@@ -12,7 +12,14 @@
     font-family: 'Ubuntu';
     font-style: normal;
     font-weight: 400;
-    src: local('Ubuntu'), url(http://example.com/fonts/ubuntu.woff) format('woff');
+    src: local('Ubuntu'), url(../fonts/ubuntu.ttf) format('woff');
+}
+
+@font-face {
+    font-family: 'Ubuntu-condensed';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Ubuntu Condensed'), url(../fonts/ubuntu-condensed.ttf) format('woff');
 }
 
 body {
@@ -21,7 +28,7 @@ body {
 }
 
 .explain {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Ubuntu-condensed, "Times New Roman", Times, serif;
 }
 
 .ng-hide-add, .ng-hide-remove {
