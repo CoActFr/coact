@@ -56,19 +56,25 @@ block component
 
   .jumbotron.pillars
     h2 Les 3 piliers d’une organisation collaborative
-    .container
+    .container.marketing
       .row
-        .col-lg-10.col-lg-offset-1
-          carousel#pillars-carousel(data-interval="5000")
-            slide#catch(active="pillarCarousel.slides.first")
-              .col-lg-8.col-lg-offset-2
-                h3 Une définition extrêmement claire des rôles de l’organisation
-                p de leur raison d’être et de ce qui est attendu de leur part
-            slide#catch(active="pillarCarousel.slides.second")
-              .col-lg-8.col-lg-offset-2
-                h3 Une attribution claire de ces rôles
-                p répondre à la question « qui fait quoi ?»
-            slide#catch(active="pillarCarousel.slides.third")
-              .col-lg-8.col-lg-offset-2
-                h3 Une remise en question de ces rôles
-                p pour réduire les écarts entre « ce qui est » et « ce qui devrait être »
+        .col-lg-12
+          #pillars
+            .col-lg-4
+              .thumbnail
+                .caption
+                  h3 Une définition extrêmement claire des rôles de l’organisation
+                  div.glyph-pillar
+                  p.subtitle de leur raison d’être et de ce qui est attendu de leur part
+            .col-lg-4
+              .thumbnail
+                .caption
+                  h3 Une attribution claire de ces rôles
+                  div.glyph-pillar
+                  p.subtitle répondre à la question « qui fait quoi ?»
+            .col-lg-4
+              .thumbnail
+                .caption
+                  h3 Une remise en question de ces rôles
+                  div.glyph-pillar
+                  p.subtitle pour réduire les écarts entre « ce qui est » et « ce qui devrait être »
