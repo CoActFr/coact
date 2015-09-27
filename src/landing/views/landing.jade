@@ -18,17 +18,20 @@ block component
                 | grâce à la collaboration
           .row.three-fork
             .col-md-4
-              img(src='img/personnel.svg' onerror='this.onerror=null;' this.src='img/personnel.png')
+              .glyph-holder
+                .glyph-personnel
               p
                 a.btn.btn-default(ng-click='landingCarousel.goTo("personnel")') Dopez les equipes
             .col-md-4
-              img(src='img/personnel.svg' onerror='this.onerror=null;' this.src='img/personnel.png')
+              .glyph-holder
+                .glyph-personnel
               p
                 a.btn.btn-default(ng-click='landingCarousel.goTo("organisation")' style='white-space:pre;')
                   | Rendez votre organisation
                   | "apprenante"
             .col-md-4
-              img(src='img/personnel.svg' onerror='this.onerror=null;' this.src='img/personnel.png')
+              .glyph-holder
+                .glyph-personnel
               p
                 a.btn.btn-default(ng-click='landingCarousel.goTo("technologie")') Adaptez votre technologie
     slide#personnel(active="landingCarousel.slides.personnel")
