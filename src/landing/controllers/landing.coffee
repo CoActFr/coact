@@ -1,7 +1,7 @@
 angular.module '%module%.landing'
 .controller 'landingCtrl',  ($scope, Slider) ->
 
-  $scope.landingCarousel = Slider.create
+  $scope.landingSlider = Slider.create
     catch: true
     personnel: false
     organisation: false

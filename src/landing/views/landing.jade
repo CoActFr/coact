@@ -6,8 +6,8 @@ block component
     .page-header
       img.img-responsive(src="img/CoAct.svg" onerror="this.onerror=null; this.src='img/CoAct.png'")
 
-  carousel#landing-carousel(no-wrap="true" data-interval="false")
-    slide#catch(active="landingCarousel.slides.catch")
+  .three-fork
+    #catch(ng-show="landingSlider.slides.catch")
       .jumbotron.catch
         .container.marketing
           .row
@@ -21,20 +21,21 @@ block component
               .glyph-holder
                 .glyph-personnel
               p
-                a.btn.btn-default(ng-click='landingCarousel.goTo("personnel")') Dopez les equipes
+                a.btn.btn-default(ng-click='landingSlider.goTo("personnel")') Dopez les equipes
             .col-md-4
               .glyph-holder
                 .glyph-personnel
               p
-                a.btn.btn-default(ng-click='landingCarousel.goTo("organisation")' style='white-space:pre;')
+                a.btn.btn-default(ng-click='landingSlider.goTo("organisation")' style='white-space:pre;')
                   | Rendez votre organisation
                   | "apprenante"
             .col-md-4
               .glyph-holder
                 .glyph-personnel
               p
-                a.btn.btn-default(ng-click='landingCarousel.goTo("technologie")') Adaptez votre technologie
-    slide#personnel(active="landingCarousel.slides.personnel")
+                a.btn.btn-default(ng-click='landingSlider.goTo("technologie")') Adaptez votre technologie
+    #personnel(ng-show="landingSlider.slides.personnel")
+      .return(ng-click='landingSlider.goTo("catch")') ⇦ Retour
       .jumbotron.appeal
         .container.marketing
           .row
@@ -46,7 +47,8 @@ block component
                 | environnement et des personnes avec lesquelles nous communiquons
               p
                 a.btn.btn-default(href='#/personnel') En apprendre plus
-    slide#organisation(active="landingCarousel.slides.organisation")
+    #organisation(ng-show="landingSlider.slides.organisation")
+      .return(ng-click='landingSlider.goTo("catch")') ⇦ Retour
       .jumbotron.appeal
         .container.marketing
           .row
@@ -57,7 +59,8 @@ block component
                 | les besoins de plus en plus rapides de gestion du changement
               p
                 a.btn.btn-default(href='#/organisation') En apprendre plus
-    slide#technologie(active="landingCarousel.slides.technologie")
+    #technologie(ng-show="landingSlider.slides.technologie")
+      .return(ng-click='landingSlider.goTo("catch")') ⇦ Retour
       .jumbotron.appeal
         .container.marketing
           .row

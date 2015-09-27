@@ -43,15 +43,37 @@ body {
 
   .three-fork{
     text-align: center;
+    position: relative;
+
+    .return {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      text-decoration: underline;
+      color: #fff;
+      cursor: pointer;
+    }
 
     @media(max-width: 1046px) {
       p {
         width: 75% !important;
         display: inline-block;
       }
-      .glyph-personnel{
+      .glyph-holder{
         width: 40px !important;
+        height: 40px !important;
         display: inline-block;
+        margin: 5px 0 0 !important;
+        padding-left: 8px !important;
+        padding-top: 7px !important;
+
+        .glyph-personnel {
+          background-position-x: -20px;
+          background-position-y:  -6px;
+          background-size: 44px 56px;
+          width: 24px;
+          height: 26px;
+        }
       }
     }
     .glyph-holder {
