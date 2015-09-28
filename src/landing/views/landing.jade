@@ -19,19 +19,19 @@ block component
           .row.three-fork
             .col-md-4
               .glyph-holder
-                .glyph-personnel
+                .glyph.glyph-personnel
               p
                 a.btn.btn-default(ng-click='landingSlider.goTo("personnel")') Dopez les equipes
             .col-md-4
               .glyph-holder
-                .glyph-personnel
+                .glyph.glyph-personnel
               p
                 a.btn.btn-default(ng-click='landingSlider.goTo("organisation")' style='white-space:pre;')
                   | Rendez votre organisation
                   | "apprenante"
             .col-md-4
               .glyph-holder
-                .glyph-personnel
+                .glyph.glyph-tech
               p
                 a.btn.btn-default(ng-click='landingSlider.goTo("technologie")') Adaptez votre technologie
     #personnel(ng-show="landingSlider.slides.personnel")
