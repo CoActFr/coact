@@ -1,5 +1,6 @@
 angular.module '%module%.landing'
-.controller 'personnelCtrl',  ($scope, Slider) ->
+.controller 'personnelCtrl',  ($scope, $analytics, Slider) ->
+  $analytics.pageTrack('/personnel');
 
   $scope.personnelSlider = Slider.create
     takeAction: true

@@ -1,5 +1,6 @@
 angular.module '%module%.landing'
-.controller 'landingCtrl',  ($scope, Slider) ->
+.controller 'landingCtrl',  ($scope, $analytics, Slider) ->
+  $analytics.pageTrack('/');
 
   $scope.landingSlider = Slider.create
     catch: true

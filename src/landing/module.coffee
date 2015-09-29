@@ -10,6 +10,9 @@
 angular.module '%module%.landing', [
   'ng'
   'ui.router'
+  'angulartics'
+  'angulartics.google.analytics'
 ]
+
 
 

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "*",
+    "angulartics-google-analytics": "~0.1.1",
     "angular-bootstrap": "0.13.0",
     "angular-local-storage": "0.2.2",
     "angular-translate": "*",

@@ -1,5 +1,6 @@
 angular.module '%module%.landing'
-.controller 'organisationCtrl',  ($scope, Slider) ->
+.controller 'organisationCtrl',  ($scope, $analytics, Slider) ->
+  $analytics.pageTrack('/organisation');
 
   $scope.pillarCarousel = Slider.create
     first: true
