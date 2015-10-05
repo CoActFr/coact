@@ -7,17 +7,18 @@ module.exports = function (shipit) {
             repositoryUrl: 'git@github.com:AubryH/coact.git',
             ignores: ['.git', 'node_modules'],
             shallowClone: true,
-            keepReleases: 3
         },
         prod: {
             servers: 'root@212.227.108.147',
             branch: 'master',
-            deployTo: '/var/www/coact'
+            deployTo: '/var/www/coact',
+            keepReleases: 2
         },
         preprod: {
             servers: 'root@212.227.108.147',
             branch: 'staging',
-            deployTo: '/var/www/coact-preprod'
+            deployTo: '/var/www/coact-preprod',
+            keepReleases: 1
         }
     });
 
