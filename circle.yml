@@ -1,0 +1,9 @@
+checkout:
+    post:
+        - git submodule sync
+        - git submodule update --init
+test:
+    pre:
+        - npm start:
+            background: true
+        - sleep 5

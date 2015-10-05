@@ -7,6 +7,8 @@
   "scripts": {
     "postinstall": "bower install --production --allow-root --config.interactive=false && gulp build",
     "start": "gulp watch",
+    "pretest": "webdriver-manager update",
+    "test": "protractor --require coffee-script/register test/protractor.conf.coffee $WITH",
     "deploy": "shipit prod deploy"
   },
   "dependencies": {
@@ -31,8 +33,12 @@
     "gulp-flatten": "~0.2.0"
   },
   "devDependencies": {
+    "chai": "^2.0.0",
+    "cucumber": "^0.4.7",
+    "lodash": "^3.9.0",
+    "protractor": "^1.7.0",
+    "shipit": "~0.1.16",
     "shipit-cli": "^1.2.1",
-    "shipit-deploy": "^2.0.0",
-    "shipit": "~0.1.16"
+    "shipit-deploy": "^2.0.0"
   }
 }
