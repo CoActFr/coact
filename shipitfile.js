@@ -13,6 +13,11 @@ module.exports = function (shipit) {
             servers: 'root@212.227.108.147',
             branch: 'master',
             deployTo: '/var/www/coact'
+        },
+        preprod: {
+            servers: 'root@212.227.108.147',
+            branch: 'staging',
+            deployTo: '/var/www/coact-preprod'
         }
     });
 
@@ -20,7 +25,7 @@ module.exports = function (shipit) {
         return shipit.start('install');
     });
 
-    if(['prod'].indexOf(shipit.environment) > -1) {
+    if(['prod', 'preprod'].indexOf(shipit.environment) > -1) {
       require('./devops/deploy/prod.js')(shipit);
     } else {
       console.log("Unknwown environment: " + shipit.environment);
