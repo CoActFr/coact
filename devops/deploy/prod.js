@@ -3,6 +3,7 @@ module.exports = function (shipit) {
     shipit.blTask('installCoact', function () {
         return shipit.remote(
           "cd " + shipit.releasePath +
+          " && npm config set production" +
           " && npm install --unsafe-perm" +
           " && ln -sf " + shipit.config.deployTo + "/current/www/ " +
           shipit.config.deployTo + "/www"

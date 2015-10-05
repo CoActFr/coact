@@ -9,7 +9,8 @@
     "start": "gulp watch",
     "pretest": "webdriver-manager update",
     "test": "protractor --require coffee-script/register test/protractor.conf.coffee $WITH",
-    "deploy": "shipit prod deploy"
+    "deploy:prod": "shipit prod deploy",
+    "deploy:preprod": "shipit preprod deploy"
   },
   "dependencies": {
     "bower": "*",
