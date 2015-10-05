@@ -7,3 +7,12 @@ test:
         - npm start:
             background: true
         - sleep 5
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run deploy:prod
+  staging:
+    branch: staging
+    commands:
+      - npm run deploy:preprod
