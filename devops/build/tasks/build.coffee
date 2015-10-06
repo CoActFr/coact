@@ -4,4 +4,5 @@ gulp.task 'build', [
   'vendor'
   'views'
   'app'
+  'server'
 ]

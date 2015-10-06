@@ -19,25 +19,25 @@ html(lang="fr", ng-app="%module%")
     nav.navbar.navbar-default.navbar-fixed-top
       .container-fluid
         .navbar-header
-          a.navbar-brand(href="#/")
+          a.navbar-brand(href="/")
             img(src="img/CoAct.svg" onerror="this.onerror=null; this.src='img/CoAct.png'")
         #navbar.navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
             li(class=nav === 'landing' ? 'active' : '')
-              a(href="#/") Accueil
+              a(href="/") Accueil
             li.dropdown(class=nav === 'personnel' || nav === 'organisation' || nav === 'technologie' ? 'active' : '')
               a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
                 | Former
                 span.caret
               ul.dropdown-menu
                 li(class=nav === 'personnel' ? 'active' : '')
-                  a(href="#/personnel") votre personnel
+                  a(href="/personnel") votre personnel
                 li(class=nav === 'organisation' ? 'active' : '')
-                  a(href="#/organisation") vos organisations
+                  a(href="/organisation") vos organisations
                 li(class=nav === 'technologie' ? 'active' : '')
-                  a(href="#/technologie") votre technologie
+                  a(href="/technologie") votre technologie
             li(class=nav === 'contact' ? 'active' : '')
-              a(href="#/contact") Contact
+              a(href="/contact") Contact
 
     block component
 

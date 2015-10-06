@@ -9,7 +9,7 @@ injectConfig = require './inject-config'
 
 parameters = require '../parameters.coffee'
 
-gulp.task 'app', ->
+gulp.task 'server', ->
   stream = gulp.src [
     "#{parameters.paths.src.server}/*.coffee"
   ]
