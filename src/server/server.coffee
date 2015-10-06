@@ -1,7 +1,10 @@
 console.log "démarrage du serveur web"
-port = "5010"
+if process.env.COACT_PORT
+  port = process.env.COACT_PORT
+else
+  port = "7777"
 
-express = require 'express'
+express = require '../node_modules/express/index.js'
 server = express()
 app = express.Router()
 server.set 'view engine', 'jade'
