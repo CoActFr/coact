@@ -17,6 +17,8 @@ app.use (req, res, next) ->
 process.on 'uncaughtException', (error) ->
   console.log error
 
+# Routes
+
 app.get '/', (request, response) ->
   response.render 'landing', request.params
 
@@ -32,6 +34,8 @@ app.get '/technologie', (request, response) ->
 app.get '/contact', (request, response) ->
   response.render 'contact', request.params
 
+# Assets
+
 app.get '/%styles%/main.css', (request, response) ->
   response.sendFile 'main.css', root: './%styles%'
 
@@ -42,8 +46,13 @@ app.get '/%scripts%/app.js', (request, response) ->
   response.sendFile 'app.js', root: './%scripts%'
 
 app.get '/img/:image', (request, response) ->
-  console.log 'trolo' +  request.params.image
   response.sendFile request.params.image, root: './img'
+
+app.get '/favicon.ico', (request, response) ->
+  response.sendFile 'favicon.ico', root: '.'
+
+app.get '/robots.txt', (request, response) ->
+  response.sendFile 'robots.txt', root: '.'
 
 server.use '', app
 server.listen port
