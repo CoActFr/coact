@@ -4,9 +4,9 @@ checkout:
         - git submodule update --init
 test:
     pre:
-        - npm start:
+        - node server.js:
             background: true
-        - sleep 5
+            pwd: www
 deployment:
   production:
     branch: master

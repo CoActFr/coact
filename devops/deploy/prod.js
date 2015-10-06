@@ -5,8 +5,7 @@ module.exports = function (shipit) {
           "cd " + shipit.releasePath +
           " && npm config set production" +
           " && npm install --unsafe-perm" +
-          " && ln -sf " + shipit.config.deployTo + "/current/www/ " +
-          shipit.config.deployTo + "/www"
+          " && COACT_PORT=" + shipit.config.serverPort + " forever start --uid '" + shipit.config.foreverUID + "' -a -l logs/log -o out.log -e err.log  server.js"
         );
     });
 

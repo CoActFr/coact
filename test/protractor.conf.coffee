@@ -1,4 +1,4 @@
-process.env.HOST ?= 'http://127.0.0.1:7777/#'
+process.env.HOST ?= 'http://127.0.0.1:7777'
 
 global.testDirectory = __dirname
 

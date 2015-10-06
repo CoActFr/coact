@@ -3,13 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "*",
-    "angulartics-google-analytics": "~0.1.1",
-    "angular-bootstrap": "0.13.0",
-    "angular-local-storage": "0.2.2",
-    "angular-translate": "*",
-    "angular-ui-router": "*",
     "bootstrap": "3.3.5",
-    "lodash": "*",
-    "ng-file-upload": "~5.0.9"
+    "lodash": "*"
   }
 }
