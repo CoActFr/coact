@@ -2,6 +2,9 @@ extends ./header.jade
 block vars
   - var nav = 'landing'
 block component
+  head
+    meta(name="description" content="Laboratoire de pratiques collaboratives. Développer les pratiques collaboratives au sein de vos organisations")
+
   #logo.container
     .page-header
       img.img-responsive(src="img/CoAct.svg" onerror="this.onerror=null; this.src='img/CoAct.png'")
