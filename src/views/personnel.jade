@@ -1,4 +1,7 @@
 extends ./header.jade
+block head
+  title Coact - Personnel
+  meta(name="description" content="Laboratoire de pratiques collaboratives. Développer les pratiques collaboratives au sein de vos organisations")
 block vars
   - var nav = 'personnel'
 block component
@@ -25,7 +28,7 @@ block component
             | Collaborative Trainings qui permettent aux participants de véritablement
             | travailler en équipe pour progresser dans leurs pratiques, ainsi qu'initier
             | une démarche collaborative pérenne au sein de votre organisation.
-  .jumbotron.appeal
+  .jumbotron.appeal(ng-controller="personnelCtrl")
     .container.marketing
       .row
         .col-md-4.slider-controller
@@ -66,4 +69,4 @@ block component
                   | possibles des Collaborative Trainings ?
       .row
         .col-md-12
-          a.btn.btn-default.btn-higlight(href="#/contact" analytics-on="click" analytics-event="Personnel: CTA Conctact us") Contactez-nous
+          a.btn.btn-default.btn-higlight(href="/contact" analytics-on="click" analytics-event="Personnel: CTA Conctact us") Contactez-nous

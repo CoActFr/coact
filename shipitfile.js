@@ -12,12 +12,16 @@ module.exports = function (shipit) {
             servers: 'root@212.227.108.147',
             branch: 'master',
             deployTo: '/var/www/coact',
+            serverPort: 5010,
+            foreverUID: 'coact',
             keepReleases: 2
         },
         preprod: {
             servers: 'root@212.227.108.147',
             branch: 'staging',
             deployTo: '/var/www/coact-preprod',
+            serverPort: 7777,
+            foreverUID: 'coactpreprod',
             keepReleases: 1
         }
     });

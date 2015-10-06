@@ -1,4 +1,7 @@
 extends ./header.jade
+block head
+  title Coact - Organisation
+  meta(name="description" content="Laboratoire de pratiques collaboratives. Développer les pratiques collaboratives au sein de vos organisations")
 block vars
   - var nav = 'organisation'
 block component
@@ -17,7 +20,7 @@ block component
             | Loin d’une vision utopiste, notre parti-pris au sein de
             | CoAct – The Collabor’action Factory est de n’activer les ressorts de la
             | collaboration que lorsqu’ils sont nécessaires.
-  #organisation-cta
+  #organisation-cta(ng-controller="organisationCtrl")
     .container
       .row.cta
         .col-lg-6
@@ -52,7 +55,7 @@ block component
                 | pour connaitre quelles seront les prochaines étapes de ce projet
         .row
           .col-md-12
-            a.btn.btn-default.btn-higlight(href="#/contact" analytics-on="click" analytics-event="Organisation: CTA Conctact us") Contactez-nous
+            a.btn.btn-default.btn-higlight(href="/contact" analytics-on="click" analytics-event="Organisation: CTA Conctact us") Contactez-nous
 
   .jumbotron.pillars
     h2 Les 3 piliers d’une organisation collaborative

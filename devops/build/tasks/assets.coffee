@@ -33,4 +33,4 @@ gulp.task 'assets', ->
   ]
   .pipe plumber()
   .pipe flatten()
-  .pipe gulp.dest "#{parameters.paths.www.main}/fonts"
+  .pipe gulp.dest "#{parameters.paths.www.fonts}"

@@ -1,4 +1,7 @@
 extends ./header.jade
+block head
+  title Coact - Technologie
+  meta(name="description" content="Laboratoire de pratiques collaboratives. Développer les pratiques collaboratives au sein de vos organisations")
 block vars
   - var nav = 'technologie'
 block component
@@ -12,4 +15,4 @@ block component
         .col-md-12
           h1 Page en construction
           p
-            a.btn.btn-primary(href="#/") Revenir à l'accueil
+            a.btn.btn-primary(href="/") Revenir à l'accueil

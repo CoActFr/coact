@@ -1,4 +1,4 @@
-angular.module '%module%.landing'
+angular.module '%module%'
 .factory 'Slider',
 () ->
   create : (slides) ->

@@ -7,14 +7,20 @@ modulePlaceholder = '%module%'
 
 srcPath = 'src'
 assetsPlaceholder = '%assets%'
-assetsFolder = 'common/assets'
-lessFolder = 'common/less'
-fontsFolder = 'common/fonts'
-imagesFolder = 'common/images'
+assetsFolder = 'assets'
+lessFolder = 'less'
+fontsFolder = 'fonts'
+imagesFolder = 'images'
+viewsFolder = 'views'
+appFolder = 'app'
+serverFolder = 'server'
 assetsPath = "#{srcPath}/#{assetsFolder}"
 lessPath = "#{srcPath}/#{lessFolder}"
 fontsPath = "#{srcPath}/#{fontsFolder}"
 imagesPath = "#{srcPath}/#{imagesFolder}"
+viewsPath = "#{srcPath}/#{viewsFolder}"
+appPath = "#{srcPath}/#{appFolder}"
+serverPath = "#{srcPath}/#{serverFolder}"
 bowerComponentsPath = "bower_components"
 
 wwwPath = 'www'
@@ -26,6 +32,10 @@ stylesFolder = 'css'
 stylesPath = "#{wwwPath}/#{stylesFolder}"
 imgFolder = 'img'
 imgPath = "#{wwwPath}/#{imgFolder}"
+wwwFontsFolder = 'fonts'
+wwwFontsPath = "#{wwwPath}/#{wwwFontsFolder}"
+wwwViewsFolder = 'views'
+wwwViewsPath = "#{wwwPath}/#{wwwViewsFolder}"
 
 config =
 
@@ -37,12 +47,17 @@ config =
       less: lessPath
       fonts: fontsPath
       images: imagesPath
+      views: viewsPath
+      app: appPath
+      server: serverPath
       bower: bowerComponentsPath
     www:
       main: wwwPath
       scripts: scriptsPath
       styles: stylesPath
       img: imgPath
+      fonts: wwwFontsPath
+      views: wwwViewsPath
 
   folders:
     scripts:
@@ -54,6 +69,7 @@ config =
 
   files:
     app: 'app.js'
+    server: 'server.js'
     styles: 'app.css'
     templates: 'templates.js'
     vendors:
@@ -68,7 +84,7 @@ config =
       replacer: (replace) -> replace modulePlaceholder, moduleName
 
   analytics:
-    id: 'UA-XXXXXXXX-X'
-    domain: 'doma.in'
+    id: 'UA-68212799-1'
+    domain: 'thecollaboractionfactory.com'
 
 module.exports = config

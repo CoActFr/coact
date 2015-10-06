@@ -28,10 +28,4 @@ gulp.task 'vendor', ->
   ]
   .pipe plumber()
   .pipe flatten()
-  .pipe gulp.dest "#{parameters.paths.www.main}/fonts"
-
-  gulp.src 'bower_components/ng-file-upload/FileAPI.min.js'
-  .pipe gulp.dest "#{parameters.paths.www.main}/js"
-
-  gulp.src 'bower_components/ng-file-upload/FileAPI.flash.swf'
-  .pipe gulp.dest "#{parameters.paths.www.main}/flash"
+  .pipe gulp.dest "#{parameters.paths.www.fonts}"

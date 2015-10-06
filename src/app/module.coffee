@@ -4,11 +4,9 @@
   @module %module%
   @description
 
-  This module requires all submodules of your app
+  Landing page of the application.
 ###
 
 angular.module '%module%', [
-  '%module%.common'
-  '%module%.landing'
-  'ngFileUpload'
+  'ng'
 ]
