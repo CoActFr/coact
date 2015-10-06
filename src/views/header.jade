@@ -1,25 +1,45 @@
-block vars
-nav.navbar.navbar-default.navbar-fixed-top
-  .container-fluid
-    .navbar-header
-      a.navbar-brand(href="#/")
-        img(src="img/CoAct.svg" onerror="this.onerror=null; this.src='img/CoAct.png'")
-    #navbar.navbar-collapse.collapse
-      ul.nav.navbar-nav.navbar-right
-        li(class=nav === 'landing' ? 'active' : '')
-          a(href="#/") Accueil
-        li.dropdown(class=nav === 'personnel' || nav === 'organisation' || nav === 'technologie' ? 'active' : '')
-          a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
-            | Former
-            span.caret
-          ul.dropdown-menu
-            li(class=nav === 'personnel' ? 'active' : '')
-              a(href="#/personnel") votre personnel
-            li(class=nav === 'organisation' ? 'active' : '')
-              a(href="#/organisation") vos organisations
-            li(class=nav === 'technologie' ? 'active' : '')
-              a(href="#/technologie") votre technologie
-        li(class=nav === 'contact' ? 'active' : '')
-          a(href="#/contact") Contact
+doctype html
+html(lang="fr", ng-app="%module%")
+  head
+    block head
+    meta(charset="utf-8")
+    link(rel="stylesheet", href="%styles%/main.css")
+    meta(name="viewport", content="initial-scale=1.0, width:device-width")
+    // Google Analytics
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-block component
+      ga('create', 'UA-68212799-1', 'auto');
+    // End Google Analytics
+  body.coactcss
+    block vars
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href="#/")
+            img(src="img/CoAct.svg" onerror="this.onerror=null; this.src='img/CoAct.png'")
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right
+            li(class=nav === 'landing' ? 'active' : '')
+              a(href="#/") Accueil
+            li.dropdown(class=nav === 'personnel' || nav === 'organisation' || nav === 'technologie' ? 'active' : '')
+              a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
+                | Former
+                span.caret
+              ul.dropdown-menu
+                li(class=nav === 'personnel' ? 'active' : '')
+                  a(href="#/personnel") votre personnel
+                li(class=nav === 'organisation' ? 'active' : '')
+                  a(href="#/organisation") vos organisations
+                li(class=nav === 'technologie' ? 'active' : '')
+                  a(href="#/technologie") votre technologie
+            li(class=nav === 'contact' ? 'active' : '')
+              a(href="#/contact") Contact
+
+    block component
+
+    script(src="%scripts%/vendor.js")
+    script(src="%scripts%/app.js")

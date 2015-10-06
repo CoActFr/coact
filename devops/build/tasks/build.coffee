@@ -2,7 +2,6 @@ gulp = require 'gulp'
 gulp.task 'build', [
   'assets'
   'vendor'
-  'index'
+  'views'
   'app'
-  'templates'
 ]

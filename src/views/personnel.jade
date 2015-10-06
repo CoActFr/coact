@@ -1,4 +1,7 @@
 extends ./header.jade
+block head
+  title Coact
+  meta(name="description" content="Laboratoire de pratiques collaboratives. Développer les pratiques collaboratives au sein de vos organisations")
 block vars
   - var nav = 'personnel'
 block component
@@ -25,7 +28,7 @@ block component
             | Collaborative Trainings qui permettent aux participants de véritablement
             | travailler en équipe pour progresser dans leurs pratiques, ainsi qu'initier
             | une démarche collaborative pérenne au sein de votre organisation.
-  .jumbotron.appeal
+  .jumbotron.appeal(ng-controller="personnelCtrl")
     .container.marketing
       .row
         .col-md-4.slider-controller

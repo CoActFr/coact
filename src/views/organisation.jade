@@ -1,4 +1,7 @@
 extends ./header.jade
+block head
+  title Coact
+  meta(name="description" content="Laboratoire de pratiques collaboratives. Développer les pratiques collaboratives au sein de vos organisations")
 block vars
   - var nav = 'organisation'
 block component
@@ -17,7 +20,7 @@ block component
             | Loin d’une vision utopiste, notre parti-pris au sein de
             | CoAct – The Collabor’action Factory est de n’activer les ressorts de la
             | collaboration que lorsqu’ils sont nécessaires.
-  #organisation-cta
+  #organisation-cta(ng-controller="organisationCtrl")
     .container
       .row.cta
         .col-lg-6

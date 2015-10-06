@@ -11,16 +11,16 @@ parameters = require '../parameters.coffee'
 
 gulp.task 'app', ->
   stream = gulp.src [
-    "#{parameters.paths.src.app}/module.coffee"
-    "#{parameters.paths.src.app}/*.coffee"
+    "#{parameters.paths.src.server}/*.coffee"
   ]
   .pipe plumber()
 
   injectConfig stream
-  .pipe parameters.angular.module.replacer replace
+  .pipe parameters.folders.scripts.replacer replace
+  .pipe parameters.folders.styles.replacer replace
   .pipe sourcemaps.init()
   .pipe coffee
     bare: true
-  .pipe concat parameters.files.app
+  .pipe concat parameters.files.server
   .pipe sourcemaps.write()
-  .pipe gulp.dest parameters.paths.www.scripts
+  .pipe gulp.dest parameters.paths.www.main
