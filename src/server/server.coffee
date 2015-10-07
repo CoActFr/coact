@@ -3,7 +3,7 @@ isProd = false;
 if process.env.IS_PROD
   isProd = true
 
-if isProd then port = "5010" else "7777"
+port = if isProd then "5010" else "7777"
 
 express = require '../node_modules/express/index.js'
 server = express()
