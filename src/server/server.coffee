@@ -51,8 +51,14 @@ app.get '/%scripts%/app.js', (request, response) ->
 app.get '/img/:image', (request, response) ->
   response.sendFile request.params.image, root: './img'
 
+app.get '/fonts/:font', (request, response) ->
+  response.sendFile request.params.font, root: './fonts'
+
 app.get '/favicon.ico', (request, response) ->
   response.sendFile 'favicon.ico', root: '.'
+
+app.get '/sitemap.xml', (request, response) ->
+  response.sendFile 'sitemap.xml', root: '.'
 
 app.get '/robots.txt', (request, response) ->
   response.sendFile 'robots.txt', root: '.'

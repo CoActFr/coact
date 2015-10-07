@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>http://www.coact.fr/</loc>
+  </url>
+  <url>
+    <loc>http://www.coact.fr/personnel</loc>
+  </url>
+  <url>
+    <loc>http://www.coact.fr/organisation</loc>
+  </url>
+  <url>
+    <loc>http://www.coact.fr/technologie</loc>
+  </url>
+  <url>
+    <loc>http://www.coact.fr/contact</loc>
+  </url>
+
+</urlset>
