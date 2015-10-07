@@ -1,8 +1,9 @@
 console.log "démarrage du serveur web"
-if process.env.COACT_PORT
-  port = process.env.COACT_PORT
-else
-  port = "7777"
+isProd = false;
+if process.env.IS_PROD
+  isProd = true
+
+if isProd then port = "5010" else "7777"
 
 express = require '../node_modules/express/index.js'
 server = express()
@@ -22,20 +23,22 @@ process.on 'uncaughtException', (error) ->
 
 # Routes
 
+pagesAccepted = [
+  'personnel'
+  'organisation'
+  'technologie'
+  'contact'
+]
+
 app.get '/', (request, response) ->
-  response.render 'landing', request.params
+  response.render 'landing', analytics: isProd
 
-app.get '/personnel', (request, response) ->
-  response.render 'personnel', request.params
-
-app.get '/organisation', (request, response) ->
-  response.render 'organisation', request.params
-
-app.get '/technologie', (request, response) ->
-  response.render 'technologie', request.params
-
-app.get '/contact', (request, response) ->
-  response.render 'contact', request.params
+app.get '/:page', (request, response) ->
+  if request.params.page in pagesAccepted
+    response.render request.params.page, analytics: isProd
+  else
+    response.status(404)
+    .send 'Not found'
 
 # Assets
 
