@@ -21,25 +21,6 @@ app.use (req, res, next) ->
 process.on 'uncaughtException', (error) ->
   console.log error
 
-# Routes
-
-pagesAccepted = [
-  'personnel'
-  'organisation'
-  'technologie'
-  'contact'
-]
-
-app.get '/', (request, response) ->
-  response.render 'landing', analytics: isProd
-
-app.get '/:page', (request, response) ->
-  if request.params.page in pagesAccepted
-    response.render request.params.page, analytics: isProd
-  else
-    response.status(404)
-    .send 'Not found'
-
 # Assets
 
 app.get '/%styles%/main.css', (request, response) ->
@@ -65,6 +46,26 @@ app.get '/sitemap.xml', (request, response) ->
 
 app.get '/robots.txt', (request, response) ->
   response.sendFile 'robots.txt', root: '.'
+
+# Routes
+
+pagesAccepted = [
+  'personnel'
+  'organisation'
+  'technologie'
+  'contact'
+]
+
+app.get '/', (request, response) ->
+  response.render 'landing', analytics: isProd
+
+app.get '/:page', (request, response) ->
+  if request.params.page in pagesAccepted
+    response.render request.params.page, analytics: isProd
+  else
+    response.status(404)
+    .send 'Not found'
+
 
 server.use '', app
 server.listen port
