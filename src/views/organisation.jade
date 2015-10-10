@@ -4,8 +4,9 @@ block head
   meta(name="description" content="La dimension organisationnelle de la collaboration : Les notions de rôles")
 block vars
   - var nav = 'organisation'
+  - var bgPage = 'bg-organisation'
 block component
-  .jumbotron
+  .jumbotron.header
     .container
       .row
         .col-md-12
@@ -35,7 +36,7 @@ block component
                     ng-click='organisationSlider.goTo("transform")'
                     ng-class='{active: organisationSlider.slides.transform}'
                     ) Transformer votre organisation
-    .jumbotron(
+    .jumbotron.animate-show.header(
       ng-show='organisationSlider.slides.workshop || organisationSlider.slides.transform')
       .container
         .row

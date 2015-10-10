@@ -2,6 +2,7 @@
 
 @coactBlue: rgba(38, 173, 228, 1);
 @coactBlueDarker: rgba(23, 158, 213, 1);
+@coactBlueTransparent: rgba(23, 158, 213, 0.7);
 @coactGrey: #999;
 
 .space-left {
@@ -35,6 +36,54 @@ body {
   /* ensure visibility during the transition */
   display: block !important; /* yes, important */
 }
+
+
+  /* Animate
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.animate-show {
+  opacity: 1;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  opacity: 0 !important;
+}
+
+
+  /* Background
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+
+body.bg-personnel {
+  background: url("../img/bg-personnel.png") no-repeat;
+  background-size: 100%;
+  background-position-y: 40px;
+  background-color: #fff;
+  .jumbotron.header .row {
+    background-color: rgba(255, 255, 255, 0.7)
+  }
+}
+
+body.bg-organisation {
+  background: url("../img/bg-organisation.png") no-repeat;
+  background-size: 70%;
+  background-position-x: 30%;
+  background-position-y: 40px;
+  background-color: #fff;
+  .jumbotron.header .row {
+    background-color: rgba(255, 255, 255, 0.7)
+  }
+}
+
+
+
+/* CoactCSS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
 
 .coactcss{
   .header {
@@ -116,15 +165,6 @@ body {
     margin-top: -25px;
   }
 
-  #personnel-header.jumbotron {
-    background: url("../img/bg-personnel.png") no-repeat;
-    background-size: 100%;
-    background-position-y: 40px;
-    background-color: #fff;
-    .row {
-      background-color: rgba(255, 255, 255, 0.7)
-    }
-  }
 
   #pillars-carousel {
     background-color: @coactBlue;
@@ -266,6 +306,10 @@ body {
     margin-bottom: 0;
   }
 
+  .jumbotron.header {
+    background-color: rgba(255, 255, 255, 0);
+  }
+
   .jumbotron.cta {
     background-color: @coactGrey;
     color: #fff;
@@ -290,7 +334,7 @@ body {
   }
 
   .jumbotron.pillars {
-    background-color: @coactBlueDarker;
+    background-color: @coactBlueTransparent;
   }
 
   .jumbotron.catch, .jumbotron.appeal {
