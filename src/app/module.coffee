@@ -9,4 +9,5 @@
 
 angular.module '%module%', [
   'ng'
+  'ngAnimate'
 ]

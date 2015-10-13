@@ -4,8 +4,9 @@ block head
   meta(name="description" content="La dimension humaine de la collaboration : Le premier enjeu de toute collaboration au sein d’une organisation est de faire en sorte que l’ensemble des personnes qui la composent communiquent et interagissent aisément.")
 block vars
   - var nav = 'personnel'
+  - var bgPage = 'bg-personnel'
 block component
-  #personnel-header.jumbotron
+  .jumbotron.header
     .container
       .row
         .col-md-12
@@ -49,7 +50,7 @@ block component
                   ng-click='personnelSlider.goTo("discover")'
                   ng-class='{active: personnelSlider.slides.discover}'
                   ) Explorez vos possibilités
-        .col-md-8.side-slider
+        #side-slider.col-md-8
           .thumbnail
             .caption
               #take-action(ng-show="personnelSlider.slides.takeAction")
