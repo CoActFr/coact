@@ -50,7 +50,7 @@ block component
                   ng-click='personnelSlider.goTo("discover")'
                   ng-class='{active: personnelSlider.slides.discover}'
                   ) Explorez vos possibilités
-        .col-md-8.side-slider
+        #side-slider.col-md-8
           .thumbnail
             .caption
               #take-action(ng-show="personnelSlider.slides.takeAction")
