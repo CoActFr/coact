@@ -5,14 +5,42 @@ block head
 block vars
   - var nav = 'technologie'
 block component
-  .container
-    .page-header
-      img.img-responsive(src="img/CoAct.svg" onerror="this.onerror=null; this.src='img/CoAct.png'")
-
-  .jumbotron.catch
+  .jumbotron.header
+    .container
+      .row
+        .col-md-8.col-md-offset-2
+          h1 La dimension technologique de la collaboration
+          p.explain
+            | Avoir compris l'interet et le fonctionnement
+            | de methodes collaborative ne suffit pas.
+            | Il faut arriver à les mettre en pratique et
+            | surtout, à les maintenir.
+          p.explain
+            | Pour celà, il est possible de s'appuyer sur
+            | de nombreux outils technologiques.
+  .jumbotron
+    .container
+      .row
+        .col-md-6
+          h2 Une veille technologique
+          p
+            | De nombreuse solutions propriétaires ou open-sources
+            | apparaissent tous les jours.
+          p
+            | Nous nous maintenons au courant de ces solutions pour
+            | vous permettre de trouver celles qui correspondent à votre
+            | besoin.
+      .row
+        .col-md-6.col-md-offset-6
+          h2 Des outils en liens avec nos methodes
+          p
+            | Lorsque l'existant ne nous satisfait pas, nous developpons
+            | nos propres outils.
+  .jumbotron.appeal
     .container
       .row
         .col-md-12
-          h1 Page en construction
-          p
-            a.btn.btn-primary(href="/") Revenir à l'accueil
+          h3
+            | Communiquez-nous vos besoins pour trouver
+            | ou créer les outils adaptés à ceux-ci.
+          a.btn.btn-default.btn-higlight(href="/contact" analytics-on="click" analytics-event="Personnel: CTA Conctact us") Contactez-nous
