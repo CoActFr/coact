@@ -1,4 +1,7 @@
 console.log "démarrage du serveur web"
+
+# init
+
 global['isProd'] = false;
 if process.env.IS_PROD
   global['isProd'] = true
@@ -11,6 +14,23 @@ global['express'] = require '../node_modules/express/index.js'
 server = express()
 server.set 'view engine', 'jade'
 server.set 'views', './views'
+
+# DB
+
+global['mongoose'] = require '../node_modules/mongoose/index.js'
+global['mongoose'].connect 'mongodb://localhost/coact'
+
+db = global['mongoose'].connection
+db.on 'error', console.error.bind(console, 'connection error:')
+db.once 'open', (callback) ->
+  # yay!
+
+  formationSchema = mongoose.Schema
+    token: String
+
+  global['formationModel'] = mongoose.model 'Formation', formationSchema
+
+# Header
 
 server.use (request, response, next) ->
   response.setHeader 'Access-Control-Allow-Origin', '*'
@@ -26,14 +46,17 @@ server.use (request, response, next) ->
   # Implement other HTTP methods.
     next()
 
-server.use (request, response, next) ->
-  if logs_activated = true
-    console.log '%s %s', request.method, request.url
-  next()
+# Logs
 
 process.on 'uncaughtException', (error) ->
   console.log error
 
+#Routers
+
+server.use '/survey', require('./%routers%/surveyRouter.js')
 server.use '', require('./%routers%/mainRouter.js')
+
+#End
+
 server.listen port
 console.log "serveur ecoute sur le port " + port

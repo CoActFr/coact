@@ -1,4 +1,7 @@
 mainRouter = global['express'].Router()
+mainRouter.use (request, response, next) ->
+  console.log '%s MainRouter: %s', request.method, request.url
+  next()
 
 # Assets
 

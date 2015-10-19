@@ -1,0 +1,13 @@
+extends ./header.jade
+block head
+  title Coact - Surveys
+block vars
+  - var nav = 'surveys'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-8
+          ul
+            each formation in formations
+              li= formation.token
