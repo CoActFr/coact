@@ -14,6 +14,7 @@ imagesFolder = 'images'
 viewsFolder = 'views'
 appFolder = 'app'
 serverFolder = 'server'
+routersFolder = 'routers'
 assetsPath = "#{srcPath}/#{assetsFolder}"
 lessPath = "#{srcPath}/#{lessFolder}"
 fontsPath = "#{srcPath}/#{fontsFolder}"
@@ -21,6 +22,7 @@ imagesPath = "#{srcPath}/#{imagesFolder}"
 viewsPath = "#{srcPath}/#{viewsFolder}"
 appPath = "#{srcPath}/#{appFolder}"
 serverPath = "#{srcPath}/#{serverFolder}"
+routersPath = "#{srcPath}/#{serverFolder}/#{routersFolder}"
 bowerComponentsPath = "bower_components"
 
 wwwPath = 'www'
@@ -36,6 +38,9 @@ wwwFontsFolder = 'fonts'
 wwwFontsPath = "#{wwwPath}/#{wwwFontsFolder}"
 wwwViewsFolder = 'views'
 wwwViewsPath = "#{wwwPath}/#{wwwViewsFolder}"
+routersPlaceholder = '%routers%'
+wwwRoutersFolder = 'routers'
+wwwRoutersPath = "#{wwwPath}/#{wwwRoutersFolder}"
 
 config =
 
@@ -49,15 +54,20 @@ config =
       images: imagesPath
       views: viewsPath
       app: appPath
-      server: serverPath
+      server:
+        main: serverPath
+        routers: routersPath
+      routers: routersPath
       bower: bowerComponentsPath
     www:
       main: wwwPath
+      routers: wwwRoutersPath
       scripts: scriptsPath
       styles: stylesPath
       img: imgPath
       fonts: wwwFontsPath
       views: wwwViewsPath
+      routers: wwwRoutersPath
 
   folders:
     scripts:
@@ -66,6 +76,9 @@ config =
     styles:
       name: stylesFolder
       replacer: (replace) -> replace stylesPlaceholder, stylesFolder
+    routers:
+      name: wwwRoutersFolder
+      replacer: (replace) -> replace routersPlaceholder, wwwRoutersFolder
 
   files:
     app: 'app.js'

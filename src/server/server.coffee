@@ -1,72 +1,39 @@
 console.log "démarrage du serveur web"
-isProd = false;
+global['isProd'] = false;
 if process.env.IS_PROD
-  isProd = true
-
-port = if isProd then "5010" else "7777"
-
-express = require '../node_modules/express/index.js'
-server = express()
-app = express.Router()
-server.set 'view engine', 'jade'
-server.set 'views', './views'
+  global['isProd'] = true
 
 logs_activated = true
 
-app.use (req, res, next) ->
+port = if global['isProd'] then "5010" else "7777"
+
+global['express'] = require '../node_modules/express/index.js'
+server = express()
+server.set 'view engine', 'jade'
+server.set 'views', './views'
+
+server.use (request, response, next) ->
+  response.setHeader 'Access-Control-Allow-Origin', '*'
+  response.setHeader 'Access-Control-Allow-Methods', 'POST, GET, OPTIONS'
+  response.setHeader 'Access-Control-Allow-Headers', 'Authorization, Origin, Content-Type, content-type, X-Requested-With, Accept'
+  response.setHeader 'Access-Control-Allow-Credentials', true
+
+  if request.method == "OPTIONS"
+  # End CORS preflight request.
+    response.writeHead(204);
+    response.end();
+  else
+  # Implement other HTTP methods.
+    next()
+
+server.use (request, response, next) ->
   if logs_activated = true
-    console.log '%s %s', req.method, req.url
+    console.log '%s %s', request.method, request.url
   next()
 
 process.on 'uncaughtException', (error) ->
   console.log error
 
-# Assets
-
-app.get '/%styles%/main.css', (request, response) ->
-  response.sendFile 'main.css', root: './%styles%'
-
-app.get '/%scripts%/vendor.js', (request, response) ->
-  response.sendFile 'vendor.js', root: './%scripts%'
-
-app.get '/%scripts%/app.js', (request, response) ->
-  response.sendFile 'app.js', root: './%scripts%'
-
-app.get '/img/:image', (request, response) ->
-  response.sendFile request.params.image, root: './img'
-
-app.get '/fonts/:font', (request, response) ->
-  response.sendFile request.params.font, root: './fonts'
-
-app.get '/favicon.ico', (request, response) ->
-  response.sendFile 'favicon.ico', root: '.'
-
-app.get '/sitemap.xml', (request, response) ->
-  response.sendFile 'sitemap.xml', root: '.'
-
-app.get '/robots.txt', (request, response) ->
-  response.sendFile 'robots.txt', root: '.'
-
-# Routes
-
-pagesAccepted = [
-  'personnel'
-  'organisation'
-  'technologie'
-  'contact'
-]
-
-app.get '/', (request, response) ->
-  response.render 'landing', analytics: isProd
-
-app.get '/:page', (request, response) ->
-  if request.params.page in pagesAccepted
-    response.render request.params.page, analytics: isProd
-  else
-    response.status(404)
-    .send 'Not found'
-
-
-server.use '', app
+server.use '', require('./%routers%/mainRouter.js')
 server.listen port
 console.log "serveur ecoute sur le port " + port
