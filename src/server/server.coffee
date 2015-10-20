@@ -1,10 +1,20 @@
 console.log "démarrage du serveur web"
 
 # init
+require('../node_modules/dotenv/lib/main.js').config
+  path: '../.env'
+  silent: true
 
-global['isProd'] = false;
-if process.env.IS_PROD
-  global['isProd'] = true
+default_ENV_VARS =
+  IS_PROD: false
+  ADMIN_PWD: 'admin'
+
+for varname of default_ENV_VARS
+  value = if varname of process.env then process.env[varname] else default_ENV_VARS[varname]
+  if typeof(value) is "string" and value.toLowerCase() == 'true'
+    value = true
+  global[varname] = value
+  console.log varname + ': ' + global[varname]
 
 logs_activated = true
 

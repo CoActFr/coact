@@ -9,5 +9,6 @@ surveyRouter.get '/:token', (request, response) ->
   global['formationModel'].find token: request.params.token, (error, formations) ->
     response.render 'survey',
       formations: formations
+      token: request.params.token
 
 module.exports = surveyRouter
