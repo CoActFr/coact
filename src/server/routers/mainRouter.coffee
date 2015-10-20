@@ -1,4 +1,4 @@
-mainRouter = global['express'].Router()
+mainRouter = express.Router()
 mainRouter.use (request, response, next) ->
   console.log '%s MainRouter: %s', request.method, request.url
   next()
@@ -39,11 +39,11 @@ pagesAccepted = [
 ]
 
 mainRouter.get '/', (request, response) ->
-  response.render 'landing', analytics: global['isProd']
+  response.render 'landing', analytics: IS_PROD
 
 mainRouter.get '/:page', (request, response) ->
   if request.params.page in pagesAccepted
-    response.render request.params.page, analytics: global['isProd']
+    response.render request.params.page, analytics: IS_PROD
   else
     response.status(404)
     .send 'Not found'

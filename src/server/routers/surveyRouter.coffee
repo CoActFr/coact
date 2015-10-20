@@ -1,4 +1,4 @@
-surveyRouter = global['express'].Router()
+surveyRouter = express.Router()
 
 surveyRouter.use (request, response, next) ->
   console.log '%s SurveyRouter: %s', request.method, request.url
@@ -6,7 +6,7 @@ surveyRouter.use (request, response, next) ->
 
 
 surveyRouter.get '/:token', (request, response) ->
-  global['formationModel'].find token: request.params.token, (error, formations) ->
+  formationModel.find token: request.params.token, (error, formations) ->
     response.render 'survey',
       formations: formations
       token: request.params.token

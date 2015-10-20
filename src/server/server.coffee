@@ -18,7 +18,7 @@ for varname of default_ENV_VARS
 
 logs_activated = true
 
-port = if global['isProd'] then "5010" else "7777"
+port = if IS_PROD then "5010" else "7777"
 
 global['express'] = require '../node_modules/express/index.js'
 server = express()
@@ -28,9 +28,9 @@ server.set 'views', './views'
 # DB
 
 global['mongoose'] = require '../node_modules/mongoose/index.js'
-global['mongoose'].connect 'mongodb://localhost/coact'
+mongoose.connect 'mongodb://localhost/coact'
 
-db = global['mongoose'].connection
+db = mongoose.connection
 db.on 'error', console.error.bind(console, 'connection error:')
 db.once 'open', (callback) ->
   # yay!
@@ -61,9 +61,15 @@ server.use (request, response, next) ->
 process.on 'uncaughtException', (error) ->
   console.log error
 
+#Auth
+
+basicAuth = require '../node_modules/basic-auth-connect/index.js'
+auth = basicAuth (user, password) ->
+  user is 'admin' and password is ADMIN_PWD
+
 #Routers
 
-server.use '/survey', require('./%routers%/surveyRouter.js')
+server.use '/survey', auth, require('./%routers%/surveyRouter.js')
 server.use '', require('./%routers%/mainRouter.js')
 
 #End
