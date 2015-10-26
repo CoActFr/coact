@@ -24,22 +24,10 @@ global['express'] = require '../node_modules/express/index.js'
 server = express()
 server.set 'view engine', 'jade'
 server.set 'views', './views'
-
-# DB
-
-global['mongoose'] = require '../node_modules/mongoose/index.js'
-mongoose.connect 'mongodb://localhost/coact'
-
-db = mongoose.connection
-db.on 'error', console.error.bind(console, 'connection error:')
-db.once 'open', (callback) ->
-  # yay!
-
-  formationSchema = mongoose.Schema
-    token: String
-
-  global['formationModel'] = mongoose.model 'Formation', formationSchema
-
+global['bodyParser'] = require '../node_modules/body-parser/index.js'
+server.use bodyParser.json()
+server.use bodyParser.urlencoded
+  extended: true
 # Header
 
 server.use (request, response, next) ->
@@ -55,6 +43,10 @@ server.use (request, response, next) ->
   else
   # Implement other HTTP methods.
     next()
+
+# Database
+
+require './models.js'
 
 # Logs
 

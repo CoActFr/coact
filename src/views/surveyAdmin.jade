@@ -1,0 +1,36 @@
+extends ./header.jade
+block head
+  title CoactAdmin - Surveys
+block vars
+  - var nav = 'surveys'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2= 'Formations with token : "' + token + '"'
+  .jumbotron(ng-controller='surveyFormCtrl')
+    .container
+      .row
+        .col-md-8
+          if newSurvey
+            form(novalidate method="post" action="/admin/newSurvey/"+token)
+              h3 Ce questionnaire n'existe pas.
+              input.btn.btn-primary(type='submit' value='Créer ce questionnaire')
+          else
+            ul
+              for page, indexP in formation.pages
+                li
+                  form(novalidate method="post" action="/admin/updateSurvey/"+ token + "/" + indexP)
+                    h3= 'PAGE ' + (indexP + 1)
+                    .page-content
+                      for question, indexQ in page.questions
+                        .question
+                          h4= 'Question ' + (indexQ + 1)
+                          input(
+                            type='textbox'
+                            name='labels[' + indexQ + ']'
+                            placeholder='Tapez votre question'
+                            value=question.label
+                            )
+                    input.btn.btn-primary(type='submit' value='Valider la Page')

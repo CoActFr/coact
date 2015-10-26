@@ -10,7 +10,10 @@ injectConfig = require './inject-config'
 parameters = require '../parameters.coffee'
 
 gulp.task 'server', ['routers'], ->
-  stream = gulp.src "#{parameters.paths.src.server.main}/server.coffee"
+  stream = gulp.src [
+    "#{parameters.paths.src.server.main}/server.coffee"
+    "#{parameters.paths.src.server.main}/models.coffee"
+  ]
   .pipe plumber()
 
   injectConfig stream

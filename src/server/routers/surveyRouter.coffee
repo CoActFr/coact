@@ -7,8 +7,12 @@ surveyRouter.use (request, response, next) ->
 
 surveyRouter.get '/:token', (request, response) ->
   formationModel.find token: request.params.token, (error, formations) ->
-    response.render 'survey',
-      formations: formations
-      token: request.params.token
+    if formations.length > 0
+      response.render 'survey',
+        formation: formations[0]
+        token: request.params.token
+    else
+      response.status(404)
+      .send 'Not found'
 
 module.exports = surveyRouter
