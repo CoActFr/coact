@@ -9,7 +9,15 @@ adminRouter.post '/newSurvey/:token', (request, response) ->
     token: request.params.token
     pages: [
       validated: false
-      questions: {label: "", mark:0, comment: "" } for [1..5]
+      questions: {
+        label: ""
+        mark:
+          allow: true
+          value: -1
+        comment:
+          allow: false
+          text: "false"
+      } for [1..5]
     ]
 
   formation.save (err)->
@@ -29,6 +37,7 @@ adminRouter.post '/updateSurvey/:token/:page', (request, response) ->
       .questions[questionNumber]
       .label = request.body.labels[questionNumber]
 
+    console.log request.body
     formation.save (err)->
       if err
         console.log 'Error during creation of formation "' + request.params.token + '"'

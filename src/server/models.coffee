@@ -15,8 +15,12 @@ db.once 'open', (callback) ->
       validated: Boolean
       questions: [
         label: String
-        mark: Number
-        comments: String
+        mark:
+          allow: Boolean
+          value: Number
+        comment:
+          allow: Boolean
+          text: String
       ]
     ]
 

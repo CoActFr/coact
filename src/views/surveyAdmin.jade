@@ -9,7 +9,7 @@ block component
       .row
         .col-md-12
           h2= 'Formations with token : "' + token + '"'
-  .jumbotron(ng-controller='surveyFormCtrl')
+  .jumbotron
     .container
       .row
         .col-md-8
@@ -18,19 +18,68 @@ block component
               h3 Ce questionnaire n'existe pas.
               input.btn.btn-primary(type='submit' value='Créer ce questionnaire')
           else
-            ul
+            script(type='text/javascript').
+              var pages = [];
+            ul(ng-controller='surveyFormCtrl')
               for page, indexP in formation.pages
+                - var pagePath = 'pages[' + indexP + ']'
+                script(type='text/javascript').
+                  !{pagePath} = {questions: []};
                 li
-                  form(novalidate method="post" action="/admin/updateSurvey/"+ token + "/" + indexP)
+                  form(
+                    novalidate
+                    method="post"
+                    action="/admin/updateSurvey/"+ token + "/" + indexP
+                    )
+
                     h3= 'PAGE ' + (indexP + 1)
                     .page-content
+
                       for question, indexQ in page.questions
+                        - var questionPath = pagePath + '.questions[' + indexQ + ']'
+
+                        script(type='text/javascript').
+                          !{questionPath} = {
+                            label: !{JSON.stringify(question.label)},
+                            allowMark: !{JSON.stringify(question.mark.allow)},
+                            allowComment: !{JSON.stringify(question.comment.allow)}
+                          };
+
                         .question
                           h4= 'Question ' + (indexQ + 1)
-                          input(
-                            type='textbox'
-                            name='labels[' + indexQ + ']'
-                            placeholder='Tapez votre question'
-                            value=question.label
+                          .col-md-11.col-md-offset-1
+                            .question-label
+                              label Intitulé : &nbsp;
+                              input(
+                                type='textbox'
+                                name="questions[" + indexQ + "]['label']"
+                                placeholder='Tapez votre question'
+                                value=question.label
+                                ng-model= questionPath + '.label'
+                                )
+
+                            label Question notée&nbsp;?&nbsp;
+                            input(
+                              type="checkbox"
+                              name="questions[" + indexQ + "]['allow-mark']"
+                              ng-model= questionPath + '.allowMark'
                             )
+                            .col-md-11.col-md-offset-1.question-mark(
+                              ng-show= questionPath + '.allowMark'
+                            )= 'Note : ' + (question.mark.value === -1 ? 'en attente de réponse' : question.mark.value)
+
+                            label Question ouverte&nbsp;?&nbsp;
+                            input(
+                              type="checkbox"
+                              ng-true-value="true"
+                              ng-false-value="false"
+                              name="questions[" + indexQ + "]['allow-comment']"
+                              ng-model= questionPath + '.allowComment'
+                            )
+                            .col-md-11.col-md-offset-1.question-comment(
+                              ng-show= questionPath + '.allowComment'
+                            )= 'Réponse : ' + (question.comment.text === "false" ? 'en attente de réponse' : question.comment.text)
+
+
                     input.btn.btn-primary(type='submit' value='Valider la Page')
+

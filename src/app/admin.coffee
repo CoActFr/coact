@@ -1,5 +1,4 @@
 angular.module '%module%'
 .controller 'surveyFormCtrl',  ($scope) ->
-  $scope.addQuestion = (questionNumber) ->
-
+  $scope.pages = pages;
   #todo
