@@ -26,18 +26,21 @@ adminRouter.post '/newSurvey/:token', (request, response) ->
     response.redirect '/admin/survey/' + request.params.token
 
 
-adminRouter.post '/updateSurvey/:token/:page', (request, response) ->
+adminRouter.post '/updateSurvey/:token', (request, response) ->
+  pageNumber = request.body.page
+  questions = request.body.questions
   formationModel.find token: request.params.token, (error, formations) ->
     unless formations.length > 0
       return console.log 'Error : formation "' + request.params.token + '" not Found'
     formation = formations[0]
-
     for questionNumber in [0..4]
-      formation.pages[request.params.page]
+      formation.pages[pageNumber]
       .questions[questionNumber]
-      .label = request.body.labels[questionNumber]
+      .label = questions[questionNumber]['\'label\'']
+    console.log formation.pages
 
     console.log request.body
+    return
     formation.save (err)->
       if err
         console.log 'Error during creation of formation "' + request.params.token + '"'

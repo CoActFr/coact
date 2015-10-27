@@ -25,60 +25,62 @@ block component
                 - var pagePath = 'pages[' + indexP + ']'
                 script(type='text/javascript').
                   !{pagePath} = {questions: []};
-                li
+
+                for question, indexQ in page.questions
+                  - var questionPath = pagePath + '.questions[' + indexQ + ']'
+
+                  script(type='text/javascript').
+                    !{questionPath} = {
+                      label: !{JSON.stringify(question.label)},
+                      mark: !{JSON.stringify(question.mark)},
+                      comment: !{JSON.stringify(question.comment)}
+                    };
+
+                li(ng-repeat="page in pages")
                   form(
                     novalidate
                     method="post"
-                    action="/admin/updateSurvey/"+ token + "/" + indexP
+                    action="/admin/updateSurvey/"+ token
                     )
+                    input(type="hidden" name="page" ng-model="$index" value="{{$index}}")
 
-                    h3= 'PAGE ' + (indexP + 1)
+                    h3= 'PAGE {{$index + 1}}'
                     .page-content
 
-                      for question, indexQ in page.questions
-                        - var questionPath = pagePath + '.questions[' + indexQ + ']'
-
-                        script(type='text/javascript').
-                          !{questionPath} = {
-                            label: !{JSON.stringify(question.label)},
-                            allowMark: !{JSON.stringify(question.mark.allow)},
-                            allowComment: !{JSON.stringify(question.comment.allow)}
-                          };
-
-                        .question
-                          h4= 'Question ' + (indexQ + 1)
+                        .question(ng-repeat="question in page.questions")
+                          h4= 'Question {{$index + 1}}'
                           .col-md-11.col-md-offset-1
                             .question-label
                               label Intitulé : &nbsp;
                               input(
                                 type='textbox'
-                                name="questions[" + indexQ + "]['label']"
+                                name="questions[{{$index}}]['label']"
                                 placeholder='Tapez votre question'
-                                value=question.label
-                                ng-model= questionPath + '.label'
+                                value="question.label"
+                                ng-model= 'question.label'
                                 )
 
                             label Question notée&nbsp;?&nbsp;
                             input(
                               type="checkbox"
-                              name="questions[" + indexQ + "]['allow-mark']"
-                              ng-model= questionPath + '.allowMark'
+                              name="questions[{{$index}}]['allow-mark']"
+                              ng-model= 'question.mark.allow'
                             )
                             .col-md-11.col-md-offset-1.question-mark(
-                              ng-show= questionPath + '.allowMark'
-                            )= 'Note : ' + (question.mark.value === -1 ? 'en attente de réponse' : question.mark.value)
+                              ng-show= 'question.mark.allow'
+                            ) Note : {{getMark(question)}}
 
                             label Question ouverte&nbsp;?&nbsp;
                             input(
                               type="checkbox"
                               ng-true-value="true"
                               ng-false-value="false"
-                              name="questions[" + indexQ + "]['allow-comment']"
-                              ng-model= questionPath + '.allowComment'
+                              name="questions[{{$index}}]['allow-comment']"
+                              ng-model= 'question.comment.allow'
                             )
                             .col-md-11.col-md-offset-1.question-comment(
-                              ng-show= questionPath + '.allowComment'
-                            )= 'Réponse : ' + (question.comment.text === "false" ? 'en attente de réponse' : question.comment.text)
+                              ng-show= 'question.comment.allow'
+                            ) Réponse : {{getComment(question)}}
 
 
                     input.btn.btn-primary(type='submit' value='Valider la Page')
