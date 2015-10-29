@@ -8,8 +8,8 @@ adminRouter.post '/newSurvey/:token', (request, response) ->
   formation = new formationModel
     token: request.params.token
     validated: false
-    pages: [
-      questions:
+    pages: [ new pageModel
+      questions: new questionModel
         label: ""
         mark:
           allow: true
@@ -24,6 +24,14 @@ adminRouter.post '/newSurvey/:token', (request, response) ->
       console.log 'Error during creation of formation "' + request.params.token + '"'
     response.redirect '/admin/survey/' + request.params.token
 
+adminRouter.post '/deleteSurvey/:token', (request, response) ->
+  formationModel.remove token: request.params.token, (error) ->
+    if error
+      return console.log 'Error : ' + error
+    token: request.params.token
+  response.redirect '/admin/allSurvey'
+
+
 
 adminRouter.post '/updateSurvey/:token', (request, response) ->
   pageNumber = request.body.page
@@ -32,14 +40,21 @@ adminRouter.post '/updateSurvey/:token', (request, response) ->
     unless formations.length > 0
       return console.log 'Error : formation "' + request.params.token + '" not Found'
     formation = formations[0]
-    for questionNumber in [0..4]
-      formation.pages[pageNumber]
-      .questions[questionNumber]
-      .label = questions[questionNumber]['\'label\'']
-    console.log formation.pages
+    formation.pages[pageNumber].questions = []
+    for question, questionNumber in questions
+      formatedQuestion = new questionModel
+        label: question['\'label\'']
+        mark:
+          allow: '\'allow-mark\'' of question
+          value: question['\'mark\'']
+        comment:
+          allow: '\'allow-comment\'' of question
+          text: question['\'comment\'']
 
-    console.log request.body
-    return
+
+      formation.pages[pageNumber]
+      .questions[questionNumber] = formatedQuestion
+
     formation.save (err)->
       if err
         console.log 'Error during creation of formation "' + request.params.token + '"'
@@ -54,9 +69,14 @@ adminRouter.get '/survey/:token', (request, response) ->
         formation: formations[0]
         token: request.params.token
     else
-      response.render 'surveyAdmin',
+      response.render 'admin/survey',
         newSurvey: true
         token: request.params.token
+
+adminRouter.get '/allSurvey', (request, response) ->
+  formationModel.find (error, formations) ->
+    response.render 'admin/allSurvey',
+      formations: formations
 
 
 module.exports = adminRouter

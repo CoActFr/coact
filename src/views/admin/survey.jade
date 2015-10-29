@@ -73,6 +73,12 @@ block component
                                 name="questions[{{$index}}]['allow-mark']"
                                 ng-model= 'question.mark.allow'
                               )
+                            input(
+                              type="hidden"
+                              name="questions[{{$index}}]['mark']"
+                              ng-model= 'question.mark.value'
+                              value= '{{question.mark.value}}'
+                            )
                             .response(
                               ng-show= 'question.mark.allow'
                             ) Note : {{getMark(question)}}
@@ -83,6 +89,12 @@ block component
                                 name="questions[{{$index}}]['allow-comment']"
                                 ng-model= 'question.comment.allow'
                               )
+                            input(
+                              type="hidden"
+                              name="questions[{{$index}}]['comment']"
+                              ng-model= 'question.comment.text'
+                              value= '{{question.comment.text}}'
+                            )
                             .response(
                               ng-show= 'question.comment.allow'
                             ) Réponse : {{getComment(question)}}

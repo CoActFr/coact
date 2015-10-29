@@ -1,0 +1,25 @@
+extends ../header.jade
+block head
+  title CoactAdmin - All Surveys
+block vars
+  - var nav = 'surveys'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2 Formations
+  .jumbotron
+    .container
+      .row
+        .col-md-8
+          ul
+            each formation in formations
+              li
+                form(
+                  novalidate
+                  method="post"
+                  action='/admin/deleteSurvey/' + formation.token
+                  )
+                  label= formation.token
+                  input(type="submit" value="Delete formation")
