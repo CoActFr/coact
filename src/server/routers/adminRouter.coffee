@@ -7,9 +7,9 @@ adminRouter.use (request, response, next) ->
 adminRouter.post '/newSurvey/:token', (request, response) ->
   formation = new formationModel
     token: request.params.token
+    validated: false
     pages: [
-      validated: false
-      questions: {
+      questions:
         label: ""
         mark:
           allow: true
@@ -17,7 +17,6 @@ adminRouter.post '/newSurvey/:token', (request, response) ->
         comment:
           allow: false
           text: "false"
-      } for [1..5]
     ]
 
   formation.save (err)->

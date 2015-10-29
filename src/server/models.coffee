@@ -11,8 +11,8 @@ db.once 'open', (callback) ->
 
   formationSchema = mongoose.Schema
     token: String
+    validated: Boolean
     pages: [
-      validated: Boolean
       questions: [
         label: String
         mark:

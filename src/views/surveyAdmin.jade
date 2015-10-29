@@ -9,79 +9,87 @@ block component
       .row
         .col-md-12
           h2= 'Formations with token : "' + token + '"'
-  .jumbotron
-    .container
-      .row
-        .col-md-8
-          if newSurvey
+  if newSurvey
+    .jumbotron
+      .container
+        .row
+          .col-md-8
             form(novalidate method="post" action="/admin/newSurvey/"+token)
               h3 Ce questionnaire n'existe pas.
               input.btn.btn-primary(type='submit' value='Créer ce questionnaire')
-          else
-            script(type='text/javascript').
-              var pages = [];
-            ul(ng-controller='surveyFormCtrl')
-              for page, indexP in formation.pages
-                - var pagePath = 'pages[' + indexP + ']'
-                script(type='text/javascript').
-                  !{pagePath} = {questions: []};
+  else
+    script(type='text/javascript').
+      var pages = [];
+    .survey(ng-controller='surveyFormCtrl')
+      for page, indexP in formation.pages
+        - var pagePath = 'pages[' + indexP + ']'
+        script(type='text/javascript').
+          !{pagePath} = {questions: []};
 
-                for question, indexQ in page.questions
-                  - var questionPath = pagePath + '.questions[' + indexQ + ']'
+        for question, indexQ in page.questions
+          - var questionPath = pagePath + '.questions[' + indexQ + ']'
 
-                  script(type='text/javascript').
-                    !{questionPath} = {
-                      label: !{JSON.stringify(question.label)},
-                      mark: !{JSON.stringify(question.mark)},
-                      comment: !{JSON.stringify(question.comment)}
-                    };
+          script(type='text/javascript').
+            !{questionPath} = {
+              label: !{JSON.stringify(question.label)},
+              mark: !{JSON.stringify(question.mark)},
+              comment: !{JSON.stringify(question.comment)}
+            };
 
-                li(ng-repeat="page in pages")
-                  form(
-                    novalidate
-                    method="post"
-                    action="/admin/updateSurvey/"+ token
-                    )
-                    input(type="hidden" name="page" ng-model="$index" value="{{$index}}")
+      .survey-page(ng-repeat="page in pages")
+        form(
+          novalidate
+          method="post"
+          action="/admin/updateSurvey/"+ token
+          )
+          .jumbotron
+            .container
+              .row
+                .col-md-8
+                  input(type="hidden" name="page" ng-model="$index" value="{{$index}}")
 
-                    h3= 'PAGE {{$index + 1}}'
-                    .page-content
+                  h3= 'PAGE {{$index + 1}}'
+                  .page-content
 
-                        .question(ng-repeat="question in page.questions")
-                          h4= 'Question {{$index + 1}}'
+                    .question(ng-repeat="question in page.questions")
+                      h4
+                        span= 'Question {{$index + 1}}'
+                        span.close(ng-click="removeQuestion(page, question)") x
+                        .container
                           .col-md-11.col-md-offset-1
-                            .question-label
-                              label Intitulé : &nbsp;
-                              input(
-                                type='textbox'
-                                name="questions[{{$index}}]['label']"
-                                placeholder='Tapez votre question'
-                                value="question.label"
-                                ng-model= 'question.label'
-                                )
-
-                            label Question notée&nbsp;?&nbsp;
+                          .question-label
+                            h5 Intitulé : &nbsp;
                             input(
-                              type="checkbox"
-                              name="questions[{{$index}}]['allow-mark']"
-                              ng-model= 'question.mark.allow'
-                            )
-                            .col-md-11.col-md-offset-1.question-mark(
+                              type='textbox'
+                              name="questions[{{$index}}]['label']"
+                              placeholder='Tapez votre question'
+                              value="question.label"
+                              ng-model= 'question.label'
+                              )
+                          .question-mark
+                            h5 Question notée&nbsp;?&nbsp;
+                              input(
+                                type="checkbox"
+                                name="questions[{{$index}}]['allow-mark']"
+                                ng-model= 'question.mark.allow'
+                              )
+                            .response(
                               ng-show= 'question.mark.allow'
                             ) Note : {{getMark(question)}}
-
-                            label Question ouverte&nbsp;?&nbsp;
-                            input(
-                              type="checkbox"
-                              ng-true-value="true"
-                              ng-false-value="false"
-                              name="questions[{{$index}}]['allow-comment']"
-                              ng-model= 'question.comment.allow'
-                            )
-                            .col-md-11.col-md-offset-1.question-comment(
+                          .question-comment
+                            h5 Question ouverte&nbsp;?&nbsp;
+                              input(
+                                type="checkbox"
+                                name="questions[{{$index}}]['allow-comment']"
+                                ng-model= 'question.comment.allow'
+                              )
+                            .response(
                               ng-show= 'question.comment.allow'
                             ) Réponse : {{getComment(question)}}
-
-
-                    input.btn.btn-primary(type='submit' value='Valider la Page')
+                    .btn.btn-primary(ng-click="addQuestion(page)") Ajoutez une question
+          .jumbotron.appeal
+            .container
+              .row
+                .col-md-8
+                  input.btn.btn-primary(type='submit' value='Valider la Page')
 
