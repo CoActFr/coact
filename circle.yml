@@ -1,3 +1,6 @@
+machine:
+  service:
+    - mongodb
 checkout:
     post:
         - git submodule sync

@@ -5,8 +5,9 @@ module.exports = function (shipit) {
           "cd " + shipit.releasePath +
           " && npm config set production" +
           " && npm install --unsafe-perm" +
+          " && ln -s " + shipit.releasePath + "/../.env .env" +
           " && forever stop coact" +
-          " && cd www/ && IS_PROD=true forever start --uid 'coact' -a -o out.log -e err.log  server.js"
+          " && cd www/ && forever start --uid 'coact' -a -o out.log -e err.log  server.js"
         );
     });
 
