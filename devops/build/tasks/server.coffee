@@ -9,9 +9,26 @@ injectConfig = require './inject-config'
 
 parameters = require '../parameters.coffee'
 
-gulp.task 'server', ->
+gulp.task 'server', ['routers'], ->
   stream = gulp.src [
-    "#{parameters.paths.src.server}/*.coffee"
+    "#{parameters.paths.src.server.main}/server.coffee"
+    "#{parameters.paths.src.server.main}/models.coffee"
+  ]
+  .pipe plumber()
+
+  injectConfig stream
+  .pipe parameters.folders.scripts.replacer replace
+  .pipe parameters.folders.styles.replacer replace
+  .pipe parameters.folders.routers.replacer replace
+  .pipe sourcemaps.init()
+  .pipe coffee
+    bare: true
+  .pipe sourcemaps.write()
+  .pipe gulp.dest parameters.paths.www.main
+
+gulp.task 'routers', ->
+  stream = gulp.src [
+    "#{parameters.paths.src.server.routers}/*.coffee"
   ]
   .pipe plumber()
 
@@ -21,6 +38,5 @@ gulp.task 'server', ->
   .pipe sourcemaps.init()
   .pipe coffee
     bare: true
-  .pipe concat parameters.files.server
   .pipe sourcemaps.write()
-  .pipe gulp.dest parameters.paths.www.main
+  .pipe gulp.dest parameters.paths.www.routers

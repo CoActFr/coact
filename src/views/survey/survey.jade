@@ -1,0 +1,70 @@
+extends ../header.jade
+block head
+  title Coact - Surveys
+block vars
+  - var nav = 'surveys'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2= 'Formations with token : "' + token + '"'
+
+  script(type='text/javascript').
+    var pages = [];
+  .survey(ng-controller='surveyFormCtrl')
+    for page, indexP in formation.pages
+      - var pagePath = 'pages[' + indexP + ']'
+      script(type='text/javascript').
+        !{pagePath} = {questions: []};
+
+      for question, indexQ in page.questions
+        - var questionPath = pagePath + '.questions[' + indexQ + ']'
+
+        script(type='text/javascript').
+          !{questionPath} = {
+            label: !{JSON.stringify(question.label)},
+            mark: !{JSON.stringify(question.mark)},
+            comment: !{JSON.stringify(question.comment)}
+          };
+
+    .survey-page(ng-repeat="page in pages")
+      form(
+        novalidate
+        method="post"
+        action="/survey/answer/"+ token
+        )
+        .jumbotron
+          .container
+            .row
+              .col-md-8
+                input(type="hidden" name="page" ng-model="$index" value="{{$index}}")
+
+                h3= 'PAGE {{$index + 1}}'
+                .page-content
+                  .question(ng-repeat="question in page.questions")
+                    h4= '{{question.label}}'
+                    .container
+                      .col-md-11.col-md-offset-1
+                        .question-mark(ng-show="question.mark.allow")
+                          .radio-mark(ng-repeat="mark in markRange")
+                            input(
+                              type="radio"
+                              name="questions[{{$parent.$index}}]['mark']"
+                              ng-model= 'question.mark.value'
+                              value= '{{mark}}'
+                            )
+                            div {{mark}}
+                        .question-comment(ng-show="question.comment.allow")
+                          textarea(
+                            rows=4
+                            cols=70
+                            name="questions[{{$index}}]['comment']"
+                            ng-model= 'question.comment.text'
+                            value= '{{question.comment.text}}'
+                          )
+        .jumbotron.appeal
+          .container
+            .row
+              .col-md-8
+                input.btn.btn-primary(type='submit' value='Valider la Page')
