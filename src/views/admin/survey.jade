@@ -1,4 +1,4 @@
-extends ./header.jade
+extends ../header.jade
 block head
   title CoactAdmin - Surveys
 block vars
@@ -20,7 +20,7 @@ block component
   else
     script(type='text/javascript').
       var pages = [];
-    .survey(ng-controller='surveyFormCtrl')
+    .survey(ng-controller='adminSurveyFormCtrl')
       for page, indexP in formation.pages
         - var pagePath = 'pages[' + indexP + ']'
         script(type='text/javascript').
@@ -97,7 +97,7 @@ block component
                             )
                             .response(
                               ng-show= 'question.comment.allow'
-                            ) Réponse : {{getComment(question)}}
+                            ) Réponse : {{question.comment.text}}
                     .btn.btn-primary(ng-click="addQuestion(page)") Ajoutez une question
           .jumbotron.appeal
             .container

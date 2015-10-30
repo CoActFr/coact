@@ -39,11 +39,11 @@ pagesAccepted = [
 ]
 
 mainRouter.get '/', (request, response) ->
-  response.render 'landing', analytics: IS_PROD
+  response.render 'main/landing', analytics: IS_PROD
 
 mainRouter.get '/:page', (request, response) ->
   if request.params.page in pagesAccepted
-    response.render request.params.page, analytics: IS_PROD
+    response.render 'main/' + request.params.page, analytics: IS_PROD
   else
     response.status(404)
     .send 'Not found'

@@ -1,11 +1,8 @@
 angular.module '%module%'
-.controller 'surveyFormCtrl',  ($scope) ->
+.controller 'adminSurveyFormCtrl',  ($scope) ->
 
   $scope.getMark = (question) ->
     if question.mark.value == -1 then 'en attente de réponse' else question.mark.value
-
-  $scope.getComment = (question) ->
-    if question.comment.text == "false" then 'en attente de réponse' else question.comment.text
 
   $scope.pages = pages
 
@@ -17,7 +14,7 @@ angular.module '%module%'
         value: -1
       comment:
         allow: false
-        text: "false"
+        text: ""
 
   $scope.removeQuestion = (page, question) ->
     index = page.questions.indexOf question

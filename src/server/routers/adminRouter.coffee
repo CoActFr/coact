@@ -16,7 +16,7 @@ adminRouter.post '/newSurvey/:token', (request, response) ->
           value: -1
         comment:
           allow: false
-          text: "false"
+          text: ""
     ]
 
   formation.save (err)->
@@ -64,7 +64,7 @@ adminRouter.get '/survey/:token', (request, response) ->
   formationModel.find token: request.params.token, (error, formations) ->
     if formations.length > 0
       console.log formations[0]
-      response.render 'surveyAdmin',
+      response.render 'admin/survey',
         newSurvey: false
         formation: formations[0]
         token: request.params.token
