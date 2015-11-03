@@ -11,38 +11,33 @@ block component
           h2= 'Formations with token : "' + token + '"'
 
   script(type='text/javascript').
-    var pages = [];
+    var questions = [];
   .survey(ng-controller='surveyFormCtrl')
-    for page, indexP in formation.pages
-      - var pagePath = 'pages[' + indexP + ']'
+
+    for question, indexQ in page.questions
+      - var questionPath = 'questions[' + indexQ + ']'
+
       script(type='text/javascript').
-        !{pagePath} = {questions: []};
+        !{questionPath} = {
+          label: !{JSON.stringify(question.label)},
+          mark: !{JSON.stringify(question.mark)},
+          comment: !{JSON.stringify(question.comment)}
+        };
 
-      for question, indexQ in page.questions
-        - var questionPath = pagePath + '.questions[' + indexQ + ']'
-
-        script(type='text/javascript').
-          !{questionPath} = {
-            label: !{JSON.stringify(question.label)},
-            mark: !{JSON.stringify(question.mark)},
-            comment: !{JSON.stringify(question.comment)}
-          };
-
-    .survey-page(ng-repeat="page in pages")
+    .survey-page
       form(
         novalidate
         method="post"
-        action="/survey/answer/"+ token
+        action="/survey/answer/" + token + "/" + pageNumber
         )
         .jumbotron
           .container
             .row
               .col-md-8
-                input(type="hidden" name="page" ng-model="$index" value="{{$index}}")
+                h3= 'PAGE ' + pageNumber
 
-                h3= 'PAGE {{$index + 1}}'
                 .page-content
-                  .question(ng-repeat="question in page.questions")
+                  .question(ng-repeat="question in questions")
                     h4= '{{question.label}}'
                     .container
                       .col-md-11.col-md-offset-1
@@ -63,8 +58,10 @@ block component
                             ng-model= 'question.comment.text'
                             value= '{{question.comment.text}}'
                           )
-        .jumbotron.appeal
-          .container
             .row
               .col-md-8
-                input.btn.btn-primary(type='submit' value='Valider la Page')
+                - for (var index = 1; index <= numberOfPages; index++)
+                  .page-index(
+                    class=index == pageNumber + 1 ? "current" : ""
+                  )= index
+                input.page-index.next-page(type='submit' value='Page suivante')
