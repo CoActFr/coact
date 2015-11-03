@@ -5,12 +5,13 @@ surveyRouter.use (request, response, next) ->
   next()
 
 surveyRouter.post '/answer/:token/:pageNumber', (request, response) ->
+  pageNumber = parseInt request.params.pageNumber, 10
   questions = request.body.questions
   formationModel.find token: request.params.token, (error, formations) ->
     unless formations.length > 0
       return console.log 'Error : formation "' + request.params.token + '" not Found'
     formation = formations[0]
-    for question, questionNumber in formation.pages[request.params.pageNumber].questions
+    for question, questionNumber in formation.pages[pageNumber].questions
       if '\'mark\'' of questions[questionNumber]
         question.mark.value = questions[questionNumber]['\'mark\'']
       if '\'comment\'' of questions[questionNumber]
@@ -19,7 +20,7 @@ surveyRouter.post '/answer/:token/:pageNumber', (request, response) ->
     formation.save (err)->
       if err
         console.log 'Error during creation of formation "' + request.params.token + '"'
-      response.redirect '/survey/' + request.params.token + "?page=" + (request.params.pageNumber + 1)
+      response.redirect '/survey/' + request.params.token + "?page=" + (pageNumber + 1)
 
 surveyRouter.get '/:token', (request, response) ->
   pageNumber = request.query.page ? 0

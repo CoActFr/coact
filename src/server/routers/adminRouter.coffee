@@ -34,26 +34,31 @@ adminRouter.post '/deleteSurvey/:token', (request, response) ->
 
 
 adminRouter.post '/updateSurvey/:token', (request, response) ->
-  pageNumber = request.body.page
+  pages = request.body.pages
   questions = request.body.questions
   formationModel.find token: request.params.token, (error, formations) ->
-    unless formations.length > 0
+    if formations.length < 1
       return console.log 'Error : formation "' + request.params.token + '" not Found'
+
     formation = formations[0]
-    formation.pages[pageNumber].questions = []
-    for question, questionNumber in questions
-      formatedQuestion = new questionModel
-        label: question['\'label\'']
-        mark:
-          allow: '\'allow-mark\'' of question
-          value: question['\'mark\'']
-        comment:
-          allow: '\'allow-comment\'' of question
-          text: question['\'comment\'']
+    formation.pages = []
 
+    for page, pageNumber in pages
+      formation.pages[pageNumber] = new pageModel
+        questions: []
 
-      formation.pages[pageNumber]
-      .questions[questionNumber] = formatedQuestion
+      for question, questionNumber in page
+        formatedQuestion = new questionModel
+          label: question['\'label\'']
+          mark:
+            allow: '\'allow-mark\'' of question
+            value: question['\'mark\'']
+          comment:
+            allow: '\'allow-comment\'' of question
+            text: question['\'comment\'']
+
+        formation.pages[pageNumber]
+        .questions[questionNumber] = formatedQuestion
 
     formation.save (err)->
       if err

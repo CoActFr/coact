@@ -325,10 +325,11 @@ body.bg-organisation {
         border-color: @coactBlue;
         color: @coactBlue;
         font-weight: bold;
-        &:hover {
-          color: #fff;
-          background-color: @coactBlue;
-        }
+      }
+      &:hover, &.next-page:hover {
+        border-color: @coactBlue;
+        color: #fff;
+        background-color: @coactBlue;
       }
       &.next-page {
         line-height: normal;
