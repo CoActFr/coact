@@ -31,7 +31,13 @@ block component
         method="post"
         action="/survey/answer/" + token + "/" + pageNumber
         )
-        if completion < 100
+        if endPage
+          .jumbotron
+            .container
+              .row
+                .col-md-8.col-md-offset-1
+                  h3 Merci d'avoir répondu à ce questionnaire
+        else
           .jumbotron
             .container
               .row
@@ -60,12 +66,6 @@ block component
                               ng-model= 'question.comment.text'
                               value= '{{question.comment.text}}'
                           )
-        else
-          .jumbotron
-            .container
-              .row
-                .col-md-8.col-md-offset-1
-                  h3 Merci d'avoir répondu à ce questionnaire
         .container.page-handler
           .row
             .col-md-8.col-md-offset-1
@@ -81,11 +81,8 @@ block component
                   span %&nbsp;de&nbsp;progression
 
               if pageNumber > 0
-                - var prevPage = pageNumber
-                if completion < 100
-                  - prevPage -= 1
                 a.page-index.textual.prev-page(
-                  href="?page=" + prevPage
+                  href="?page=" + (pageNumber - 1)
                 ) Page précédente
 
               - for (var index = 0; index <= pageNumber; index++)
@@ -94,5 +91,5 @@ block component
                   href="?page=" + index
                 )= (index + 1)
 
-              if completion < 100
+              if !endPage
                 input.page-index.textual.next-page(type='submit' value='Page suivante')

@@ -52,12 +52,14 @@ surveyRouter.get '/:token', (request, response) ->
 
       if pageNumber == formations[0].pages.length
         response.render 'survey/survey',
-          pageNumber: pageNumber - 1
+          pageNumber: pageNumber
           numberOfPages: formations[0].pages.length
           token: request.params.token
           completion: 100
+          endPage: true
 
       response.render 'survey/survey',
+        endPage: false
         pageNumber: pageNumber
         numberOfPages: formations[0].pages.length
         completion: getCompletion formations[0].pages, pageNumber
