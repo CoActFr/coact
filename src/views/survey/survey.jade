@@ -3,6 +3,7 @@ block head
   title Coact - Surveys
 block vars
   - var nav = 'surveys'
+  - var bgPage = 'bg-grey'
 block component
   .jumbotron
     .container
@@ -11,38 +12,33 @@ block component
           h2= 'Formations with token : "' + token + '"'
 
   script(type='text/javascript').
-    var pages = [];
+    var questions = [];
   .survey(ng-controller='surveyFormCtrl')
-    for page, indexP in formation.pages
-      - var pagePath = 'pages[' + indexP + ']'
+
+    for question, indexQ in page.questions
+      - var questionPath = 'questions[' + indexQ + ']'
+
       script(type='text/javascript').
-        !{pagePath} = {questions: []};
+        !{questionPath} = {
+          label: !{JSON.stringify(question.label)},
+          mark: !{JSON.stringify(question.mark)},
+          comment: !{JSON.stringify(question.comment)}
+        };
 
-      for question, indexQ in page.questions
-        - var questionPath = pagePath + '.questions[' + indexQ + ']'
-
-        script(type='text/javascript').
-          !{questionPath} = {
-            label: !{JSON.stringify(question.label)},
-            mark: !{JSON.stringify(question.mark)},
-            comment: !{JSON.stringify(question.comment)}
-          };
-
-    .survey-page(ng-repeat="page in pages")
+    .survey-page(ng-cloak)
       form(
         novalidate
         method="post"
-        action="/survey/answer/"+ token
+        action="/survey/answer/" + token + "/" + pageNumber
         )
         .jumbotron
           .container
             .row
-              .col-md-8
-                input(type="hidden" name="page" ng-model="$index" value="{{$index}}")
+              .col-md-8.col-md-offset-1
+                h3= 'PAGE ' + (pageNumber + 1)
 
-                h3= 'PAGE {{$index + 1}}'
                 .page-content
-                  .question(ng-repeat="question in page.questions")
+                  .question(ng-repeat="question in questions")
                     h4= '{{question.label}}'
                     .container
                       .col-md-11.col-md-offset-1
@@ -63,8 +59,22 @@ block component
                             ng-model= 'question.comment.text'
                             value= '{{question.comment.text}}'
                           )
-        .jumbotron.appeal
-          .container
-            .row
-              .col-md-8
-                input.btn.btn-primary(type='submit' value='Valider la Page')
+        .container.page-handler
+          .row
+            .col-md-8.col-md-offset-1
+              .progress
+                .progress-bar(
+                  role="progressbar"
+                  aria-valuenow= completion
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width:" + completion + "%"
+                )
+                  span=completion
+                  span %&nbsp;de&nbsp;progression
+              - for (var index = 0; index <= pageNumber; index++)
+                a.page-index(
+                  class=index == pageNumber ? "current" : ""
+                  href="?page=" + index
+                )= (index + 1)
+              input.page-index.next-page(type='submit' value='Page suivante')

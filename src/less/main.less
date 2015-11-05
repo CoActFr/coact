@@ -58,24 +58,31 @@ body {
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 
-body.bg-personnel {
-  background: url("../img/bg-personnel.png") no-repeat;
-  background-size: 100%;
-  background-position-y: 40px;
-  background-color: #fff;
-  .jumbotron.header .row {
-    background-color: rgba(255, 255, 255, 0.7)
+body{
+  &.bg-personnel {
+    background: url("../img/bg-personnel.png") no-repeat;
+    background-size: 100%;
+    background-position-y: 40px;
+    background-color: #fff;
+    .jumbotron.header .row {
+      background-color: rgba(255, 255, 255, 0.7)
+    }
   }
-}
 
-body.bg-organisation {
-  background: url("../img/bg-organisation.png") no-repeat;
-  background-size: 70%;
-  background-position-x: 30%;
-  background-position-y: 40px;
-  background-color: #fff;
-  .jumbotron.header .row {
-    background-color: rgba(255, 255, 255, 0.7)
+
+  &.bg-organisation {
+    background: url("../img/bg-organisation.png") no-repeat;
+    background-size: 70%;
+    background-position-x: 30%;
+    background-position-y: 40px;
+    background-color: #fff;
+    .jumbotron.header .row {
+      background-color: rgba(255, 255, 255, 0.7)
+    }
+  }
+
+  &.bg-grey {
+    background-color: #ccc;
   }
 }
 
@@ -287,6 +294,10 @@ body.bg-organisation {
       width: 100%
     }
 
+    .page-handler {
+      margin-top: 20px;
+    }
+
     .question {
       border-color: #777;
       border-top-right-radius: 15px;
@@ -295,11 +306,13 @@ body.bg-organisation {
       padding-right: 10px;
       margin-bottom: 20px;
 
-      .question-mark .radio-mark {
-        display: inline-block;
-        margin: 0 20px;
-        text-align: center;
-
+      .question-mark {
+        margin-bottom: 10px;
+        .radio-mark {
+          display: inline-block;
+          margin: 0 20px;
+          text-align: center;
+        }
       }
       .question-comment textarea {
         width: 100%;
@@ -308,6 +321,44 @@ body.bg-organisation {
     }
     .response {
       margin-left: 10px;
+    }
+
+    .page-index {
+      border-style: dashed;
+      border-color: #000;
+      color: #000;
+      width: 25px;
+      height: 30px;
+      text-align: center;
+      margin: 10px 5px;
+      display: inline-block;
+
+      &.current, &.next-page, &.add-page  {
+        border-color: @coactBlue;
+        color: @coactBlue;
+        font-weight: bold;
+      }
+      &:hover, &.next-page:hover, &.add-page:hover {
+        border-color: @coactBlue;
+        color: #fff;
+        background-color: @coactBlue;
+      }
+      &.next-page, &.add-page {
+        line-height: normal;
+        background-color: transparent;
+        border-width: 3px;
+      }
+      &.next-page {
+        width: 140px;
+      }
+      &.add-page {
+        width: 160px;
+      }
+    }
+    .progress .progress-bar {
+      color: #000;
+      text-align: left;
+      text-indent: 43%
     }
   }
 
@@ -375,6 +426,13 @@ body.bg-organisation {
       font-size: 50px !important;
     }
     margin-bottom: 0;
+  }
+
+  .jumbotron.footer {
+    position: absolute;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: #ccc;
   }
 
   .jumbotron.header {
