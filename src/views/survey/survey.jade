@@ -3,6 +3,7 @@ block head
   title Coact - Surveys
 block vars
   - var nav = 'surveys'
+  - var bgPage = 'bg-grey'
 block component
   .jumbotron
     .container
@@ -24,7 +25,7 @@ block component
           comment: !{JSON.stringify(question.comment)}
         };
 
-    .survey-page
+    .survey-page(ng-cloak)
       form(
         novalidate
         method="post"
@@ -33,7 +34,7 @@ block component
         .jumbotron
           .container
             .row
-              .col-md-8
+              .col-md-8.col-md-offset-1
                 h3= 'PAGE ' + (pageNumber + 1)
 
                 .page-content
@@ -58,11 +59,22 @@ block component
                             ng-model= 'question.comment.text'
                             value= '{{question.comment.text}}'
                           )
-            .row
-              .col-md-8
-                - for (var index = 0; index <= pageNumber; index++)
-                  a.page-index(
-                    class=index == pageNumber ? "current" : ""
-                    href="?page=" + index
-                  )= (index + 1)
-                input.page-index.next-page(type='submit' value='Page suivante')
+        .container.page-handler
+          .row
+            .col-md-8.col-md-offset-1
+              .progress
+                .progress-bar(
+                  role="progressbar"
+                  aria-valuenow= completion
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width:" + completion + "%"
+                )
+                  span=completion
+                  span %&nbsp;de&nbsp;progression
+              - for (var index = 0; index <= pageNumber; index++)
+                a.page-index(
+                  class=index == pageNumber ? "current" : ""
+                  href="?page=" + index
+                )= (index + 1)
+              input.page-index.next-page(type='submit' value='Page suivante')

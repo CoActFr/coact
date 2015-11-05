@@ -3,6 +3,7 @@ block head
   title CoactAdmin - Surveys
 block vars
   - var nav = 'surveys'
+  - var bgPage = 'bg-grey'
 block component
   .jumbotron
     .container
@@ -97,15 +98,14 @@ block component
                               ng-show= 'question.comment.allow'
                             ) Réponse : {{question.comment.text}}
                     .btn.btn-primary(ng-click="addQuestion(page)") Ajoutez une question
-        .jumbotron
-          .container
-            .row
-              .col-md-8
-                .page-index(
-                  ng-repeat="page in pages"
-                  ng-class="$index == currentPage ? 'current' : ''"
-                  ng-click="setPage($index)"
-                ) {{$index + 1}}
-                .page-index.next-page(ng-click="addPage()") Ajoutez une page
-                input.btn.btn-primary(type='submit' value='Valider le questionnaire')
+        .container.page-handler
+          .row
+            .col-md-8
+              .page-index(
+                ng-repeat="page in pages"
+                ng-class="$index == currentPage ? 'current' : ''"
+                ng-click="setPage($index)"
+              ) {{$index + 1}}
+              .page-index.add-page(ng-click="addPage()") Ajoutez une page
+              input.btn.btn-primary(type='submit' value='Valider le questionnaire')
 

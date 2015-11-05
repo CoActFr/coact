@@ -17,6 +17,8 @@ html(lang="fr", ng-app="%module%")
         ga('create', 'UA-68212799-1', 'auto');
         ga('send', 'pageview', location.pathname);
       // End Google Analytics
+    script(src="/%scripts%/vendor.js")
+    script(src="/%scripts%/app.js")
   block vars
   body#body.coactcss(class=bgPage)
     nav.navbar.navbar-default.navbar-fixed-top
@@ -49,5 +51,3 @@ html(lang="fr", ng-app="%module%")
 
     block component
 
-    script(src="/%scripts%/vendor.js")
-    script(src="/%scripts%/app.js")
