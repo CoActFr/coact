@@ -323,6 +323,9 @@ body{
       margin-left: 10px;
     }
 
+    input.page-index.textual{
+      line-height: normal;
+    }
     .page-index {
       border-style: dashed;
       border-color: #000;
@@ -332,27 +335,30 @@ body{
       text-align: center;
       margin: 10px 5px;
       display: inline-block;
+      text-decoration: none;
 
-      &.current, &.next-page, &.add-page  {
+      &.current, &.textual.next-page, &.textual.add-page  {
         border-color: @coactBlue;
         color: @coactBlue;
         font-weight: bold;
       }
-      &:hover, &.next-page:hover, &.add-page:hover {
+      &:hover, &.textual:hover {
         border-color: @coactBlue;
         color: #fff;
         background-color: @coactBlue;
       }
-      &.next-page, &.add-page {
-        line-height: normal;
+      &.textual {
         background-color: transparent;
         border-width: 3px;
-      }
-      &.next-page {
-        width: 140px;
-      }
-      &.add-page {
-        width: 160px;
+        &.next-page {
+          width: 140px;
+        }
+        &.add-page {
+          width: 160px;
+        }
+        &.prev-page {
+          width: 160px;
+        }
       }
     }
     .progress .progress-bar {

@@ -14,16 +14,16 @@ block component
   script(type='text/javascript').
     var questions = [];
   .survey(ng-controller='surveyFormCtrl')
+    if completion < 100
+      for question, indexQ in page.questions
+        - var questionPath = 'questions[' + indexQ + ']'
 
-    for question, indexQ in page.questions
-      - var questionPath = 'questions[' + indexQ + ']'
-
-      script(type='text/javascript').
-        !{questionPath} = {
-          label: !{JSON.stringify(question.label)},
-          mark: !{JSON.stringify(question.mark)},
-          comment: !{JSON.stringify(question.comment)}
-        };
+        script(type='text/javascript').
+          !{questionPath} = {
+            label: !{JSON.stringify(question.label)},
+            mark: !{JSON.stringify(question.mark)},
+            comment: !{JSON.stringify(question.comment)}
+          };
 
     .survey-page(ng-cloak)
       form(
@@ -31,34 +31,41 @@ block component
         method="post"
         action="/survey/answer/" + token + "/" + pageNumber
         )
-        .jumbotron
-          .container
-            .row
-              .col-md-8.col-md-offset-1
-                h3= 'PAGE ' + (pageNumber + 1)
+        if completion < 100
+          .jumbotron
+            .container
+              .row
+                .col-md-8.col-md-offset-1
+                  h3= 'PAGE ' + (pageNumber + 1)
 
-                .page-content
-                  .question(ng-repeat="question in questions")
-                    h4= '{{question.label}}'
-                    .container
-                      .col-md-11.col-md-offset-1
-                        .question-mark(ng-show="question.mark.allow")
-                          .radio-mark(ng-repeat="mark in markRange")
-                            input(
-                              type="radio"
-                              name="questions[{{$parent.$index}}]['mark']"
-                              ng-model= 'question.mark.value'
-                              value= '{{mark}}'
-                            )
-                            div {{mark}}
-                        .question-comment(ng-show="question.comment.allow")
-                          textarea(
-                            rows=4
-                            cols=70
-                            name="questions[{{$index}}]['comment']"
-                            ng-model= 'question.comment.text'
-                            value= '{{question.comment.text}}'
+                  .page-content
+                    .question(ng-repeat="question in questions")
+                      h4= '{{question.label}}'
+                      .container
+                        .col-md-11.col-md-offset-1
+                          .question-mark(ng-show="question.mark.allow")
+                            .radio-mark(ng-repeat="mark in markRange")
+                              input(
+                                type="radio"
+                                name="questions[{{$parent.$index}}]['mark']"
+                                ng-model= 'question.mark.value'
+                                value= '{{mark}}'
+                              )
+                              div {{mark}}
+                          .question-comment(ng-show="question.comment.allow")
+                            textarea(
+                              rows=4
+                              cols=70
+                              name="questions[{{$index}}]['comment']"
+                              ng-model= 'question.comment.text'
+                              value= '{{question.comment.text}}'
                           )
+        else
+          .jumbotron
+            .container
+              .row
+                .col-md-8.col-md-offset-1
+                  h3 Merci d'avoir répondu à ce questionnaire
         .container.page-handler
           .row
             .col-md-8.col-md-offset-1
@@ -72,9 +79,20 @@ block component
                 )
                   span=completion
                   span %&nbsp;de&nbsp;progression
+
+              if pageNumber > 0
+                - var prevPage = pageNumber
+                if completion < 100
+                  - prevPage -= 1
+                a.page-index.textual.prev-page(
+                  href="?page=" + prevPage
+                ) Page précédente
+
               - for (var index = 0; index <= pageNumber; index++)
                 a.page-index(
                   class=index == pageNumber ? "current" : ""
                   href="?page=" + index
                 )= (index + 1)
-              input.page-index.next-page(type='submit' value='Page suivante')
+
+              if completion < 100
+                input.page-index.textual.next-page(type='submit' value='Page suivante')

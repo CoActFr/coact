@@ -30,32 +30,37 @@ surveyRouter.post '/answer/:token/:pageNumber', (request, response) ->
 GET
 ###
 
+getCompletion = (pages, pageNumber) ->
+  numberOfAnswers = 0
+  numberOfQuestions = 0
+  for page, index in pages
+    numberOfQuestions += page.questions.length
+    if index < pageNumber
+      numberOfAnswers = numberOfQuestions
+
+  completion = 0
+  if numberOfQuestions > 0
+    completion = Math.floor(100*numberOfAnswers/numberOfQuestions)
+  return completion
+
 surveyRouter.get '/:token', (request, response) ->
   pageNumber = request.query.page ? 0
 
   formationModel.find token: request.params.token, (error, formations) ->
     if formations.length > 0
-      pageNumber = Math.min pageNumber, formations[0].pages.length - 1
+      pageNumber = Math.min pageNumber, formations[0].pages.length
 
-      numberOfAnswers = 0
-      numberOfQuestions = 0
-      for page, index in formations[0].pages
-        console.log page.questions.length
-        numberOfQuestions += page.questions.length
-        if index < pageNumber
-          numberOfAnswers = numberOfQuestions
-
-      console.log  numberOfQuestions
-      console.log numberOfAnswers
-
-      completion = 0
-      if numberOfQuestions > 0
-        completion = Math.floor(100*numberOfAnswers/numberOfQuestions)
+      if pageNumber == formations[0].pages.length
+        response.render 'survey/survey',
+          pageNumber: pageNumber - 1
+          numberOfPages: formations[0].pages.length
+          token: request.params.token
+          completion: 100
 
       response.render 'survey/survey',
         pageNumber: pageNumber
         numberOfPages: formations[0].pages.length
-        completion: completion
+        completion: getCompletion formations[0].pages, pageNumber
         page: formations[0].pages[pageNumber]
         token: request.params.token
     else
