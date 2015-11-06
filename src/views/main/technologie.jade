@@ -4,6 +4,7 @@ block head
   meta(name="description" content="Mettez en place les outils informatiques collaboratifs adaptés à votre organisation")
 block vars
   - var nav = 'technologie'
+  - var bgPage = 'bg-technologie'
 block component
   .jumbotron.header
     .container
@@ -18,10 +19,10 @@ block component
           p.explain
             | Pour celà, il est possible de s'appuyer sur
             | de nombreux outils technologiques.
-  .jumbotron
-    .container
+  .jumbotron.l-transparent
+    .container.marketing
       .row
-        .col-md-6
+        .col-md-6.thumbnail
           h2 Une veille technologique
           p
             | De nombreuse solutions propriétaires ou open-sources
@@ -31,7 +32,7 @@ block component
             | vous permettre de trouver celles qui correspondent à votre
             | besoin.
       .row
-        .col-md-6.col-md-offset-6
+        .col-md-6.col-md-offset-6.thumbnail
           h2 Des outils en liens avec nos methodes
           p
             | Lorsque l'existant ne nous satisfait pas, nous developpons
