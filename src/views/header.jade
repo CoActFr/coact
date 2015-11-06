@@ -37,15 +37,15 @@ html(lang="fr", ng-app="%module%")
               a(href="/") Accueil
             li.dropdown(class=nav === 'personnel' || nav === 'organisation' || nav === 'technologie' ? 'active' : '')
               a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
-                | Former
+                | Collaboration
                 span.caret
               ul.dropdown-menu
                 li(class=nav === 'personnel' ? 'active' : '')
-                  a(href="/personnel") votre personnel
+                  a(href="/personnel") humaine
                 li(class=nav === 'organisation' ? 'active' : '')
-                  a(href="/organisation") vos organisations
+                  a(href="/organisation") organisationnelle
                 li(class=nav === 'technologie' ? 'active' : '')
-                  a(href="/technologie") votre technologie
+                  a(href="/technologie") technologique
             li(class=nav === 'contact' ? 'active' : '')
               a(href="/contact") Contact
 
