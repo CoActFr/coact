@@ -9,7 +9,7 @@ block component
     .container
       .row
         .col-md-12
-          h2= 'Formations with token : "' + token + '"'
+          h2= 'Questionnaire : "' + token + '"'
   if newSurvey
     .jumbotron
       .container
@@ -22,7 +22,7 @@ block component
     script(type='text/javascript').
       var pages = [];
     .survey(ng-controller='adminSurveyFormCtrl')
-      for page, indexP in formation.pages
+      for page, indexP in template.pages
         - var pagePath = 'pages[' + indexP + ']'
         script(type='text/javascript').
           !{pagePath} = {questions: []};
@@ -33,8 +33,8 @@ block component
           script(type='text/javascript').
             !{questionPath} = {
               label: !{JSON.stringify(question.label)},
-              mark: !{JSON.stringify(question.mark)},
-              comment: !{JSON.stringify(question.comment)}
+              allowMark: !{JSON.stringify(question.allowMark)},
+              allowComment: !{JSON.stringify(question.allowComment)}
             };
 
       form(
@@ -70,33 +70,15 @@ block component
                               input(
                                 type="checkbox"
                                 name="pages[{{$parent.$index}}].questions[{{$index}}]['allow-mark']"
-                                ng-model= 'question.mark.allow'
+                                ng-model= 'question.allowMark'
                               )
-                            input(
-                              type="hidden"
-                              name="pages[{{$parent.$index}}].questions[{{$index}}]['mark']"
-                              ng-model= 'question.mark.value'
-                              value= '{{question.mark.value}}'
-                            )
-                            .response(
-                              ng-show= 'question.mark.allow'
-                            ) Note : {{getMark(question)}}
                           .question-comment
                             h5 Question ouverte&nbsp;?&nbsp;
                               input(
                                 type="checkbox"
                                 name="pages[{{$parent.$index}}].questions[{{$index}}]['allow-comment']"
-                                ng-model= 'question.comment.allow'
+                                ng-model= 'question.allowComment'
                               )
-                            input(
-                              type="hidden"
-                              name="pages[{{$parent.$index}}].questions[{{$index}}]['comment']"
-                              ng-model= 'question.comment.text'
-                              value= '{{question.comment.text}}'
-                            )
-                            .response(
-                              ng-show= 'question.comment.allow'
-                            ) Réponse : {{question.comment.text}}
                     .btn.btn-primary(ng-click="addQuestion(page)") Ajoutez une question
         .container.page-handler
           .row

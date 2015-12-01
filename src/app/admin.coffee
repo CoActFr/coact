@@ -10,12 +10,8 @@ angular.module '%module%'
   $scope.addQuestion = (page) ->
     page.questions.push
       label: ""
-      mark:
-        allow: true
-        value: -1
-      comment:
-        allow: false
-        text: ""
+      allowMark: true
+      allowComment: false
 
   $scope.addPage = ->
     newIndex = $scope.pages.length

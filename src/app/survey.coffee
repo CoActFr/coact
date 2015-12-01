@@ -4,4 +4,3 @@ angular.module '%module%'
   $scope.questions = questions
   $scope.markRange = [0..10]
 
-  #todo

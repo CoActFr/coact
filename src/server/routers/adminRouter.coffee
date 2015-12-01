@@ -5,27 +5,26 @@ adminRouter.use (request, response, next) ->
   next()
 
 adminRouter.post '/newSurvey/:token', (request, response) ->
-  formation = new formationModel
+  survey = new surveyModel
     token: request.params.token
-    validated: false
-    pages: [ new pageModel
-      questions: new questionModel
-        label: ""
-        mark:
-          allow: true
-          value: -1
-        comment:
-          allow: false
-          text: ""
-    ]
+    template: new surveyTemplateModel
+      pages: [ new pageModel
+        questions: [ new basicQuestionModel
+          label: ""
+          allowMark: true
+          allowComment: true
+        ]
+      ]
 
-  formation.save (err)->
+    users: []
+
+  survey.save (err)->
     if err
-      console.log 'Error during creation of formation "' + request.params.token + '"'
+      console.log 'Error during creation of survey "' + request.params.token + '"'
     response.redirect '/admin/survey/' + request.params.token
 
 adminRouter.post '/deleteSurvey/:token', (request, response) ->
-  formationModel.remove token: request.params.token, (error) ->
+  surveyModel.remove token: request.params.token, (error) ->
     if error
       return console.log 'Error : ' + error
     token: request.params.token
@@ -36,15 +35,15 @@ adminRouter.post '/deleteSurvey/:token', (request, response) ->
 adminRouter.post '/updateSurvey/:token', (request, response) ->
   pages = request.body.pages
   questions = request.body.questions
-  formationModel.find token: request.params.token, (error, formations) ->
-    if formations.length < 1
-      return console.log 'Error : formation "' + request.params.token + '" not Found'
+  surveyModel.find token: request.params.token, (error, surveys) ->
+    if surveys.length < 1
+      return console.log 'Error : survey "' + request.params.token + '" not Found'
 
-    formation = formations[0]
-    formation.pages = []
+    survey = surveys[0]
+    survey.pages = []
 
     for page, pageNumber in pages
-      formation.pages[pageNumber] = new pageModel
+      survey.pages[pageNumber] = new pageModel
         questions: []
 
       for question, questionNumber in page
@@ -52,26 +51,24 @@ adminRouter.post '/updateSurvey/:token', (request, response) ->
           label: question['\'label\'']
           mark:
             allow: '\'allow-mark\'' of question
-            value: question['\'mark\'']
           comment:
             allow: '\'allow-comment\'' of question
-            text: question['\'comment\'']
 
-        formation.pages[pageNumber]
+        survey.template.pages[pageNumber]
         .questions[questionNumber] = formatedQuestion
 
-    formation.save (err)->
+    survey.save (err)->
       if err
-        console.log 'Error during creation of formation "' + request.params.token + '"'
+        console.log 'Error during creation of survey "' + request.params.token + '"'
       response.redirect '/admin/survey/' + request.params.token
 
 adminRouter.get '/survey/:token', (request, response) ->
-  formationModel.find token: request.params.token, (error, formations) ->
-    if formations.length > 0
-      console.log formations[0]
+  surveyModel.find token: request.params.token, (error, surveys) ->
+    if surveys.length > 0
+      console.log surveys[0]
       response.render 'admin/survey',
         newSurvey: false
-        formation: formations[0]
+        template: surveys[0].template
         token: request.params.token
     else
       response.render 'admin/survey',
@@ -79,9 +76,9 @@ adminRouter.get '/survey/:token', (request, response) ->
         token: request.params.token
 
 adminRouter.get '/allSurvey', (request, response) ->
-  formationModel.find (error, formations) ->
+  surveyModel.find (error, surveys) ->
     response.render 'admin/allSurvey',
-      formations: formations
+      surveys: surveys
 
 
 module.exports = adminRouter

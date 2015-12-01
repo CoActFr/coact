@@ -1,6 +1,6 @@
 extends ../header.jade
 block head
-  title CoactAdmin - All Surveys
+  title CoactAdmin - Questionnaires
 block vars
   - var nav = 'surveys'
 block component
@@ -8,18 +8,18 @@ block component
     .container
       .row
         .col-md-12
-          h2 Formations
+          h2 Questionnaires
   .jumbotron
     .container
       .row
         .col-md-8
           ul
-            each formation in formations
+            each survey in surveys
               li
                 form(
                   novalidate
                   method="post"
-                  action='/admin/deleteSurvey/' + formation.token
+                  action='/admin/deleteSurvey/' + survey.token
                   )
-                  label= formation.token
-                  input(type="submit" value="Delete formation")
+                  label= survey.token
+                  input(type="submit" value="Delete questionnaire")
