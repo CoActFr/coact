@@ -38,31 +38,34 @@ adminRouter.post '/deleteSurvey/:token', (request, response) ->
 
 
 adminRouter.post '/updateSurvey/:token', (request, response) ->
+
   pages = request.body.pages
-  questions = request.body.questions
-  surveyModel.find token: request.params.token, (error, surveys) ->
-    if surveys.length < 1
+
+  surveyModel.findOne token: request.params.token
+  .populate 'template'
+  .exec (error, survey) ->
+    if error
+      console.log error
+    if survey is null
       return console.log 'Error : survey "' + request.params.token + '" not Found'
 
-    survey = surveys[0]
-    survey.pages = []
+    template = survey.template
+    template.pages = []
 
     for page, pageNumber in pages
-      survey.pages[pageNumber] = new pageModel
+      template.pages[pageNumber] = new pageModel
         questions: []
 
       for question, questionNumber in page
-        formatedQuestion = new questionModel
+        formatedQuestion = new basicQuestionModel
           label: question['\'label\'']
-          mark:
-            allow: '\'allow-mark\'' of question
-          comment:
-            allow: '\'allow-comment\'' of question
+          allowMark: '\'allow-mark\'' of question
+          allowComment: '\'allow-comment\'' of question
 
-        survey.template.pages[pageNumber]
+        template.pages[pageNumber]
         .questions[questionNumber] = formatedQuestion
 
-    survey.save (err)->
+    template.save (err)->
       if err
         console.log 'Error during creation of survey "' + request.params.token + '"'
       response.redirect '/admin/survey/' + request.params.token
