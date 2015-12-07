@@ -53,7 +53,7 @@ db.once 'open', (callback) ->
     questionId: mongoose.Schema.Types.ObjectId
     answer:
       type: mongoose.Schema.ObjectId
-      ref: 'basicAnswerSchema'
+      ref: 'BasicAnswer'
 
   # Survey User
 
@@ -68,7 +68,7 @@ db.once 'open', (callback) ->
     token: String
     template:
       type: mongoose.Schema.ObjectId
-      ref: 'surveyTemplateSchema'
+      ref: 'SurveyTemplate'
     users: [surveyUserSchema]
 
 

@@ -5,23 +5,28 @@ adminRouter.use (request, response, next) ->
   next()
 
 adminRouter.post '/newSurvey/:token', (request, response) ->
-  survey = new surveyModel
-    token: request.params.token
-    template: new surveyTemplateModel
-      pages: [ new pageModel
-        questions: [ new basicQuestionModel
-          label: ""
-          allowMark: true
-          allowComment: true
-        ]
+  template = new surveyTemplateModel
+    pages: [ new pageModel
+      questions: [ new basicQuestionModel
+        label: ""
+        allowMark: true
+        allowComment: true
       ]
+    ]
 
-    users: []
-
-  survey.save (err)->
+  template.save (err) ->
     if err
       console.log 'Error during creation of survey "' + request.params.token + '"'
-    response.redirect '/admin/survey/' + request.params.token
+
+    survey = new surveyModel
+      token: request.params.token
+      template: template._id
+      users: []
+
+    survey.save (err) ->
+      if err
+        console.log 'Error during creation of survey "' + request.params.token + '"'
+      response.redirect '/admin/survey/' + request.params.token
 
 adminRouter.post '/deleteSurvey/:token', (request, response) ->
   surveyModel.remove token: request.params.token, (error) ->
@@ -63,12 +68,16 @@ adminRouter.post '/updateSurvey/:token', (request, response) ->
       response.redirect '/admin/survey/' + request.params.token
 
 adminRouter.get '/survey/:token', (request, response) ->
-  surveyModel.find token: request.params.token, (error, surveys) ->
-    if surveys.length > 0
-      console.log surveys[0]
+  surveyModel.findOne token: request.params.token
+  .populate 'template'
+  .exec (error, survey) ->
+    if error
+      console.log error
+    unless survey is null
+      console.log survey
       response.render 'admin/survey',
         newSurvey: false
-        template: surveys[0].template
+        template: survey.template
         token: request.params.token
     else
       response.render 'admin/survey',
