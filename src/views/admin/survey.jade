@@ -41,30 +41,30 @@ block component
         novalidate
         method="post"
         action="/admin/updateSurvey/"+ token
+        autocomplete="off"
         )
         .survey-page(ng-repeat="page in pages" ng-show="$index == currentPage")
           .jumbotron
             .container
               .row
-                .col-md-8
+                .col-md-12
                   h3= 'PAGE {{$index + 1}}'
                   .page-content
 
                     .question(ng-repeat="question in page.questions")
-                      h4
-                        span= 'Question {{$index + 1}}'
+                      .question-label
+                        input(
+                          type='textbox'
+                          name="pages[{{$parent.$index}}].questions[{{$index}}]['label']"
+                          placeholder='Tapez votre question'
+                          value="question.label"
+                          ng-model= 'question.label'
+                        )
                         span.close(ng-click="removeQuestion(page, question)") x
-                        .container
-                          .col-md-11.col-md-offset-1
-                          .question-label
-                            h5 Intitulé : &nbsp;
-                            input(
-                              type='textbox'
-                              name="pages[{{$parent.$index}}].questions[{{$index}}]['label']"
-                              placeholder='Tapez votre question'
-                              value="question.label"
-                              ng-model= 'question.label'
-                              )
+                      .container
+                        .col-md-11.col-md-offset-1
+
+
                           .question-mark
                             h5 Question notée&nbsp;?&nbsp;
                               input(
@@ -82,12 +82,15 @@ block component
                     .btn.btn-primary(ng-click="addQuestion(page)") Ajoutez une question
         .container.page-handler
           .row
-            .col-md-8
+            .col-md-12
               .page-index(
                 ng-repeat="page in pages"
                 ng-class="$index == currentPage ? 'current' : ''"
                 ng-click="setPage($index)"
               ) {{$index + 1}}
               .page-index.textual.add-page(ng-click="addPage()") Ajoutez une page
-              input.btn.btn-primary(type='submit' value='Valider le questionnaire')
+              input.btn.btn-primary(type='submit' value='Sauvegarder le questionnaire')
+
+              a.btn.btn-primary(href="/admin/sendSurvey/"+ token) Envoyer le questionnaire
+
 

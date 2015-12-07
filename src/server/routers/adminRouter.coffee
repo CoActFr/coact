@@ -87,6 +87,19 @@ adminRouter.get '/survey/:token', (request, response) ->
         newSurvey: true
         token: request.params.token
 
+adminRouter.get '/sendSurvey/:token', (request, response) ->
+  surveyModel.findOne token: request.params.token
+  .exec (error, survey) ->
+    if error
+      console.log error
+    unless survey is null
+      console.log survey
+      response.render 'admin/sendSurvey',
+        users: survey.users
+        token: request.params.token
+    else
+      response.redirect '/admin/survey/' + request.params.token
+
 adminRouter.get '/allSurvey', (request, response) ->
   surveyModel.find (error, surveys) ->
     response.render 'admin/allSurvey',

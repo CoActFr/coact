@@ -1,0 +1,14 @@
+extends ../header.jade
+block head
+  title CoactAdmin - Surveys
+block vars
+  - var nav = 'surveys'
+  - var bgPage = 'bg-grey'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2= 'Questionnaire : "' + token + '"'
+        for user in users
+          div Blah !
