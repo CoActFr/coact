@@ -20,6 +20,11 @@ logs_activated = true
 
 port = if IS_PROD then "5010" else "7777"
 
+### deps ###
+global['_'] = require '../node_modules/lodash/index.js'
+
+### ---- ###
+
 global['express'] = require '../node_modules/express/index.js'
 server = express()
 server.set 'view engine', 'jade'

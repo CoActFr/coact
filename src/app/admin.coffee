@@ -29,3 +29,13 @@ angular.module '%module%'
     if index > -1
       page.questions.splice(index, 1)
   #todo
+
+
+angular.module '%module%'
+.controller 'adminSendFormCtrl',  ($scope) ->
+  $scope.emails = emails
+  $scope.new
+
+  $scope.addUser = (email) ->
+    $scope.emails.push email
+    $scope.new = ""

@@ -399,7 +399,55 @@ body{
     }
   }
 
+  .send-list {
+    h2 {
+      margin-bottom: 20px;
+    }
+    .user-list {
+      margin-bottom: 30px;
+      border-radius: 15px;
+      background-color: @coactGrey;
+      padding: 20px;
 
+      .user {
+        margin: 10px;
+
+        input[type="textbox"] {
+          margin: 0;
+          width: 50%;
+          resize: horizontal;
+
+          &, &:hover, &:active, &:focus{
+            background-color: transparent;
+            border: 0;
+            outline: 0 !important;
+          }
+        }
+
+        a.btn.btn-binary {
+          background-color: @coactBlue;
+          color: #fff;
+        }
+      }
+
+
+      input[type="submit"].btn.btn-binary {
+        margin-left: 30%;
+        width: 40%;
+      }
+    }
+
+    .add-user {
+      input {
+        border-radius: 5px;
+        margin-right: 20px;
+      }
+      .btn.btn-binary {
+        width: 40%;
+      }
+    }
+
+  }
     /* Slider
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
   .slider-controller, #side-slider {

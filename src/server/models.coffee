@@ -59,8 +59,12 @@ db.once 'open', (callback) ->
 
   surveyUserSchema = mongoose.Schema
     email: String
-    tempAnswers: [answerSchema]
     answers: [answerSchema]
+
+  surveyUserSchema.methods.getEncodedToken = ->
+    new Buffer @ownerDocument().token + "#" + @email
+    .toString('base64')
+
 
   # Survey
 
@@ -71,7 +75,20 @@ db.once 'open', (callback) ->
       ref: 'SurveyTemplate'
     users: [surveyUserSchema]
 
-
+  ###
+    callback : (error, user) -> do something
+  ###
+  surveySchema.statics.findUserByEncodedToken = (encodedToken, callback) ->
+    [token, email] = new Buffer(encodedToken, 'base64').toString('ascii').split("#")
+    @findOne token: token
+    .exec (error, survey) ->
+      if error
+        console.log error
+        return callback error, null
+      user =  _.find survey.users, 'email', email
+      if user is undefined
+        return callback "Error: user " + email + " is undefined", null
+      callback null, user
 
   ### Models ###
 
