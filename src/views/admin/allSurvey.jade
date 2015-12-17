@@ -19,7 +19,7 @@ block component
                 form(
                   novalidate
                   method="post"
-                  action='/admin/deleteSurvey/' + survey.token
+                  action='/admin/deleteSurvey/' + survey.name
                   )
-                  label= survey.token
+                  label= survey.name
                   input(type="submit" value="Delete questionnaire")

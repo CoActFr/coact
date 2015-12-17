@@ -4,50 +4,50 @@ adminRouter.use (request, response, next) ->
   console.log '%s AdminRouter: %s', request.method, request.url
   next()
 
-adminRouter.post '/newSurvey/:token', (request, response) ->
+adminRouter.post '/newSurvey/:name', (request, response) ->
   template = new surveyTemplateModel
     pages: [ new pageModel
       questions: [ new basicQuestionModel
         label: ""
         allowMark: true
-        allowComment: true
+        allowComment: false
       ]
     ]
 
   template.save (err) ->
     if err
-      console.log 'Error during creation of survey "' + request.params.token + '"'
+      console.log 'Error during creation of survey "' + request.params.name + '"'
 
     survey = new surveyModel
-      token: request.params.token
+      name: request.params.name
       template: template._id
       users: []
 
     survey.save (err) ->
       if err
-        console.log 'Error during creation of survey "' + request.params.token + '"'
-      response.redirect '/admin/survey/' + request.params.token
+        console.log 'Error during creation of survey "' + request.params.name + '"'
+      response.redirect '/admin/survey/' + request.params.name
 
-adminRouter.post '/deleteSurvey/:token', (request, response) ->
-  surveyModel.remove token: request.params.token, (error) ->
+adminRouter.post '/deleteSurvey/:name', (request, response) ->
+  surveyModel.remove name: request.params.name, (error) ->
     if error
       return console.log 'Error : ' + error
-    token: request.params.token
+    name: request.params.name
   response.redirect '/admin/allSurvey'
 
 
 
-adminRouter.post '/updateSurvey/:token', (request, response) ->
+adminRouter.post '/updateSurvey/:name', (request, response) ->
 
   pages = request.body.pages
 
-  surveyModel.findOne token: request.params.token
+  surveyModel.findOne name: request.params.name
   .populate 'template'
   .exec (error, survey) ->
     if error
       console.log error
     if survey is null
-      return console.log 'Error : survey "' + request.params.token + '" not Found'
+      return console.log 'Error : survey "' + request.params.name + '" not Found'
 
     template = survey.template
     template.pages = []
@@ -67,11 +67,11 @@ adminRouter.post '/updateSurvey/:token', (request, response) ->
 
     template.save (err)->
       if err
-        console.log 'Error during creation of survey "' + request.params.token + '"'
-      response.redirect '/admin/sendSurvey/' + request.params.token
+        console.log 'Error during creation of survey "' + request.params.name + '"'
+      response.redirect '/admin/sendSurvey/' + request.params.name
 
-adminRouter.get '/survey/:token', (request, response) ->
-  surveyModel.findOne token: request.params.token
+adminRouter.get '/survey/:name', (request, response) ->
+  surveyModel.findOne name: request.params.name
   .populate 'template'
   .exec (error, survey) ->
     if error
@@ -81,14 +81,14 @@ adminRouter.get '/survey/:token', (request, response) ->
       response.render 'admin/survey',
         newSurvey: false
         template: survey.template
-        token: request.params.token
+        name: request.params.name
     else
       response.render 'admin/survey',
         newSurvey: true
-        token: request.params.token
+        name: request.params.name
 
-adminRouter.get '/sendSurvey/:token', (request, response) ->
-  surveyModel.findOne token: request.params.token
+adminRouter.get '/sendSurvey/:name', (request, response) ->
+  surveyModel.findOne name: request.params.name
   .exec (error, survey) ->
     if error
       console.log error
@@ -97,17 +97,17 @@ adminRouter.get '/sendSurvey/:token', (request, response) ->
       console.log _.map survey.users, 'email'
       response.render 'admin/sendSurvey',
         emails: _.map survey.users, 'email'
-        token: request.params.token
+        name: request.params.name
     else
-      response.redirect '/admin/survey/' + request.params.token
+      response.redirect '/admin/survey/' + request.params.name
 
-adminRouter.post '/sendSurvey/:token', (request, response) ->
+adminRouter.post '/sendSurvey/:name', (request, response) ->
   emails = request.body.emails
   unless emails
     emails = []
 
   toKeep = []
-  surveyModel.findOne token: request.params.token
+  surveyModel.findOne name: request.params.name
   .exec (error, survey) ->
     console.log survey.users
     for user in survey.users
@@ -125,14 +125,14 @@ adminRouter.post '/sendSurvey/:token', (request, response) ->
 
     survey.save (err)->
       if err
-        console.log 'Error during creation of survey "' + request.params.token + '"'
-      response.redirect '/admin/sendSurvey/' + request.params.token
+        console.log 'Error during creation of survey "' + request.params.name + '"'
+      response.redirect '/admin/sendSurvey/' + request.params.name
 
-adminRouter.get '/getAnswer/:token/:userNumber', (request, response) ->
-  surveyModel.findOne token: request.params.token
+adminRouter.get '/getAnswer/:name/:userNumber', (request, response) ->
+  surveyModel.findOne name: request.params.name
   .exec (error, survey) ->
     unless survey.users.length > request.params.userNumber
-      response.redirect '/admin/sendSurvey/' + request.params.token
+      response.redirect '/admin/sendSurvey/' + request.params.name
 
     encodedToken = survey.users[request.params.userNumber].getEncodedToken()
     response.redirect '/survey/' + encodedToken

@@ -1,8 +1,80 @@
 extends ../header.jade
 block head
-  title Coact - Surveys
+  title CoactAdmin - Surveys
 block vars
   - var nav = 'surveys'
   - var bgPage = 'bg-grey'
 block component
-  div= email
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2= 'Questionnaire : "' + token + '"'
+  script(type='text/javascript').
+    var pages = [];
+  .survey(ng-controller='surveyFormCtrl')
+    for page, indexP in pages
+      - var pagePath = 'pages[' + indexP + ']'
+      script(type='text/javascript').
+        !{pagePath} = [];
+
+      for question, indexQ in page
+        - var questionPath = pagePath + '[' + indexQ + ']'
+
+        script(type='text/javascript').
+          !{questionPath} = {
+            question: !{JSON.stringify(question.question)},
+            answer: !{JSON.stringify(question.answer)}
+          };
+
+    form(
+      novalidate
+      method="post"
+      action="/survey/"+ encodedToken
+      autocomplete="off"
+      )
+      .survey-page(ng-repeat="page in pages" ng-show="$index == currentPage")
+        .jumbotron
+          .container
+            .row
+              .col-md-12
+                h3= 'PAGE {{$index + 1}}'
+                .page-content
+
+                  .question(ng-repeat="question in page")
+                    .question-label
+                      h2 {{question.question.label}}
+                    .container
+                      .col-md-11.col-md-offset-1
+                        .question-mark(ng-if="question.question.allowMark")
+                          .radio-mark(ng-repeat="mark in markRange")
+                            input(
+                              type="radio"
+                              name="questions[{{$parent.$index}}]['mark']"
+                              ng-model= 'question.answer.mark'
+                              value= '{{mark}}'
+                            )
+                            div {{mark}}
+                        .question-comment(ng-if="question.question.allowComment")
+                          textarea(
+                            rows=4
+                            cols=70
+                            name="questions[{{$index}}]['comment']"
+                            ng-model= 'question.answer.comment'
+                            value= '{{question.comment.text}}')
+      .container.page-handler
+        .row
+          .col-md-12
+            .page-index(
+              ng-repeat="page in pages"
+              ng-class="$index == currentPage ? 'current' : ''"
+              ng-click="setPage($index)"
+            ) {{$index + 1}}
+            input.btn.btn-primary(
+              type='submit'
+              ng-show="currentPage == (pages.length -1)"
+              value='Valider le questionnaire')
+            btn.btn-primary(
+              ng-show="currentPage == (pages.length -1)"
+              ng-click="sendTest('" + encodedToken + "')"
+              ) js le questionnaire

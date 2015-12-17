@@ -62,14 +62,14 @@ db.once 'open', (callback) ->
     answers: [answerSchema]
 
   surveyUserSchema.methods.getEncodedToken = ->
-    new Buffer @ownerDocument().token + "#" + @email
+    new Buffer @ownerDocument().name + "#" + @email
     .toString('base64')
 
 
   # Survey
 
   surveySchema = mongoose.Schema
-    token: String
+    name: String
     template:
       type: mongoose.Schema.ObjectId
       ref: 'SurveyTemplate'
@@ -79,8 +79,9 @@ db.once 'open', (callback) ->
     callback : (error, user) -> do something
   ###
   surveySchema.statics.findUserByEncodedToken = (encodedToken, callback) ->
-    [token, email] = new Buffer(encodedToken, 'base64').toString('ascii').split("#")
-    @findOne token: token
+    [name, email] = new Buffer(encodedToken, 'base64').toString('ascii').split("#")
+    @findOne name: name
+    .populate('users.answers.answer')
     .exec (error, survey) ->
       if error
         console.log error

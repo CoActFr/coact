@@ -1,9 +1,6 @@
 angular.module '%module%'
 .controller 'adminSurveyFormCtrl',  ($scope) ->
 
-  $scope.getMark = (question) ->
-    if question.mark.value == -1 then 'en attente de réponse' else question.mark.value
-
   $scope.pages = pages
   $scope.currentPage = 0
 

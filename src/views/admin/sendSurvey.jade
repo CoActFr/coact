@@ -16,11 +16,11 @@ block component
       .container
         .row
           .col-md-12
-            h2= 'Questionnaire : "' + token + '"'
+            h2= 'Questionnaire : "' + name + '"'
             form.user-list(
               novalidate
               method="post"
-              action="/admin/sendSurvey/"+ token
+              action="/admin/sendSurvey/"+ name
               ng-show="emails.length > 0"
             )
               .user(ng-repeat="email in emails")
@@ -31,7 +31,7 @@ block component
                   value="{{email}}"
                 )
 
-                a.btn.btn-binary(href="/admin/getAnswer/" + token + "/{{$index}}") Voir la réponse
+                a.btn.btn-binary(href="/admin/getAnswer/" + name + "/{{$index}}") Voir la réponse
 
               input.btn.btn-binary(
                 type="submit"
