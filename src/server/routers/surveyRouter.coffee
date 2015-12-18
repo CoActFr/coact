@@ -72,7 +72,7 @@ surveyRouter.get '/:encodedToken', (request, response) ->
 
           unless answer and answer.answer
             answer =
-              mark: -1
+              mark: 0
               comment: ""
           else
             answer = _.omit answer.answer.toObject(), ['_id', '__v']

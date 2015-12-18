@@ -29,8 +29,6 @@ block component
 
     form(
       novalidate
-      method="post"
-      action="/survey/"+ encodedToken
       autocomplete="off"
       )
       .survey-page(ng-repeat="page in pages" ng-show="$index == currentPage")
@@ -43,23 +41,14 @@ block component
 
                   .question(ng-repeat="question in page")
                     .question-label
-                      h2 {{question.question.label}}
+                      span {{question.question.label}}
                     .container
                       .col-md-11.col-md-offset-1
-                        .question-mark(ng-if="question.question.allowMark")
-                          .radio-mark(ng-repeat="mark in markRange")
-                            input(
-                              type="radio"
-                              name="questions[{{$parent.$index}}]['mark']"
-                              ng-model= 'question.answer.mark'
-                              value= '{{mark}}'
-                            )
-                            div {{mark}}
+                        .question-mark(ng-show="question.question.allowMark")
                         .question-comment(ng-if="question.question.allowComment")
                           textarea(
                             rows=4
                             cols=70
-                            name="questions[{{$index}}]['comment']"
                             ng-model= 'question.answer.comment'
                             value= '{{question.comment.text}}')
       .container.page-handler
@@ -70,10 +59,6 @@ block component
               ng-class="$index == currentPage ? 'current' : ''"
               ng-click="setPage($index)"
             ) {{$index + 1}}
-            input.btn.btn-primary(
-              type='submit'
-              ng-show="currentPage == (pages.length -1)"
-              value='Valider le questionnaire')
             btn.btn-primary(
               ng-show="currentPage == (pages.length -1)"
               ng-click="sendTest('" + encodedToken + "')"
