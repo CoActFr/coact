@@ -12,6 +12,7 @@ block component
           h2= 'Questionnaire : "' + token + '"'
   script(type='text/javascript').
     var pages = [];
+    var encodedToken = !{JSON.stringify(encodedToken)}
   .survey(ng-controller='surveyFormCtrl')
     for page, indexP in pages
       - var pagePath = 'pages[' + indexP + ']'
@@ -59,7 +60,9 @@ block component
               ng-class="$index == currentPage ? 'current' : ''"
               ng-click="setPage($index)"
             ) {{$index + 1}}
-            btn.btn-primary(
+            .page-index.textual.next-page(
               ng-show="currentPage == (pages.length -1)"
-              ng-click="sendTest('" + encodedToken + "')"
-              ) js le questionnaire
+              )
+              btn.btn-primary(
+                ng-click="answerSurvey()"
+                ) soumettre le questionnaire

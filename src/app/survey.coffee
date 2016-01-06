@@ -3,6 +3,7 @@ angular.module '%module%'
 
   $scope.pages = pages
   $scope.currentPage = 0
+  $scope.encodedToken = encodedToken
 
   $scope.markLabel = [
     'ne se prononce pas'
@@ -13,9 +14,10 @@ angular.module '%module%'
 
   $scope.setPage = (newIndex) ->
     $scope.currentPage = newIndex
+    $scope.answerSurvey()
 
-  $scope.sendTest = (encodedToken) ->
-    url = window.location.host + "/survey/test/" + encodedToken
+  $scope.answerSurvey = ->
+    url = window.location.host + "/survey/answer/" + $scope.encodedToken
     unless url.substring(0, 7) == 'http://'
       url = 'http://' + url
     req =

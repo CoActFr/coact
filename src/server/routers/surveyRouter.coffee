@@ -13,11 +13,11 @@ surveyRouter.post '/:encodedToken', (request, response) ->
   return
   response.redirect '/admin/survey/' + request.params.encodedToken
 
-surveyRouter.post '/test/:encodedToken', (request, response) ->
+surveyRouter.post '/answer/:encodedToken', (request, response) ->
 
   surveyModel.findUserByEncodedToken request.params.encodedToken, (error, user)->
     surveyTemplateModel.findById user.ownerDocument().template, (error, template) ->
-      console.log user
+      #console.log user
 
       user.answers = []
       answerToSave = []
@@ -26,28 +26,28 @@ surveyRouter.post '/test/:encodedToken', (request, response) ->
         for question, questionNumber in page.questions
           answer = new basicAnswerModel request.body[pageNumber][questionNumber].answer
 
-          console.log "-- a --"
-          console.log answer
+          #console.log "-- a --"
+          #console.log answer
 
           answerToSave.push answer
           user.answers.push new answerModel
             questionId: question._id
             answer: answer._id
 
-      console.log "-------"
+      #console.log "-------"
       answerLeft = answerToSave.length
       for answer in answerToSave
         answer.save (err)->
           if err
             return response.sendStatus(500)
           answerLeft -= 1
-          console.log answerLeft
+          #console.log answerLeft
           if answerLeft == 0 # save the user when all answer are saved then respond
             user.ownerDocument().save (err) ->
               if err
                 console.log 'Error during answer "' + request.params.encodedToken + '"'
                 return response.sendStatus(500)
-              console.log user.answers
+              #console.log user.answers
               return response.sendStatus(200)
 
 ###
@@ -59,7 +59,7 @@ surveyRouter.get '/:encodedToken', (request, response) ->
 
     surveyTemplateModel.findById user.ownerDocument().template, (error, template) ->
 
-      console.log user
+      #console.log user
       pages = []
 
       for page, pageNumber in template.pages
@@ -67,8 +67,8 @@ surveyRouter.get '/:encodedToken', (request, response) ->
         for question, questionNumber in page.questions
           answer = _.find(user.answers, 'questionId', question._id)
 
-          console.log "--- answer ---"
-          console.log answer
+          #console.log "--- answer ---"
+          #console.log answer
 
           unless answer and answer.answer
             answer =
@@ -81,7 +81,7 @@ surveyRouter.get '/:encodedToken', (request, response) ->
             question: _.omit question.toObject(), ['_id', '__v']
             answer: answer
 
-      console.log "--- ------- ---"
+      #console.log "--- ------- ---"
 
       response.render 'survey/survey',
         encodedToken: request.params.encodedToken
