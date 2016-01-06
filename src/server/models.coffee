@@ -101,5 +101,6 @@ db.once 'open', (callback) ->
   global['surveyUserModel'] = mongoose.model 'SurveyUser', surveyUserSchema
   global['surveyModel'] = mongoose.model 'Survey', surveySchema
 
+  require './%models%/pcmTest.js'
 
 module.exports = db

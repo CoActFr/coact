@@ -1,0 +1,76 @@
+extends ../header.jade
+block head
+  title CoactAdmin - Questionnaires
+block vars
+  - var nav = 'surveys'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2 PCM Questionnaires
+  script(type='text/javascript').
+    var pcmTests = [];
+  each pcmTest in pcmTests
+    script(type='text/javascript').
+      pcmTests.push(!{pcmTest.name});
+  .jumbotron(ng-controller='adminPCMCtrl')
+    .container(ng-switch on="addPcmTestState")
+      .row(ng-switch-default)
+        .col-md-8(ng-switch on="pcmTests")
+          ul(ng-switch-when="pcmTests.length > 0" ng-repeat="testName in pcmTests")
+            li {{testName}}
+          div(ng-switch-default) Il n'y a pas de questionnaire pour le moment
+          .btn.btn-primary(
+            ng-click="createPcmTest()"
+          ) Créer un questionnaire PCM
+      .row.pcm-test(ng-switch-when="form")
+        .col-md-12
+          form
+            .container
+              .row
+                .col-md-8
+                  h2
+                    input(
+                      type='textbox'
+                      placeholder='Tapez le nom du questionnaire'
+                      ng-model= 'addPcmTest.name'
+                    )
+              .row.video(ng-repeat="video in addPcmTest.videos" ng-show="$last")
+                .col-md-12
+                  .container
+                    .col-md-8.col-md-offset-2
+                      .video-placeholder
+                        p Tapez le code youtube
+                        input.video-code(
+                            type='textbox'
+                            placeholder='3nMF6_RRZnU?list=UU7fDa4FxmFYMKrIOI3-C-VQ'
+                            ng-model= 'video.embedCode'
+                          )
+                    .col-md-8.col-md-offset-2
+                      h3
+                        textarea.question(
+                        ng-model= 'video.question'
+                        placeholder='Tapez la question ici'
+                        cols=60
+                        rows=1
+                        )
+                    .col-md-8.col-md-offset-2.answer.disabled
+                      h4 Choisissez un ou plusieur profile :
+                      .pcm-selector
+                        .btn.harmoniser Empathique
+                        .btn.thinker Travaillomane
+                        .btn.believer Persévérant
+                        .btn.doer Promoteur
+                        .btn.dreamer Réveur
+                        .btn.funster Rebelle
+                      h4 Justifiez votre réponse :
+                      textarea(disabled
+                      value="justification"
+                      cols=60
+                      rows=5)
+
+              .btn.btn-primary(
+                ng-click="addVideo()"
+              ) Ajouter une video
+

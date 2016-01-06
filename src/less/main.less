@@ -451,6 +451,105 @@ body{
     }
 
   }
+    /* PCM test
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+  .pcm-test {
+    form {
+      .video {
+        background-color: @coactBlue;
+        margin: 20px 0;
+        padding: 40px 0;
+        border-radius: 15px;
+        .video-placeholder {
+          background-color: @coactGrey;
+          width: 560px;
+          height: 315px;
+          padding-top: 125px;
+          padding-left: 80px;
+          margin-bottom: 20px;
+          margin-left: 30px;
+          input {
+            width: 400px
+          }
+        }
+        textarea.question {
+          &, &:hover, &:active, &:focus{
+            background-color: transparent;
+            border: 0;
+            outline: 0 !important;
+          }
+          &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+              color:    #41E9F3;
+          }
+          &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+             color:    #41E9F3;
+             opacity:  1;
+          }
+          &::-moz-placeholder { /* Mozilla Firefox 19+ */
+             color:    #41E9F3;
+             opacity:  1;
+          }
+          &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+             color:    #41E9F3;
+          }
+          &:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+            color:    #41E9F3;
+          }
+        }
+        .answer{
+          border-radius: 15px;
+          padding: 20px 0;
+
+          &.disabled {
+            pointer-events: none;
+            /* for "disabled" effect */
+            div, input, h2 {
+              opacity: 0.8;
+            }
+          }
+        }
+        .pcm-selector {
+          display: inline-block;
+          height: 140px;
+          width: 330px;
+          margin-left: 50px;
+          border-radius: 50px;
+          position: relative;
+          background-color: #ddd;
+          border: 1px solid;
+          .btn {
+            position: absolute;
+            &.harmoniser {
+              top: 15px;
+              left: 150px;
+            }
+            &.thinker {
+              top: 53px;
+              left: 190px;
+            }
+            &.believer {
+              top: 96px;
+              left: 150px;
+            }
+            &.doer {
+              top: 96px;
+              left: 50px;
+            }
+            &.dreamer {
+              top: 53px;
+              left: 20px;
+            }
+            &.funster {
+              top: 15px;
+              left: 50px;
+            }
+          }
+        }
+      }
+    }
+  }
+
     /* Slider
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
   .slider-controller, #side-slider {

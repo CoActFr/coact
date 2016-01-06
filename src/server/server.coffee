@@ -67,7 +67,9 @@ auth = basicAuth (user, password) ->
 #Routers
 
 server.use '/survey', require('./%routers%/surveyRouter.js')
+server.use '/pcm', require('./%routers%/pcmRouter.js')
 server.use '/admin', auth, require('./%routers%/adminRouter.js')
+server.use '/admin/pcm', auth, require('./%routers%/adminPCMRouter.js')
 server.use '', require('./%routers%/mainRouter.js')
 
 #End
