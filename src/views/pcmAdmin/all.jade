@@ -72,11 +72,11 @@ block component
                 .page-number
                   span.before(
                     ng-hide="$first"
-                    ng-click="before($index)")="<"
+                    ng-click="before()")="<"
                   span.current question {{$index + 1 }} sur {{addPcmTest.videos.length}}
                   span.after(
                     ng-hide="$last"
-                    ng-click="after($index)")=">"
+                    ng-click="after()")=">"
 
               .btn.btn-primary(
                 ng-click="addVideo()"

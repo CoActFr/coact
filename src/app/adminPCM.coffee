@@ -22,11 +22,11 @@ angular.module '%module%'
       question: ''
     $scope.currentPage += 1
 
-  $scope.before = (index) ->
-    $scope.currentPage = index - 1
+  $scope.before = ->
+    $scope.currentPage -= 1
 
-  $scope.after = (index) ->
-    $scope.currentPage = index + 1
+  $scope.after = ->
+    $scope.currentPage += 1
 
 
   $scope.saveTest = ->

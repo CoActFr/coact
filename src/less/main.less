@@ -456,7 +456,7 @@ body{
 
   .pcm-test {
     form {
-      .video {
+      .videos {
         position: relative;
         .page-number {
           position: absolute;
@@ -477,6 +477,12 @@ body{
           .after {
             right: 0px;
           }
+        }
+
+        .valid-answer {
+          position: absolute;
+          bottom: 4px;
+          right: 270px;
         }
 
         background-color: @coactBlue;
@@ -535,7 +541,7 @@ body{
         .pcm-selector {
           display: inline-block;
           height: 140px;
-          width: 330px;
+          width: 360px;
           margin-left: 50px;
           border-radius: 50px;
           position: relative;
@@ -543,29 +549,55 @@ body{
           border: 1px solid;
           .btn {
             position: absolute;
+            border-radius: 20px;
+            border: 1px solid;
+            width: 120px;
+            background-color: #bbb;
+
+            &:active {
+              box-shadow: none;
+            }
             &.harmoniser {
               top: 15px;
-              left: 150px;
+              right: 50px;
+              &.checked {
+                background-color: orange;
+              }
             }
             &.thinker {
               top: 53px;
-              left: 190px;
+              right: 20px;
+              &.checked {
+                background-color: #0094FF;
+              }
             }
             &.believer {
               top: 96px;
-              left: 150px;
+              right: 50px;
+              &.checked {
+                background-color: #B002F6;
+              }
             }
             &.doer {
               top: 96px;
               left: 50px;
+              &.checked {
+                background-color: red;
+              }
             }
             &.dreamer {
               top: 53px;
               left: 20px;
+              &.checked {
+                background-color: #AE8031;
+              }
             }
             &.funster {
               top: 15px;
               left: 50px;
+              &.checked {
+                background-color: yellow;
+              }
             }
           }
         }

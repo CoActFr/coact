@@ -22,9 +22,6 @@ pcmUserSchema = mongoose.Schema
   email: String
   answers: [pcmAnswerSchema]
 
-pcmUserSchema.methods.getEncodedToken = ->
-  new Buffer @ownerDocument().name + "#" + @email
-  .toString('base64')
 
 
 # PCM Test
@@ -34,19 +31,31 @@ pcmTestSchema = mongoose.Schema
   videos: [pcmVideoSchema]
   users: [pcmUserSchema]
 
+pcmTestSchema.methods.getEncodedToken = (email) ->
+  new Buffer @.name + "#" + email.toLowerCase()
+  .toString('base64')
+
 ###
   callback : (error, user) -> do something
 ###
-pcmTestSchema.statics.findUserByEncodedToken = (encodedToken, callback) ->
-  [name, email] = new Buffer(encodedToken, 'base64').toString('ascii').split("#")
+pcmTestSchema.statics.getOrCreateUserFromToken = (token, callback) ->
+  [name, email] = new Buffer(token, 'base64').toString('ascii').split("#")
   @findOne name: name
   .exec (error, pcmTest) ->
     if error
       return callback error, null
     user =  _.find pcmTest.users, 'email', email
     if user is undefined
-      return callback "Error: user " + email + " is undefined", null
-    callback null, user
+      pcmTest.users.push new pcmUserModel
+        email: email
+        answers: []
+
+      pcmTest.save (error) ->
+        if error
+          return callback "Error: user " + email + " cannot be created", null
+        callback null, user
+    else
+      callback null, user
 
 ### Models ###
 
