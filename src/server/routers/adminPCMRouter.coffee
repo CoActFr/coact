@@ -5,8 +5,34 @@ adminPCMRouter.use (request, response, next) ->
   next()
 
 adminPCMRouter.get '/all', (request, response) ->
-  pcmTestModel.find (error, pcmTests) ->
-    response.render 'pcmAdmin/all',
-      pcmTests: pcmTests
+  pcmTestModel.remove _id: "568e3217e18ae1261c889611", (error, pcmTests) ->
+    pcmTestModel.find (error, pcmTests) ->
+      console.log pcmTests
+      response.render 'pcmAdmin/all',
+        pcmTests: pcmTests
+
+
+adminPCMRouter.post '/add', (request, response) ->
+  unless request.body.name
+    console.log "Error while saving pcm test " + request.body.name
+    return response.sendStatus(500)
+  pcmTestModel.findOne name: request.body.name
+  .exec (error, test) ->
+    if error
+      console.log "Error while saving pcm test " + request.body.name
+      return response.sendStatus(500)
+    unless test is null
+      console.log "Error while saving pcm test " + request.body.name + " : already exist"
+      return response.sendStatus(409)
+
+    new pcmTestModel
+      name: request.body.name
+      users: []
+      videos: request.body.videos
+    .save (error) ->
+      if error
+        console.log "Error while saving pcm test " + request.body.name
+        return response.sendStatus(500)
+      return response.sendStatus(200)
 
 module.exports = adminPCMRouter

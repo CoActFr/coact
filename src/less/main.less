@@ -457,6 +457,28 @@ body{
   .pcm-test {
     form {
       .video {
+        position: relative;
+        .page-number {
+          position: absolute;
+          left: 20px;
+          bottom: 7px;
+          height: 30px;
+          width: 170px;
+
+          .before, .after, .current {
+            position: absolute;
+          }
+          .before {
+            left: 0px;
+          }
+          .current {
+            left: 25px;
+          }
+          .after {
+            right: 0px;
+          }
+        }
+
         background-color: @coactBlue;
         margin: 20px 0;
         padding: 40px 0;
@@ -469,6 +491,7 @@ body{
           padding-left: 80px;
           margin-bottom: 20px;
           margin-left: 30px;
+          border: 3px solid #000;
           input {
             width: 400px
           }
@@ -547,6 +570,15 @@ body{
           }
         }
       }
+    .btn.btn-primary {
+      margin: 5px 20px;
+    }
+
+    .error-msg {
+      color: red;
+      font-style: italic;
+    }
+
     }
   }
 
