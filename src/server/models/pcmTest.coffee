@@ -53,7 +53,7 @@ pcmTestSchema.statics.getOrCreateUserFromToken = (token, callback) ->
       pcmTest.save (error) ->
         if error
           return callback "Error: user " + email + " cannot be created", null
-        callback null, user
+        callback null, _.find pcmTest.users, 'email', email
     else
       callback null, user
 
