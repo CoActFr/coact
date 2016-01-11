@@ -1,0 +1,90 @@
+//QWRhbSNhdWJyeS5oZXJ2ZUBjb2FjdC5mcg==
+//
+iframe(
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/" + embedCode
+  frameborder="0"
+  allowfullscreen
+)
+//3nMF6_RRZnU?list=UU7fDa4FxmFYMKrIOI3-C-VQ
+
+extends ../header.jade
+block head
+  title CoactAdmin - Questionnaires
+block vars
+  - var nav = 'surveys'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2= "Questionnaire Process Communication : " + name
+  script(type='text/javascript').
+    var videos = !{JSON.stringify(videos)}
+    var answers = !{JSON.stringify(answers)}
+  .jumbotron.pcm-test(ng-controller='PCMCtrl')
+    form
+      .container
+        .row.videos
+          .col-md-12
+            .container.video(ng-repeat="video in videos" ng-show="$index == currentPage")
+              .col-md-8.col-md-offset-2
+                iframe(
+                  width="560"
+                  height="315"
+                  ng-src="{{getYoutubeUrl(video.embedCode)}}"
+                  frameborder="0"
+                  allowfullscreen
+                )
+              .col-md-8.col-md-offset-2
+                h3 {{video.question}}
+              .col-md-8.col-md-offset-2.answer
+                h4 Choisissez un ou plusieur profile :
+                .pcm-selector
+                  .btn.harmoniser(
+                    ng-class="currentAnswer.profile.harmoniser ? 'checked' : ''"
+                    ng-click="currentAnswer.profile.harmoniser = ! currentAnswer.profile.harmoniser"
+                    ) Empathique
+                  .btn.thinker(
+                    ng-class="currentAnswer.profile.thinker ? 'checked' : ''"
+                    ng-click="currentAnswer.profile.thinker = ! currentAnswer.profile.thinker"
+                    ) Travaillomane
+                  .btn.believer(
+                    ng-class="currentAnswer.profile.believer ? 'checked' : ''"
+                    ng-click="currentAnswer.profile.believer = ! currentAnswer.profile.believer"
+                    ) Persévérant
+                  .btn.doer(
+                    ng-class="currentAnswer.profile.doer ? 'checked' : ''"
+                    ng-click="currentAnswer.profile.doer = ! currentAnswer.profile.doer"
+                    ) Promoteur
+                  .btn.dreamer(
+                    ng-class="currentAnswer.profile.dreamer ? 'checked' : ''"
+                    ng-click="currentAnswer.profile.dreamer = ! currentAnswer.profile.dreamer"
+                    ) Réveur
+                  .btn.funster(
+                    ng-class="currentAnswer.profile.funster ? 'checked' : ''"
+                    ng-click="currentAnswer.profile.funster = ! currentAnswer.profile.funster"
+                    ) Rebelle
+                h4 Justifiez votre réponse :
+                textarea(
+                value="justification"
+                cols=60
+                rows=5
+                ng-model="currentAnswer.justification")
+            .container.thanks(ng-show="currentPage >= videos.length")
+              h2 Merci pour votre participation
+              .btn.btn-primary(ng-click="before()") Changer vos réponses
+          .page-number(ng-hide="currentPage >= videos.length")
+            span.before(
+              ng-show="currentPage > 0"
+              ng-click="before()")="<"
+            span.current question {{currentPage + 1 }} sur {{videos.length}}
+            span.after(
+              ng-show="answers.length > currentPage"
+              ng-click="after()")=">"
+          .valid-answer(ng-hide="currentPage >= videos.length")
+            .btn.btn-primary(ng-click="saveAndNext()")= "{{lastAnswerToValidate > currentPage ? 'Modifier la réponse' : 'Valider la réponse'}}"
+
+            span.error-msg {{errorMsg}}
+

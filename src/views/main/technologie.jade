@@ -1,0 +1,47 @@
+extends ../header.jade
+block head
+  title Coact - Technologie
+  meta(name="description" content="Mettez en place les outils informatiques collaboratifs adaptés à votre organisation")
+block vars
+  - var nav = 'technologie'
+  - var bgPage = 'bg-technologie'
+block component
+  .jumbotron.header
+    .container
+      .row
+        .col-md-8.col-md-offset-2
+          h1 La dimension technologique de la collaboration
+          p.explain
+            | Avoir compris l'intérêt et le fonctionnement
+            | de méthodes collaboratives ne suffit pas.
+            | Il faut arriver à les mettre en pratique et
+            | surtout, à les maintenir.
+          p.explain
+            | Pour cela, il est possible de s'appuyer sur
+            | de nombreux outils technologiques.
+  .jumbotron.l-transparent
+    .container.marketing
+      .row
+        .col-md-6.thumbnail
+          h2 Une veille technologique
+          p
+            | De nombreuse solutions propriétaires ou open-sources
+            | apparaissent tous les jours.
+          p
+            | Nous nous maintenons au courant de ces solutions pour
+            | vous permettre de trouver celles qui correspondent à votre
+            | besoin.
+      .row
+        .col-md-6.col-md-offset-6.thumbnail
+          h2 Des outils en liens avec nos méthodes
+          p
+            | Lorsque l'existant ne nous satisfait pas, nous développons
+            | nos propres outils.
+  .jumbotron.appeal
+    .container
+      .row
+        .col-md-12
+          h3
+            | Communiquez-nous vos besoins pour trouver
+            | ou créer les outils adaptés à ceux-ci.
+          a.btn.btn-default.btn-higlight(href="/contact" analytics-on="click" analytics-event="Personnel: CTA Conctact us") Contactez-nous
