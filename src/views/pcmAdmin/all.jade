@@ -22,6 +22,7 @@ block component
             li
               span {{testName}}
               a.btn.btn-primary(ng-href="/admin/pcm/see/{{testName}}") voir les résultats
+              a.btn.btn-primary(ng-href="/admin/pcm/send/{{testName}}") envoyer le questionnaire
           div(ng-hide="pcmTests.length > 0") Il n'y a pas de questionnaire pour le moment
           .btn.btn-primary(
             ng-click="createPcmTest()"
