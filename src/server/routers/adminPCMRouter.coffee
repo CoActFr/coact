@@ -7,10 +7,14 @@ adminPCMRouter.use (request, response, next) ->
 adminPCMRouter.get '/all', (request, response) ->
   pcmTestModel.remove _id: "568e3217e18ae1261c889611", (error, pcmTests) ->
     pcmTestModel.find (error, pcmTests) ->
-      console.log pcmTests
       response.render 'pcmAdmin/all',
         pcmTests: pcmTests
 
+adminPCMRouter.get '/see/:name', (request, response) ->
+  pcmTestModel.findOne name: request.params.name
+  .exec (error, pcmTest) ->
+    response.render 'pcmAdmin/see',
+      pcmTest: pcmTest
 
 adminPCMRouter.post '/add', (request, response) ->
   unless request.body.name

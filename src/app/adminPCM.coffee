@@ -50,3 +50,16 @@ angular.module '%module%'
           $scope.errorMsg = "name " + $scope.addPcmTest.name + " already exist"
         else
           $scope.errorMsg = "erreur"
+
+
+angular.module '%module%'
+.controller 'seePCMCtrl',  ($scope) ->
+  $scope.currentPage = 0
+  $scope.numberOfVideos = numberOfVideos
+
+  $scope.next = ->
+    $scope.currentPage += 1
+
+  $scope.previous = ->
+    $scope.currentPage -= 1
+
