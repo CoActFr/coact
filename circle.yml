@@ -3,12 +3,12 @@ test:
         - node server.js:
             background: true
             pwd: www
-deployment:
-  production:
-    branch: master
-    commands:
-      - npm run deploy:prod
-  staging:
-    branch: staging
-    commands:
-      - npm run deploy:preprod
+#deployment:
+#  production:
+#    branch: master
+#    commands:
+#      - npm run deploy:prod
+#  staging:
+#    branch: staging
+#    commands:
+#      - npm run deploy:preprod
