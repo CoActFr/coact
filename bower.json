@@ -5,6 +5,7 @@
     "angular": "*",
     "angular-animate": "1.4.7",
     "bootstrap": "3.3.5",
-    "lodash": "*"
+    "lodash": "*",
+    "seiyria-bootstrap-slider": "5.3.3"
   }
 }

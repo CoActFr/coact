@@ -1,0 +1,53 @@
+extends ../header.jade
+block head
+  title CoactAdmin - Questionnaires
+block vars
+  - var nav = 'surveys'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2= "PCM Questionnaire : " + pcmTest.name
+
+  script(type='text/javascript').
+    var numberOfVideos = !{pcmTest.videos.length};
+
+  .jumbotron.see-test-results(ng-controller='seePCMCtrl')
+    for video, videoNumber in pcmTest.videos
+      .container(ng-show="currentPage=="+videoNumber)
+        .row.small-video
+          h3= video.question
+          iframe(
+            width="140"
+            height="78"
+            src="https://www.youtube.com/embed/" + video.embedCode
+            frameborder="0"
+            allowfullscreen
+          )
+        for user in pcmTest.users
+          if user.answers.length > videoNumber
+            .row
+              .col-md-10.col-md-offset-1
+                .result-header
+                  h2= user.email
+                  - var answer = user.answers[videoNumber]
+                  .pcm-profile-result
+                    h3 Profiles choisis :
+                    if answer.profile.harmoniser
+                      .harmoniser &nbsp;
+                    if answer.profile.thinker
+                      .thinker &nbsp;
+                    if answer.profile.believer
+                      .believer &nbsp;
+                    if answer.profile.doer
+                      .doer &nbsp;
+                    if answer.profile.dreamer
+                      .dreamer &nbsp;
+                    if answer.profile.funster
+                      .funster &nbsp;
+                p.justification= answer.justification
+
+    .video-navigation
+      .btn.btn-primary.next-video(ng-click="previous()" ng-show="currentPage > 0") video précédente
+      .btn.btn-primary.previous-video(ng-click="next()" ng-show="currentPage < numberOfVideos - 1") video suivante
