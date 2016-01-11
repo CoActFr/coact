@@ -39,4 +39,15 @@ adminPCMRouter.post '/add', (request, response) ->
         return response.sendStatus(500)
       return response.sendStatus(200)
 
+adminPCMRouter.get '/sendTest', (request, response) ->
+  sendMail 'mails/pcmtest.jade',
+    to: 'aubry.herve@coact.fr', # REQUIRED. This can be a comma delimited string just like a normal email to field.
+    subject: 'Test Email', # REQUIRED.
+    pcmTestCode: 'QWRhbSNhdWJyeS5oZXJ2ZUBjb2FjdC5mcg=='
+  , (error) ->
+    if error
+      console.log(error);
+      return response.sendStatus(500)
+    response.send('Email Sent');
+
 module.exports = adminPCMRouter

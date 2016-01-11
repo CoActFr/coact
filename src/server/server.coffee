@@ -8,6 +8,8 @@ require('../node_modules/dotenv/lib/main.js').config
 default_ENV_VARS =
   IS_PROD: false
   ADMIN_PWD: 'admin'
+  MAILER_USER: 'no-reply@coact.fr'
+  MAILER_PWD: 'secret'
 
 for varname of default_ENV_VARS
   value = if varname of process.env then process.env[varname] else default_ENV_VARS[varname]
@@ -29,6 +31,25 @@ global['express'] = require '../node_modules/express/index.js'
 server = express()
 server.set 'view engine', 'jade'
 server.set 'views', './views'
+
+# Mailer
+
+mailer = require 'express-mailer'
+mailer.extend server,
+  from: 'no-reply@coact.fr',
+  host: 'auth.smtp.1and1.fr', # hostname
+  secureConnection: true, # use SSL
+  port: 465, # port for secure SMTP
+  transportMethod: 'SMTP', # default is SMTP. Accepts anything that nodemailer accepts
+  auth:
+    user: MAILER_USER,
+    pass: MAILER_PWD
+
+global['sendMail'] = (template, locals, callback) ->
+  server.mailer.send template, locals, callback
+
+# BodyParser
+
 global['bodyParser'] = require '../node_modules/body-parser/index.js'
 server.use bodyParser.json()
 server.use bodyParser.urlencoded
