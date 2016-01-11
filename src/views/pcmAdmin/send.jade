@@ -1,0 +1,35 @@
+extends ../header.jade
+block head
+  title CoactAdmin - Questionnaires
+block vars
+  - var nav = 'surveys'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2= "PCM Questionnaire : " + pcmTest.name
+
+  .jumbotron
+    .container
+      .row
+        .col-md-8.col-md-offset-2
+          h3 Email ayant déjà répondu :
+          ul
+            for user in pcmTest.users
+              li= user.email
+
+      .row.send-pcm-test
+        .col-md-8.col-md-offset-2
+          h3 Envoyer un nouvel email :
+          form(name="sendEmailForm" ng-controller='sendPCMCtrl')
+            input(type='email' name="emailToSend" ng-model="emailToSend" required)
+            .btn.btn-primary(ng-click="sendEmail()") envoyer
+            div(role="alert" ng-show="tryToSend")
+              span.error(ng-show="sendEmailForm.emailToSend.$error.required") un email est requis !
+              span.error(ng-show="sendEmailForm.emailToSend.$error.email") ce n'est pas un email valide !
+              span.error(ng-show="errorMsg") une erreur est survenu sur notre serveur
+            div(role="alert" ng-show="successMsg")
+              span.success email envoyé avec succés
+
+

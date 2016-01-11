@@ -63,3 +63,29 @@ angular.module '%module%'
   $scope.previous = ->
     $scope.currentPage -= 1
 
+
+
+angular.module '%module%'
+.controller 'sendPCMCtrl',  ($scope, $http) ->
+  $scope.tryToSend = false
+  $scope.emailToSend = ""
+  $scope.errorMsg = false
+  $scope.successMsg = false
+
+  $scope.sendEmail = ->
+    $scope.tryToSend = true
+    $scope.successMsg = false
+    if $scope.sendEmailForm.$valid
+      $http
+        method: 'POST'
+        url: window.location.href
+        data:
+          email: $scope.emailToSend
+      .then ->
+        $scope.tryToSend = false
+        $scope.emailToSend = ""
+        $scope.successMsg = true
+      , (data) ->
+        $scope.errorMsg = true
+
+
