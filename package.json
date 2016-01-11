@@ -38,12 +38,12 @@
     "basic-auth-connect": "~1.0.0",
     "body-parser": "~1.14.1",
     "jade": "~1.10.0",
+    "lodash": "^3.9.0",
     "mongoose": "~4.1.11"
   },
   "devDependencies": {
     "chai": "^2.0.0",
     "cucumber": "^0.4.7",
-    "lodash": "^3.9.0",
     "protractor": "^1.7.0",
     "shipit": "~0.1.16",
     "shipit-cli": "^1.2.1",
