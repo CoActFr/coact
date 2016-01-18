@@ -50,10 +50,17 @@ global['sendMail'] = (template, locals, callback) ->
 
 # BodyParser
 
-global['bodyParser'] = require '../node_modules/body-parser/index.js'
+bodyParser = require '../node_modules/body-parser/index.js'
 server.use bodyParser.json()
 server.use bodyParser.urlencoded
   extended: true
+
+# BusBoy
+global['busboy'] = require '../node_modules/connect-busboy/index.js'
+
+# Excel
+global['Excel'] = require '../node_modules/exceljs/excel.js'
+
 # Header
 
 server.use (request, response, next) ->

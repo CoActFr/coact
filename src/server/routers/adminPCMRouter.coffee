@@ -73,4 +73,20 @@ adminPCMRouter.get '/sendTest', (request, response) ->
       return response.sendStatus(500)
     response.send('Email Sent');
 
+adminPCMRouter.post '/inport-test', busboy(), (request, response) ->
+  request.busboy.on 'file', (fieldname, file, filename, encoding, mimetype) ->
+    unless _.endsWith filename, '.xlsx'
+      console.log "ERROR : " + filename + " is not a .xlsx"
+      return response.status(406).send 'Provide a .xlsx file'
+
+
+    workbook = new Excel.Workbook()
+    workbook.xlsx.read file
+    .then ->
+      worksheet = workbook.getWorksheet(1);
+      console.log worksheet.getCell("B1").value
+      return response.sendStatus(500)
+
+  request.pipe request.busboy
+
 module.exports = adminPCMRouter
