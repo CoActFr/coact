@@ -39,7 +39,9 @@
     "body-parser": "~1.14.1",
     "jade": "~1.10.0",
     "lodash": "^3.9.0",
-    "mongoose": "~4.1.11"
+    "mongoose": "~4.1.11",
+    "exceljs": "~0.2.3",
+    "connect-busboy": "0.0.2"
   },
   "devDependencies": {
     "chai": "^2.0.0",
