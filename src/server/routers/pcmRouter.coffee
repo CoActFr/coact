@@ -23,6 +23,7 @@ pcmRouter.get '/:token', (request, response) ->
 
 pcmRouter.post '/:token', (request, response) ->
   pcmTestModel.getOrCreateUserFromToken request.params.token, (error, user) ->
+
     if error
       console.log "error"
       return response.sendStatus 500
