@@ -18,28 +18,28 @@ block component
     .container(ng-switch on="addPcmTestState")
       .row(ng-switch-default)
         .col-md-8
-          ul(ng-if="pcmTests.length > 0")
-            li(ng-repeat="testName in pcmTests")
-              span {{testName}}
-              a.btn.btn-primary(ng-href="/admin/pcm/see/{{testName}}") voir les résultats
-              a.btn.btn-primary(ng-href="/admin/pcm/send/{{testName}}") envoyer le questionnaire
-          form(
+          .container.all-test(ng-if="pcmTests.length > 0")
+            .row(ng-repeat="testName in pcmTests")
+              .col-md-4 {{testName}}
+              .col-md-4
+                a.btn.btn-primary(ng-href="/admin/pcm/see/{{testName}}") voir les résultats
+              .col-md-4
+                a.btn.btn-primary(ng-href="/admin/pcm/send/{{testName}}") envoyer le questionnaire
+          form.inport-pcm-test(
             method="post"
             enctype="multipart/form-data"
             action="inport-test")
-            h3 import a test
-            input(type='file' name='pcmTest')
-            input(type="submit")
-          form(
-            method="post"
-            action="test")
-            h3 test
-            input(type="textbox" name="truc" value="truc")
+            h3 Importer un test depuis un .xlsx
+            p Example de fichier d'inport :&nbsp;
+              a(href="/admin/pcm/inport-pcmtest-example.xlsx") inport-pcmtest-example.xlsx
+            input(
+              type='file'
+              name='pcmTest')
             input(type="submit")
           div(ng-hide="pcmTests.length > 0") Il n'y a pas de questionnaire pour le moment
           .btn.btn-primary(
             ng-click="createPcmTest()"
-          ) Créer un questionnaire PCM
+          ) Créer en ligne un questionnaire PCM
       .row.pcm-test(ng-switch-when="form")
         .col-md-12
           form

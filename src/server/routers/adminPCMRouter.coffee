@@ -75,6 +75,9 @@ adminPCMRouter.get '/sendTest', (request, response) ->
       return response.sendStatus(500)
     response.send('Email Sent');
 
+adminPCMRouter.get '/inport-pcmtest-example.xlsx', (request, response) ->
+  response.sendFile 'inport-pcmtest-example.xlsx', root: '.'
+
 adminPCMRouter.post '/inport-test', busboy(), (request, response) ->
   request.busboy.on 'file', (fieldname, file, filename, encoding, mimetype) ->
     unless _.endsWith filename, '.xlsx'
