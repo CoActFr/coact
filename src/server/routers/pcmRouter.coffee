@@ -33,6 +33,16 @@ pcmRouter.post '/:token', (request, response) ->
     else
       user.answers.push new pcmAnswerModel request.body.answer
 
+    if user.answers.length == user.ownerDocument().videos.length
+      sendMail 'mails/pcmtestanswered.jade',
+        to: "contact@coact.fr" # REQUIRED. This can be a comma delimited string just like a normal email to field.
+        subject: '[CoAct] ' + user.email + ' a répondu au questionnaire ' + user.ownerDocument().name # REQUIRED.
+        testName: user.ownerDocument().name
+        userEmail: user.email
+      , (error) ->
+        if error
+          console.log(error);
+
     user.ownerDocument().save (error) ->
       if error
         console.log "Error while saving pcm answer " + request.body.answerNumber + " : " + error
