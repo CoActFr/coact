@@ -4,6 +4,7 @@ adminPCMRouter.use (request, response, next) ->
   console.log '%s AdminPCMRouter: %s', request.method, request.url
   next()
 
+
 adminPCMRouter.get '/all', (request, response) ->
   pcmTestModel.remove _id: "568e3217e18ae1261c889611", (error, pcmTests) ->
     pcmTestModel.find (error, pcmTests) ->
@@ -28,6 +29,7 @@ adminPCMRouter.post '/add', (request, response) ->
     unless test is null
       console.log "Error while saving pcm test " + request.body.name + " : already exist"
       return response.sendStatus(409)
+
 
     new pcmTestModel
       name: request.body.name
@@ -84,8 +86,35 @@ adminPCMRouter.post '/inport-test', busboy(), (request, response) ->
     workbook.xlsx.read file
     .then ->
       worksheet = workbook.getWorksheet(1);
-      console.log worksheet.getCell("B1").value
-      return response.sendStatus(500)
+      testname = worksheet.getCell("B1").value
+
+      pcmTestModel.findOne name: testname
+      .exec (error, test) ->
+        if error
+          console.log "Error while saving pcm test " + request.body.name
+          return response.sendStatus(500)
+        unless test is null
+          console.log "Error while saving pcm test " + request.body.name + " : already exist"
+          return response.status(409).send testname + " : already exist"
+
+        pcmTest = new pcmTestModel
+          name: testname
+          videos: []
+          users: []
+
+        worksheet.eachRow (row, rowNumber) ->
+          unless rowNumber > 2
+            return
+
+          pcmTest.videos.push new pcmVideoModel
+            embedCode: row.getCell('A').value
+            question: row.getCell('B').value
+
+        pcmTest.save (error) ->
+          if error
+            console.log "Error while saving pcm test " + request.body.name
+            return response.sendStatus(500)
+          return response.redirect '/admin/pcm/all'
 
   request.pipe request.busboy
 
