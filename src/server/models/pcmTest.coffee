@@ -35,8 +35,8 @@ pcmTestSchema = mongoose.Schema
 
 pcmTestSchema.methods.getEncodedToken = ({email, firstname, lastname}) ->
   concatCode = @.name + "#" + email.toLowerCase()
-  concatCode += "#" + _.capitalize firstname
-  concatCode += "#" + _.capitalize lastname
+  concatCode += "#" + firstname
+  concatCode += "#" + lastname
   new Buffer concatCode
   .toString('base64')
 
