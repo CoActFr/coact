@@ -20,10 +20,27 @@ block component
               li= user.email
 
       .row.send-pcm-test
-        .col-md-8.col-md-offset-2
-          h3 Envoyer un nouvel email :
-          form(name="sendEmailForm" ng-controller='sendPCMCtrl')
-            input(type='email' name="emailToSend" ng-model="emailToSend" required)
+        .col-md-10.col-md-offset-1
+          form.send-to-user(name="sendEmailForm" ng-controller='sendPCMCtrl')
+            h3 Envoyer un nouvel email :
+            input(
+              type='textbox'
+              name="firstname"
+              ng-model="firstnameToSend"
+              placeholder="Prénom"
+              )
+            input(
+              type='textbox'
+              name="lastname"
+              placeholder="Nom"
+              ng-model="lastnameToSend"
+              )
+            input(
+              type='email'
+              name="emailToSend"
+              ng-model="emailToSend"
+              placeholder="example@email.com"
+              required)
             .btn.btn-primary(ng-click="sendEmail()") envoyer
             div(role="alert" ng-show="tryToSend")
               span.error(ng-show="sendEmailForm.emailToSend.$error.required") un email est requis !
@@ -31,5 +48,16 @@ block component
               span.error(ng-show="errorMsg") une erreur est survenu sur notre serveur
             div(role="alert" ng-show="successMsg")
               span.success email envoyé avec succés
-
-
+      .row.send-pcm-test
+        .col-md-10.col-md-offset-1
+          form.inport-pcm-test(
+            method="post"
+            enctype="multipart/form-data"
+            action="/admin/pcm/send-to-multiple-users/" + pcmTest.name)
+            h3 Envoyer un email aux utilisateurs d'un .xlsx
+            p Example de fichier d'inport :&nbsp;
+              a(href="/admin/pcm/inport-users-example.xlsx") inport-users-example.xlsx
+            input(
+              type='file'
+              name='users')
+            input(type="submit")

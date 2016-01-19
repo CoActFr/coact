@@ -21,13 +21,28 @@ block component
         .col-md-12
           h2= "Questionnaire Process Communication : " + name
   script(type='text/javascript').
-    var videos = !{JSON.stringify(videos)}
-    var answers = !{JSON.stringify(answers)}
+    var videos = !{JSON.stringify(videos)};
+    var answers = !{JSON.stringify(answers)};
+    var user = !{JSON.stringify(user)};
   .jumbotron.pcm-test(ng-controller='PCMCtrl')
     form
       .container
         .row.videos
           .col-md-12
+            .container.user-info(ng-show="currentPage<0")
+              h3 Qui êtes vous ?
+              .row
+                .col-md-6
+                  h4 Prénom
+                  input(type="textbox"
+                  ng-model="userFirstname"
+                  )
+              .row
+                .col-md-6
+                  h4 Nom
+                  input(type="textbox"
+                  ng-model="userLastname"
+                  )
             .container.video(ng-repeat="video in videos" ng-show="$index == currentPage")
               .col-md-8.col-md-offset-2
                 iframe(
@@ -75,9 +90,9 @@ block component
             .container.thanks(ng-show="currentPage >= videos.length")
               h2 Merci pour votre participation
               .btn.btn-primary(ng-click="before()") Changer vos réponses
-          .page-number(ng-hide="currentPage >= videos.length")
+          .page-number(ng-hide="currentPage >= videos.length || currentPage < 0")
             span.before(
-              ng-show="currentPage > 0"
+              ng-show="currentPage >= 0"
               ng-click="before()")="<"
             span.current Question {{currentPage + 1 }} sur {{videos.length}}
             span.after(
