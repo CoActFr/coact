@@ -20,10 +20,27 @@ block component
               li= user.email
 
       .row.send-pcm-test
-        .col-md-8.col-md-offset-2
-          h3 Envoyer un nouvel email :
-          form(name="sendEmailForm" ng-controller='sendPCMCtrl')
-            input(type='email' name="emailToSend" ng-model="emailToSend" required)
+        .col-md-10.col-md-offset-1
+          form.send-to-user(name="sendEmailForm" ng-controller='sendPCMCtrl')
+            h3 Envoyer un nouvel email :
+            input(
+              type='textbox'
+              name="firstname"
+              ng-model="firstnameToSend"
+              placeholder="Prénom"
+              )
+            input(
+              type='textbox'
+              name="lastname"
+              placeholder="Nom"
+              ng-model="lastnameToSend"
+              )
+            input(
+              type='email'
+              name="emailToSend"
+              ng-model="emailToSend"
+              placeholder="example@email.com"
+              required)
             .btn.btn-primary(ng-click="sendEmail()") envoyer
             div(role="alert" ng-show="tryToSend")
               span.error(ng-show="sendEmailForm.emailToSend.$error.required") un email est requis !

@@ -1,6 +1,9 @@
 angular.module '%module%'
 .controller 'PCMCtrl',  ($scope, $http, $sce) ->
 
+  $scope.userFirstname = user.firstname
+  $scope.userLastname = user.lastname
+
   getDefaultAnswer = ->
     profile:
       harmoniser: false
@@ -15,7 +18,10 @@ angular.module '%module%'
   $scope.answers = answers
   $scope.errorMsg = ""
   $scope.lastAnswerToValidate = Math.min answers.length, videos.length
-  $scope.currentPage = $scope.lastAnswerToValidate
+  if $scope.lastAnswerToValidate > 0
+    $scope.currentPage = $scope.lastAnswerToValidate
+  else
+    $scope.currentPage = -1
   $scope.currentAnswer = getDefaultAnswer()
 
   sendAnswer = (callback) ->
@@ -35,8 +41,9 @@ angular.module '%module%'
       $scope.errorMsg = "une erreur est survenue"
 
   $scope.before = ->
-    $scope.answers[$scope.currentPage] = $scope.currentAnswer
-    $scope.currentAnswer  = $scope.answers[$scope.currentPage-1]
+    if $scope.currentPage > 0
+      $scope.answers[$scope.currentPage] = $scope.currentAnswer
+      $scope.currentAnswer  = $scope.answers[$scope.currentPage-1]
     $scope.currentPage -=  1
 
   $scope.after = ->
@@ -47,8 +54,25 @@ angular.module '%module%'
       $scope.currentAnswer = getDefaultAnswer()
     $scope.currentPage += 1
 
+  updateUser = ->
+    req =
+      method: 'POST'
+      url:  window.location.href.replace 'pcm', 'pcm/update-user'
+      data:
+        firstname: $scope.userFirstname
+        lastname: $scope.userLastname
+    $http req
+    .then ->
+      $scope.currentPage = 0
+    , (data) ->
+      $scope.errorMsg = "une erreur est survenue"
+
   $scope.saveAndNext = ->
-    sendAnswer $scope.after
+    if $scope.currentPage >= 0
+      sendAnswer $scope.after
+    else
+      updateUser()
+
 
   $scope.getYoutubeUrl = (embedCode) ->
     $sce.trustAsResourceUrl "https://www.youtube.com/embed/" + embedCode

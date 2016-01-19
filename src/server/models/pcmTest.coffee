@@ -20,6 +20,8 @@ pcmAnswerSchema = mongoose.Schema
 
 pcmUserSchema = mongoose.Schema
   email: String
+  firstname: String
+  lastname: String
   answers: [pcmAnswerSchema]
 
 
@@ -31,16 +33,19 @@ pcmTestSchema = mongoose.Schema
   videos: [pcmVideoSchema]
   users: [pcmUserSchema]
 
-pcmTestSchema.methods.getEncodedToken = (email) ->
-  new Buffer @.name + "#" + email.toLowerCase()
+pcmTestSchema.methods.getEncodedToken = ({email, firstname, lastname}) ->
+  concatCode = @.name + "#" + email.toLowerCase()
+  concatCode += "#" + firstname
+  concatCode += "#" + lastname
+  new Buffer concatCode
   .toString('base64')
 
 ###
   callback : (error, user) -> do something
 ###
 pcmTestSchema.statics.getOrCreateUserFromToken = (token, callback) ->
-  [name, email] = new Buffer(token, 'base64').toString('ascii').split("#")
-  @findOne name: name
+  [testname, email, firstname, lastname] = new Buffer(token, 'base64').toString('ascii').split("#")
+  @findOne name: testname
   .exec (error, pcmTest) ->
     if error
       return callback error, null
@@ -48,6 +53,8 @@ pcmTestSchema.statics.getOrCreateUserFromToken = (token, callback) ->
     if user is undefined
       pcmTest.users.push new pcmUserModel
         email: email
+        firstname: firstname
+        lastname: lastname
         answers: []
 
       pcmTest.save (error) ->
