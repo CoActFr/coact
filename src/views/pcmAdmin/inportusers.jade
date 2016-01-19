@@ -1,0 +1,9 @@
+h2 Emails envoyés :
+ul
+  each user in users
+    li
+      span= user.firstname + " "
+      span= user.lastname + " "
+      span= user.email
+p
+  a(href="/admin/pcm/all") revenir à la page admin
