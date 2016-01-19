@@ -30,7 +30,7 @@ block component
             .row
               .col-md-10.col-md-offset-1
                 .result-header
-                  h2= user.email
+                  h2= user.email + " " + user.firstname + " " + user.lastname
                   - var answer = user.answers[videoNumber]
                   .pcm-profile-result
                     h3 Profiles choisis :

@@ -57,23 +57,15 @@ adminPCMRouter.post '/send/:name', (request, response) ->
     sendMail 'mails/pcmtest.jade',
       to: request.body.email, # REQUIRED. This can be a comma delimited string just like a normal email to field.
       subject: '[CoAct] Questionnaire de Process Communication', # REQUIRED.
-      pcmTestCode: pcmTest.getEncodedToken request.body.email
+      pcmTestCode: pcmTest.getEncodedToken
+        email: request.body.email
+        firstname: request.body.firstname
+        lastname: request.body.lastname
     , (error) ->
       if error
         console.log(error);
         return response.sendStatus(500)
       response.sendStatus(200)
-
-adminPCMRouter.get '/sendTest', (request, response) ->
-  sendMail 'mails/pcmtest.jade',
-    to: 'aubry.herve@coact.fr', # REQUIRED. This can be a comma delimited string just like a normal email to field.
-    subject: 'Test Email', # REQUIRED.
-    pcmTestCode: 'QWRhbSNhdWJyeS5oZXJ2ZUBjb2FjdC5mcg=='
-  , (error) ->
-    if error
-      console.log(error);
-      return response.sendStatus(500)
-    response.send('Email Sent');
 
 adminPCMRouter.get '/inport-pcmtest-example.xlsx', (request, response) ->
   response.sendFile 'inport-pcmtest-example.xlsx', root: '.'

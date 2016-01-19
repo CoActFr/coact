@@ -69,6 +69,8 @@ angular.module '%module%'
 .controller 'sendPCMCtrl',  ($scope, $http) ->
   $scope.tryToSend = false
   $scope.emailToSend = ""
+  $scope.firstnameToSend = ""
+  $scope.lastnameToSend = ""
   $scope.errorMsg = false
   $scope.successMsg = false
 
@@ -81,9 +83,13 @@ angular.module '%module%'
         url: window.location.href
         data:
           email: $scope.emailToSend
+          firstname: $scope.firstnameToSend
+          lastname: $scope.lastnameToSend
       .then ->
         $scope.tryToSend = false
         $scope.emailToSend = ""
+        $scope.firstnameToSend = ""
+        $scope.lastnameToSend = ""
         $scope.successMsg = true
       , (data) ->
         $scope.errorMsg = true
