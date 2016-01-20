@@ -9,6 +9,9 @@ block component
       .row
         .col-md-12
           h2= "PCM Questionnaire : " + pcmTest.name
+          a(
+            href="/admin/pcm/export-results/" + pcmTest.name
+          ) exporter en .xlsx
 
   script(type='text/javascript').
     var numberOfVideos = !{pcmTest.videos.length};
