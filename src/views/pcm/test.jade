@@ -43,7 +43,7 @@ block component
                   input(type="textbox"
                   ng-model="userLastname"
                   )
-            .container.video(ng-repeat="video in videos" ng-show="$index == currentPage")
+            .container.video(ng-repeat="video in videos" ng-if="$index == currentPage")
               .col-md-8.col-md-offset-2
                 iframe(
                   width="560"
