@@ -35,7 +35,6 @@ angular.module '%module%'
     .then ->
       if $scope.currentPage == $scope.lastAnswerToValidate
         $scope.lastAnswerToValidate += 1
-      $scope.answers[$scope.currentPage] = $scope.currentAnswer
       callback()
     , (data) ->
       $scope.errorMsg = "une erreur est survenue"
@@ -48,7 +47,7 @@ angular.module '%module%'
 
   $scope.after = ->
     $scope.answers[$scope.currentPage] = $scope.currentAnswer
-    if $scope.answers.length > $scope.currentPage
+    if $scope.answers.length > $scope.currentPage + 1
       $scope.currentAnswer  = $scope.answers[$scope.currentPage+1]
     else
       $scope.currentAnswer = getDefaultAnswer()
