@@ -162,6 +162,20 @@ adminPCMRouter.post '/send-to-multiple-users/:name', busboy(), (request, respons
 
   request.pipe request.busboy
 
+# Destroy
+
+adminPCMRouter.get '/destroy/:name', (request, response) ->
+  response.render 'pcmAdmin/destroy',
+    name: request.params.name
+
+adminPCMRouter.post '/destroy/:name', (request, response) ->
+  pcmTestModel.remove name: request.params.name
+  .exec (error) ->
+    if error
+      console.log "Error while destroying pcm test " + request.body.name
+      return response.sendStatus(500)
+    response.redirect '/admin/pcm/all',
+
 # See result
 
 adminPCMRouter.get '/see/:name', (request, response) ->

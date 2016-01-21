@@ -1,0 +1,16 @@
+extends ../header.jade
+block head
+  title CoactAdmin - Questionnaires
+block vars
+  - var nav = 'surveys'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2="Êtes-vous sûr de vouloir effacer le questionnaire : " + name
+      .row.col-md-12
+        form.inport-pcm-test(
+          method="post"
+          action=name)
+          input(type="submit" value="Oui")

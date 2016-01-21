@@ -21,10 +21,12 @@ block component
           .container.all-test(ng-if="pcmTests.length > 0")
             .row(ng-repeat="testName in pcmTests")
               .col-md-4 {{testName}}
-              .col-md-4
+              .col-md-2
                 a.btn.btn-primary(ng-href="/admin/pcm/see/{{testName}}") voir les résultats
-              .col-md-4
+              .col-md-2.col-md-offset-1
                 a.btn.btn-primary(ng-href="/admin/pcm/send/{{testName}}") envoyer le questionnaire
+              .col-md-2.col-md-offset-1
+                a.btn.btn-primary(ng-href="/admin/pcm/destroy/{{testName}}") Effacer
           form.inport-pcm-test(
             method="post"
             enctype="multipart/form-data"
