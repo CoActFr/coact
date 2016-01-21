@@ -34,7 +34,7 @@ pcmTestSchema = mongoose.Schema
   users: [pcmUserSchema]
 
 pcmTestSchema.methods.getEncodedToken = ({email, firstname, lastname}) ->
-  concatCode = @.name + "#" + email.toLowerCase()
+  concatCode = @._id + "#" + email.toLowerCase()
   concatCode += "#" + firstname
   concatCode += "#" + lastname
   new Buffer concatCode
@@ -44,8 +44,8 @@ pcmTestSchema.methods.getEncodedToken = ({email, firstname, lastname}) ->
   callback : (error, user) -> do something
 ###
 pcmTestSchema.statics.getOrCreateUserFromToken = (token, callback) ->
-  [testname, email, firstname, lastname] = new Buffer(token, 'base64').toString('ascii').split("#")
-  @findOne name: testname
+  [testId, email, firstname, lastname] = new Buffer(token, 'base64').toString('utf8').split("#")
+  @findOne _id: testId
   .exec (error, pcmTest) ->
     if error
       return callback error, null
