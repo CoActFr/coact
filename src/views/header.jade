@@ -51,3 +51,38 @@ html(lang="fr", ng-app="%module%")
 
     block component
 
+    footer
+      .container
+        .row
+          .col-md-3.footer-brand
+            img(src="/img/CoActWhite.svg" onerror="this.onerror=null; this.src='/img/CoActWhite.png'")
+          .col-md-3.adress
+            h1 CoAct
+            p(style='white-space:pre;')
+              | c/o La Ruche
+              | 84 quai de Jemmapes
+              | F-75010 Paris
+            a(
+              href="mailto:contact@thecollaboractionfactory.com?Subject=Contact%20Coact"
+              target="_top"
+            ) contact@coact.fr
+
+          .col-md-3.links
+            h1 Collaborer
+            a(class=nav === 'personnel' ? 'active' : ''
+            href="/personnel") Hommes
+            a(class=nav === 'organisation' ? 'active' : ''
+            href="/organisation") Organisation
+            a(class=nav === 'technologie' ? 'active' : ''
+            href="/technologie") Technologies
+          .col-md-3.socials
+            h1 Nous suivre
+            a.social-icon(href="https://www.linkedin.com/company/coact-the-collabor%27action-factory" target="_blank")
+              img(src="/img/linkedin_icon.png" width="25" height="25" alt="LinkedIn" border="0")
+            a.social-icon(href="https://www.facebook.com/thecollaboractionfactory" target="_blank")
+              img(src="/img/facebook-icon.png" width="25" height="25" alt="LinkedIn" border="0")
+        .row.legals
+          .col-md-10.col-md-offset-1
+            h1 Mentions légales
+            p
+              | SAS au capital de 6000€ - RCS Paris 813 572 78 - | SIRET 813 572 781 00017 - NAF 7022Z
