@@ -614,19 +614,51 @@ body{
 
     /* Slider
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  .slider-controller, #side-slider {
-    height: 340px;
+  #slider-controller, #side-slider {
+    height: 370px;
 
     .thumbnail {
-      height: 310px;
+      height: 350px;
 
       .caption {
-        height: 290px;
-        p {
-          @media(max-width: 640px) {
-            font-size: 20px !important;
+        height: 340px;
+        p, ul {
+          text-align: left;
+          padding-top: 0;
+          margin-bottom: 10px;
+
+          li {
+            color: @coactBlue;
+            font-size: 25px !important;
+            line-height:  18*1.42857143px;
+            @media(max-width: 640px) {
+              font-size: 22px !important;
+              line-height:  16*1.42857143px;
+            }
+            span {
+              color: #333;
+            }
           }
         }
+        p, ul>li>span {
+          font-size: 18px !important;
+          @media(max-width: 640px) {
+            font-size: 16px !important;
+          }
+        }
+
+        #transform p {
+          margin-bottom: 25px;
+        }
+
+        .btn-cta {
+          height: 80px;
+          white-space: pre-line;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          padding-top: 10px;
+        }
+
       }
     }
   }
