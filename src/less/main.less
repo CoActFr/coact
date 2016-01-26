@@ -744,23 +744,40 @@ body{
       margin-right: 10px;
     }
 
-    a {
-      color: #fff;
-    }
 
     /* ## Contact Form
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
     form {
+      .alert {
+        position: fixed;
+        top: 50px;
+        right: 10px;
+        width: 45%
+      }
+
       text-align: center;
       h3 {
         font-size: 25px;
       }
+      .subtitle {
+        font-style: italic;
+        font-size: 13px;
+        margin-top: 5px;
+        &.error {
+          color: red;
+          font-weight: bold;
+        }
+      }
+
       span {
         font-size: 20px;
       }
-      input[type="textbox"] {
+      input[type="textbox"], input[type="email"] {
         width: 85%;
+        &.ng-dirty.ng-invalid-required {
+          border-color: red;
+        }
       }
 
       .interest {
