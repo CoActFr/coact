@@ -1,0 +1,43 @@
+doctype transitional
+html
+  head
+    meta(http-equiv = 'Content-Type', content = 'text/html; charset=UTF-8')
+    title= subject
+  body
+
+    h2 Bonjour CoAct !
+
+    p
+      span J'appartient a l'organisation&nbsp;
+      span=organisation
+      span &nbsp; et je cherche a vous contacter à propos :
+      ul
+        if interests.collaborativeTraining
+          li des collaboratives trainings
+        if interests.seminar
+          li des séminaires créatifs
+        if interests.openForum
+          li des forums ouverts
+        if interests.learningOrganisation
+          li de l'organisation apprenante
+        if interests.technologies
+          li des technologies pour collaborer
+        if interests.others || !(interests.collaborativeTraining || interests.seminar || interests.openForum || interests.learningOrganisation || interests.technologies)
+          li d'un sujet particulier
+    if details
+      p Plus précisément :&nbsp;
+      p=details
+
+
+    p(style='white-space:pre-line;')
+      span= firstname + " " + lastname
+      if fonction
+        span="\n" + fonction + " chez " + organisation
+      else
+        span="\n" + organisation
+      span="\n" + email
+      if phone
+        span="\n" + phone
+
+
+
