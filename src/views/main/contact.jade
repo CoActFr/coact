@@ -14,6 +14,71 @@ block component
           h1 Contactez-nous !
   #contact.jumbotron
     .container
+      .col-md-6
+          h2
+            .glyph.glyph-email
+            span Directement
+      .row
+        .col-md-10.col-md-offset-1
+          .container
+            form(name="contactForm")
+              .row
+                .col-md-6
+                  h3 Nom*&nbsp;
+                  input(type="textbox")
+                .col-md-6
+                  h3 Prénom*&nbsp;
+                  input(type="textbox")
+              .row
+                .col-md-12
+                  h3 Organisation*
+                  input(type="textbox")
+              .row
+                .col-md-12
+                  h3 Fonction
+                  input(type="textbox")
+              .row
+                .col-md-12
+                  h3 Email*
+                  input(type="textbox")
+              .row
+                .col-md-12
+                  h3 Téléphone
+                  input(type="textbox")
+              .row
+                .col-md-12
+                  h3 Vous êtes intéressé par
+                .col-md-6.col-md-offset-4
+                  .interest
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest1")
+                      label(for="interest1") les collaborative trainings
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest2")
+                      label(for="interest2") les séminaires créatifs
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest3")
+                      label(for="interest3") les forums ouverts
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest4")
+                      label(for="interest4") l’organisation apprenante
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest5")
+                      label(for="interest5") les technologies pour collaborer
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest6")
+                      label(for="interest6") autres
+              .row
+                .col-md-12
+                  h3 Précisez-nous votre demande
+                  textarea(
+                    cols=60
+                    rows=5
+                  )
+              .row
+                .col-md-12
+                  .btn.btn-primary() Envoyer
+      hr
       .row
         .col-md-6
           h2
@@ -40,16 +105,6 @@ block component
                     img(src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="LinkedIn" border="0")
               .col-md-6
                 p 06 58 50 68 14
-      hr
-      .row
-        .col-md-6
-          h2
-            .glyph.glyph-email
-            span Par email
-        .col-md-6
-          br
-          p
-            a(href="mailto:contact@thecollaboractionfactory.com?Subject=Contact%20Coact" target="_top") contact@coact.fr
       hr
       .row
         .col-md-6
