@@ -32,14 +32,14 @@ block component
   .jumbotron.appeal(ng-controller="personnelCtrl")
     .container.marketing
       .row
-        .col-md-4.slider-controller
+        #slider-controller.col-md-4
           .thumbnail
             .caption
               p
                 a.btn.btn-cta(
                   ng-click='personnelSlider.goTo("takeAction")'
                   ng-class='{active: personnelSlider.slides.takeAction}'
-                  ) Passez à l’action
+                  ) Passez à l’action avec les Collabor’actions
               p
                 a.btn.btn-cta(
                   ng-click='personnelSlider.goTo("transform")'
@@ -54,20 +54,35 @@ block component
           .thumbnail
             .caption
               #take-action(ng-show="personnelSlider.slides.takeAction")
-                p
-                  | Expérimentez un Collaborative Training
-                  | sur 2 heures pour 4 à 6 personnes.
+                p.
+                  Expérimentez nos animations dynamiques et impliquantes lors de vos séminaires ou vos formations :
+                ul
+                  li
+                    span.
+                      des séminaires aux formats innovants pour faire vivre à vos collaborateurs des expériences inoubliables
+                  li
+                    span.
+                      des forums ouverts pour impliquer vos collaborateurs dans les décisions et les faire s’approprier des plans d’actions
+                  li
+                    span.
+                      des Collaborative Trainings, véritable innovation pédagogique permettant aux participants d’être à 100% acteurs de leur formation
+                p.
+                  Vous vous demandez si ces animations pourraient vous convenir et répondre à vos objectifs, choisissez une démonstration pour vous faire votre propre idée.
               #transform(ng-show="personnelSlider.slides.transform")
-                p
-                  | Vous avez déjà des programmes de formation en place et vous recherchez
-                  | un format innovant qui marquera vos participants ?
-                p
-                  | Transformez une formation « classique »
-                  | en Collaborative training.
+                p.
+                  Aujourd’hui, dans un monde en perpétuelle et rapide évolution, tous les collaborateurs d’une organisation ont besoin de développer leurs compétences de manière de plus en plus rapide et de plus en plus souvent pour « rester dans la course ».
+                p.
+                  Formations présentielles, MOOC, serious games, e-learning…et si vous choisissiez d’innover en dynamisant vos actions présentielles avec les "collaborative trainings" (ou entrainements collaboratifs).
+                p.
+                  Vivez des histoires dans lesquelles vous allez développer ensemble vos compétences pour faire progresser votre équipe dans une "formation dont vous êtes le héros"
               #discover(ng-show="personnelSlider.slides.discover")
-                p
-                  | Vous vous interrogez sur les thèmes abordés et les applications
-                  | possibles des Collaborative Trainings ?
+                p(style='white-space:pre-line;').
+                  Vous cherchez aujourd’hui comment permettre à vos équipes de mieux fonctionner ensemble ?
+                  Vous constatez que de nombreux problèmes viennent d’une mauvaise communication ou d’incompréhension des fonctionnements des uns et des autres ?
+                  Vous vous dites que vous pourriez mieux organiser le travail pour favoriser une collaboration naturelle entre les membres de votre organisation ?
+
+                p.
+                  Grâce à des outils simples, opérationnels et dont les résultats observables sont rapides à constater, mettez de la fluidité dans le fonctionnement de vos équipes et exploitez le plein potentiel des ressources de chacun.
       .row
         .col-md-12
           a.btn.btn-default.btn-higlight(href="/contact" analytics-on="click" analytics-event="Personnel: CTA Conctact us") Contactez-nous

@@ -14,6 +14,86 @@ block component
           h1 Contactez-nous !
   #contact.jumbotron
     .container
+      .col-md-6
+          h2
+            .glyph.glyph-email
+            span Directement
+      .row
+        .col-md-8.col-md-offset-2
+          .container
+            form(
+            name="contactForm"
+            ng-controller='contactCtrl'
+            ng-submit="submitMessage()"
+            )
+              .row
+                .col-md-6
+                  h3 Nom*&nbsp;
+                  input(type="textbox" name="firstname" ng-model = "message.firstname" required)
+                .col-md-6
+                  h3 Prénom*&nbsp;
+                  input(type="textbox" name="lastname" ng-model = "message.lastname" required)
+              .row
+                .col-md-12
+                  h3 Organisation*
+                  input(type="textbox" name="organisation" ng-model = "message.organisation" required)
+              .row
+                .col-md-12
+                  h3 Fonction
+                  input(type="textbox" name="fonction" ng-model = "message.fonction")
+              .row
+                .col-md-12
+                  h3 Email*
+                  input(type="email" name="email" ng-model = "message.email" required)
+              .row
+                .col-md-12
+                  h3 Téléphone
+                  input(type="textbox" name="phone" ng-model = "message.phone")
+              .row
+                .col-md-12
+                  h3 Vous êtes intéressé par
+                .col-md-6
+                  .interest
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest1" name="collaborativeTraining" ng-model="message.interests.collaborativeTraining")
+                      label(for="interest1") les collaborative trainings
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest2" name="seminar" ng-model="message.interests.seminar")
+                      label(for="interest2") les séminaires créatifs
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest3" name="openForum" ng-model="message.interests.openForum")
+                      label(for="interest3") les forums ouverts
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest4" name="learningOrganisation" ng-model="message.interests.learningOrganisation")
+                      label(for="interest4") l’organisation apprenante
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest5" name="technologies" ng-model="message.interests.technologies")
+                      label(for="interest5") les technologies pour collaborer
+                    .interest-box.checkbox.checkbox-primary
+                      input(type="checkbox" id="interest6" name="others" ng-model="message.interests.others")
+                      label(for="interest6") autres
+              .row
+                .col-md-12
+                  h3 Précisez-nous votre demande
+                  textarea(
+                    cols=60
+                    rows=5
+                    ng-model="message.details"
+                    name="details"
+                  )
+              .row
+                .col-md-12
+                  div.alert.alert-success(ng-show="showSuccessAlert")
+                    span Message envoyé avec succès
+                    a.close(href="#" type="button" ng-click="showSuccessAlert=false" ) &times;
+                  div.alert.alert-danger(ng-show="showFailureAlert")
+                    span Une erreur s'est produite lors de l'envoi du message.
+                    a.close(href="#" type="button" ng-click="showFailureAlert=false" ) &times;
+
+                  input.btn.btn-primary(type="submit" value="Envoyer")
+                .col-md-12.subtitle(ng-class="contactForm.$valid ? '' : 'error'")
+                  *Champs requis
+      hr
       .row
         .col-md-6
           h2
@@ -40,16 +120,6 @@ block component
                     img(src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="LinkedIn" border="0")
               .col-md-6
                 p 06 58 50 68 14
-      hr
-      .row
-        .col-md-6
-          h2
-            .glyph.glyph-email
-            span Par email
-        .col-md-6
-          br
-          p
-            a(href="mailto:contact@thecollaboractionfactory.com?Subject=Contact%20Coact" target="_top") contact@coact.fr
       hr
       .row
         .col-md-6

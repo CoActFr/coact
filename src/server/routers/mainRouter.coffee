@@ -48,4 +48,37 @@ mainRouter.get '/:page', (request, response) ->
     response.status(404)
     .send 'Not found'
 
+mainRouter.post '/contact', (request, response) ->
+  unless request.body.firstname and request.body.lastname and request.body.organisation and request.body.email
+    return response.sendStatus 500
+
+  fromString = request.body.firstname + ' ' + request.body.lastname
+  fromString += ' <' + request.body.email + '>'
+
+  sendMail
+    template:'mails/contact'
+    from: fromString
+  ,
+    to: "contact@coact.fr" # REQUIRED. This can be a comma delimited string just like a normal email to field.
+    subject: '[CoAct] Contacter Nous'
+    lastname: request.body.lastname
+    firstname: request.body.firstname
+    organisation: request.body.organisation
+    fonction: request.body.fonction
+    email: request.body.email
+    phone: request.body.phone
+    interests:
+      collaborativeTraining: request.body.interests.collaborativeTraining
+      seminar: request.body.interests.seminar
+      openForum: request.body.interests.openForum
+      learningOrganisation: request.body.interests.learningOrganisation
+      technologies: request.body.interests.technologies
+      others: request.body.interests.others
+    details: request.body.details
+  , (error) ->
+    if error
+      console.log(error);
+      return response.sendStatus(500)
+    response.sendStatus(200)
+
 module.exports = mainRouter
