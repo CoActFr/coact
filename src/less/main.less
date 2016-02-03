@@ -2,6 +2,7 @@
 @import '../../bower_components/seiyria-bootstrap-slider/less/bootstrap-slider.less';
 
 @coactBlue: rgba(38, 173, 228, 1);
+@coactBlueLight: rgba(77, 188, 233, 1);
 @coactBlueDarker: rgba(23, 158, 213, 1);
 @coactBlueTransparent: rgba(23, 158, 213, 0.7);
 @coactGrey: #999;
@@ -88,7 +89,15 @@ body{
   }
 
   &.bg-technologie {
-    background-color: @coactBlue;
+    background-color: @coactBlueLight;
+    background-image: url("../img/bg-technologie.png");
+    background-repeat: no-repeat;
+    background-size: 45%;
+    background-position-x: 50%;
+    background-position-y: 290px;
+    .jumbotron.header .row {
+      margin-bottom: 190px;
+    }
     .jumbotron.l-transparent {
       background-color: rgba(200, 200, 200, 0.7);
       padding: 20px 0 0 0;
