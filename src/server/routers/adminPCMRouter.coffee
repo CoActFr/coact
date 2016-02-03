@@ -127,11 +127,17 @@ adminPCMRouter.post '/send-to-multiple-users/:name', busboy(), (request, respons
       .then ->
         emailToSend = []
         errors = []
+        endDashFound = false
 
         worksheet = workbook.getWorksheet(1);
         worksheet.eachRow (row, rowNumber) ->
-          unless rowNumber > 1
+          if rowNumber < 2 or endDashFound
             return
+
+          if row.getCell('A').value == "#"
+            endDashFound = true
+            return
+
           row.getCell('C').type = Excel.ValueType.String
           email = ""
           switch row.getCell('C').type
