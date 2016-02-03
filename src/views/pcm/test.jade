@@ -19,7 +19,7 @@ block component
     .container
       .row
         .col-md-12
-          h2= "Questionnaire Process Communication : " + name
+          h2#pcm-test-title= "Questionnaire Process Communication : " + name
   script(type='text/javascript').
     var videos = !{JSON.stringify(videos)};
     var answers = !{JSON.stringify(answers)};
@@ -76,7 +76,7 @@ block component
                   .btn.dreamer(
                     ng-class="currentAnswer.profile.dreamer ? 'checked' : ''"
                     ng-click="currentAnswer.profile.dreamer = ! currentAnswer.profile.dreamer"
-                    ) Réveur
+                    ) Rêveur
                   .btn.funster(
                     ng-class="currentAnswer.profile.funster ? 'checked' : ''"
                     ng-click="currentAnswer.profile.funster = ! currentAnswer.profile.funster"

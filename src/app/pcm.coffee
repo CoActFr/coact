@@ -1,5 +1,5 @@
 angular.module '%module%'
-.controller 'PCMCtrl',  ($scope, $http, $sce) ->
+.controller 'PCMCtrl',  ($scope, $http, $sce, $anchorScroll) ->
 
   $scope.userFirstname = user.firstname
   $scope.userLastname = user.lastname
@@ -44,6 +44,7 @@ angular.module '%module%'
       $scope.answers[$scope.currentPage] = $scope.currentAnswer
       $scope.currentAnswer  = $scope.answers[$scope.currentPage-1]
     $scope.currentPage -=  1
+    $anchorScroll 'pcm-test-title'
 
   $scope.after = ->
     $scope.answers[$scope.currentPage] = $scope.currentAnswer
@@ -52,6 +53,7 @@ angular.module '%module%'
     else
       $scope.currentAnswer = getDefaultAnswer()
     $scope.currentPage += 1
+    $anchorScroll 'pcm-test-title'
 
   updateUser = ->
     req =
@@ -63,6 +65,8 @@ angular.module '%module%'
     $http req
     .then ->
       $scope.currentPage = 0
+      $anchorScroll 'pcm-test-title'
+
     , (data) ->
       $scope.errorMsg = "une erreur est survenue"
 
