@@ -17,6 +17,11 @@
 @tablet-small: ~"(min-width: 641px) and (max-width: 991px)";
 @tablet-large: ~"(min-width: 992px) and (max-width: 1199px)";
 
+@tablet-all: ~"(min-width: 641px) and (max-width: 1199px)";
+@phone-and-tablet: ~"(max-width: 1199px)";
+@phone-and-small-tablet: ~"(max-width: 991px)";
+
+
 .space-left {
   margin-left: 5px;
 }
@@ -119,7 +124,7 @@ body{
       cursor: pointer;
     }
 
-    @media(max-width: 1046px) {
+    @media @phone-and-small-tablet {
       p {
         width: 75% !important;
         display: inline-block;
@@ -161,7 +166,7 @@ body{
   }
 
   p {
-    @media(max-width: 640px) {
+    @media @phone {
       font-size: 15px !important;
     }
     font-size: 20px !important;
@@ -565,14 +570,14 @@ body{
         .pcm-profile-result {
           position: absolute;
           top: -15px;
-          @media(max-width: 1046px) {
+          @media @phone-and-tablet {
             top: 4px;
           }
           right: 15px;
 
           h3 {
             display: inline-block;
-            @media(max-width: 1046px) {
+            @media @phone-and-tablet {
               display: none;
             }
           }
@@ -580,7 +585,7 @@ body{
           &>div {
             display: inline-block;
             width: 50px;
-            @media(max-width: 1046px) {
+            @media @phone-and-tablet {
               width: 15px;
             }
             height: 25px;
@@ -660,7 +665,7 @@ body{
             color: @coactBlue;
             font-size: 25px !important;
             line-height:  18*1.42857143px;
-            @media(max-width: 640px) {
+            @media @phone {
               font-size: 22px !important;
               line-height:  16*1.42857143px;
             }
@@ -671,7 +676,7 @@ body{
         }
         p, ul>li>span {
           font-size: 18px !important;
-          @media(max-width: 640px) {
+          @media @phone {
             font-size: 16px !important;
           }
         }
@@ -867,7 +872,7 @@ body{
       margin-bottom: 50px;
     }
 
-    @media(max-width: 640px) {
+    @media @phone {
       h1, h2, h3 {
         font-size: 25px !important;
       }
@@ -878,7 +883,7 @@ body{
   }
 
   .jumbotron.appeal p {
-    @media(max-width: 640px) {
+    @media @phone {
       font-size: 15px !important;
     }
     font-size: 28px !important;
@@ -898,13 +903,13 @@ body{
         width: 100%;
         margin: 0;
         font-size: 28px;
-        @media(max-width: 640px) {
+        @media @phone {
           font-size: 22px;
         }
       }
       width: 90%;
       margin: 0 5%;
-      @media(max-width: 640px) {
+      @media @phone {
         font-size: 14px;
       }
       font-size: 20px;
