@@ -13,6 +13,10 @@
 @coactDreamer: #AE8031;
 @coactFunster : yellow;
 
+@phone: ~"(max-width:640px)";
+@tablet-small: ~"(min-width: 641px) and (max-width: 991px)";
+@tablet-large: ~"(min-width: 992px) and (max-width: 1199px)";
+
 .space-left {
   margin-left: 5px;
 }
@@ -205,24 +209,33 @@ body{
   #pillars {
     .thumbnail{
       width: 310px;
+      @media @phone {
+        margin-left: 60px;
+        margin-bottom: 35px;
+      }
+      @media @tablet-small {
+        margin-left: 200px;
+        margin-bottom: 35px;
+      }
+      @media @tablet-large {
+        margin-left: 305px;
+        margin-bottom: 35px;
+      }
     }
     .caption {
-      height: 280px;
+      height: 240px;
       width: 300px;
       position: relative;
       text-align: center;
       h3 {
         font-size: 24px;
-      }
-      .glyph.glyph-pillar {
-        margin-left: 45%;
-        position: absolute;
-        top: 130px;
+        padding-left: 30px;
+        padding-right: 30px;
       }
       .subtitle {
         position: absolute;
         font-size: 16px !important;
-        top: 225px;
+        top: 160px;
       }
     }
   }
@@ -237,11 +250,38 @@ body{
     }
   }
 
+  .pillar-bubble {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    background-color: white;
+    border-bottom-style: dotted;
+    border-right-style: dotted;
+    border-color: @coactBlue;
+    border-width: 2px;
+    border-radius: 45px;
+    width: 90px;
+    height: 90px;
+  }
+
   .glyph.glyph-pillar {
-    background-position: -4px -3px;
-    background-size: 132px 187px;
-    width: 20px;
-    height: 73px;
+
+    position: absolute;
+    top: 13px;
+    left: 29px;
+    background-size: 153px 217px;
+    width: 46px;
+    height: 65px;
+  }
+
+  .glyph.glyph-pillar.glyph-pillar-1 {
+    background-position: -6px -95px;
+  }
+  .glyph.glyph-pillar.glyph-pillar-2 {
+    background-position: -53px -95px;
+  }
+  .glyph.glyph-pillar.glyph-pillar-3 {
+    background-position: -100px -95px;
   }
 
   #contact .glyph {

@@ -26,26 +26,26 @@ block component
               .glyph-holder
                 .glyph.glyph-personnel
               p
-                a.btn.btn-default(ng-click='landingSlider.goTo("personnel")') Dopez les équipes
+                a.btn.btn-default(ng-click='landingSlider.goTo("personnel")' style='white-space:pre-line;') Exploitez toutes les ressources de vos équipes
             .col-md-4
               .glyph-holder
                 .glyph.glyph-organisation
               p
-                a.btn.btn-default(ng-click='landingSlider.goTo("organisation")' style='white-space:pre;')
+                a.btn.btn-default(ng-click='landingSlider.goTo("organisation")' style='white-space:pre-line;')
                   | Rendez votre organisation
                   | "apprenante"
             .col-md-4
               .glyph-holder
                 .glyph.glyph-technologie
               p
-                a.btn.btn-default(ng-click='landingSlider.goTo("technologie")') Adaptez votre technologie
+                a.btn.btn-default(ng-click='landingSlider.goTo("technologie")' style='white-space:pre-line;') Mettez en place les outils de collaboration appropriés
     #personnel(ng-show="landingSlider.slides.personnel")
       .return(ng-click='landingSlider.goTo("catch")') ⇦ Retour
       .jumbotron.appeal
         .container.marketing
           .row
             .col-md-12
-              h2 Dopez vos équipes
+              h2 Exploitez toutes les ressources de vos équipes
               p
                 | Grâce à une meilleure connaissance de soi, de son propre fonctionnement
                 | en condition normale et sous stress, de nos attentes vis-à-vis de notre
@@ -70,7 +70,7 @@ block component
         .container.marketing
           .row
             .col-md-12
-              h2 Adaptez votre technologie
+              h2 Mettez en place les outils de collaboration appropriés
               p
                 | Par la mise en place de technologies favorisant la collaboration dès
                 | lors que celles-ci sont soutenues par les collaborateurs
