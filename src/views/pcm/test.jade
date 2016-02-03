@@ -99,7 +99,7 @@ block component
               ng-show="answers.length > currentPage"
               ng-click="after()")=">"
           .valid-answer(ng-hide="currentPage >= videos.length")
-            .btn.btn-primary(ng-click="saveAndNext()")= "{{lastAnswerToValidate > currentPage ? 'Modifier la réponse' : 'Valider la réponse'}}"
+            .btn.btn-primary(ng-click="saveAndNext()")= "{{lastAnswerToValidate > currentPage || currentPage < 0 ? 'Modifier la réponse' : 'Valider la réponse'}}"
 
             span.error-msg {{errorMsg}}
 

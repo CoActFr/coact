@@ -94,6 +94,7 @@ adminPCMRouter.post '/send/:name', (request, response) ->
     if error or pcmTest is null
       console.log "Error while sending pcm test " + request.body.name + " by email"
       return response.sendStatus(500)
+
     sendMail 'mails/pcmtest.jade',
       to: request.body.email, # REQUIRED. This can be a comma delimited string just like a normal email to field.
       subject: '[CoAct] Questionnaire de Process Communication', # REQUIRED.
@@ -101,6 +102,7 @@ adminPCMRouter.post '/send/:name', (request, response) ->
         email: request.body.email
         firstname: request.body.firstname
         lastname: request.body.lastname
+      firstname: request.body.firstname
     , (error) ->
       if error
         console.log(error);
@@ -125,11 +127,17 @@ adminPCMRouter.post '/send-to-multiple-users/:name', busboy(), (request, respons
       .then ->
         emailToSend = []
         errors = []
+        endDashFound = false
 
         worksheet = workbook.getWorksheet(1);
         worksheet.eachRow (row, rowNumber) ->
-          unless rowNumber > 1
+          if rowNumber < 2 or endDashFound
             return
+
+          if row.getCell('A').value == "#"
+            endDashFound = true
+            return
+
           row.getCell('C').type = Excel.ValueType.String
           email = ""
           switch row.getCell('C').type
@@ -152,6 +160,7 @@ adminPCMRouter.post '/send-to-multiple-users/:name', busboy(), (request, respons
             to: user.email
             subject: '[CoAct] Questionnaire de Process Communication' # REQUIRED.
             pcmTestCode: pcmTest.getEncodedToken user
+            firstname: user.firstname
           , (error) ->
             if error
               console.log(error);
