@@ -45,13 +45,14 @@ block component
                   )
             .container.video(ng-repeat="video in videos" ng-if="$index == currentPage")
               .col-md-8.col-md-offset-2
-                iframe(
-                  width="560"
-                  height="315"
-                  ng-src="{{getYoutubeUrl(video.embedCode)}}"
-                  frameborder="0"
-                  allowfullscreen
-                )
+                .video-frame
+                  iframe(
+                    width="575"
+                    height="315"
+                    ng-src="{{getYoutubeUrl(video.embedCode)}}"
+                    frameborder="0"
+                    allowfullscreen
+                  )
               .col-md-8.col-md-offset-2
                 h3 {{video.question}}
               .col-md-8.col-md-offset-2.answer

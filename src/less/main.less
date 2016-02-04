@@ -400,7 +400,7 @@ body{
         .valid-answer {
           position: absolute;
           bottom: 4px;
-          right: 270px;
+          right: 0;
         }
 
         background-color: @coactBlue;
@@ -420,6 +420,15 @@ body{
             width: 400px
           }
         }
+        .video-frame {
+          padding: 19px;
+          background: rgb(147, 147, 147);
+          border-radius: 20px;
+          width: 615px;
+          height: 355px;
+          border: 1px solid #777;
+        }
+
         textarea.question {
           &, &:hover, &:active, &:focus{
             background-color: transparent;
@@ -446,7 +455,7 @@ body{
         }
         .answer{
           border-radius: 15px;
-          padding: 20px 0;
+          padding: 20px 15px;
 
           &.disabled {
             pointer-events: none;
@@ -460,7 +469,7 @@ body{
           display: inline-block;
           height: 140px;
           width: 360px;
-          margin-left: 50px;
+          margin-left: 130px;
           border-radius: 50px;
           position: relative;
           background-color: #ddd;
