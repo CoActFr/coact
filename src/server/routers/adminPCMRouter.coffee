@@ -155,6 +155,13 @@ adminPCMRouter.post '/send-to-multiple-users/:name', busboy(), (request, respons
             firstname: row.getCell('A').value
             lastname: row.getCell('B').value
 
+        console.log "-- email to send : --"
+        console.log emailToSend
+        console.log "---------------------"
+
+        unless emailToSend.length > 0
+          return response.status(406).send "no emails founds"
+
         _.forEach emailToSend, (user, index) ->
           sendMail 'mails/pcmtest.jade',
             to: user.email
