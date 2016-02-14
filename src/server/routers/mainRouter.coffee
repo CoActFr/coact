@@ -36,6 +36,7 @@ pagesAccepted = [
   'organisation'
   'technologie'
   'contact'
+  'jobs'
 ]
 
 mainRouter.get '/', (request, response) ->
@@ -75,6 +76,30 @@ mainRouter.post '/contact', (request, response) ->
       technologies: request.body.interests.technologies
       others: request.body.interests.others
     details: request.body.details
+  , (error) ->
+    if error
+      console.log(error);
+      return response.sendStatus(500)
+    response.sendStatus(200)
+
+mainRouter.post '/jobs', (request, response) ->
+  unless request.body.firstname and request.body.lastname and request.body.email
+    return response.sendStatus 500
+
+  fromString = request.body.firstname + ' ' + request.body.lastname
+  fromString += ' <' + request.body.email + '>'
+
+  sendMail
+    template:'mails/jobs'
+    from: fromString
+  ,
+    to: "contact@coact.fr" # REQUIRED. This can be a comma delimited string just like a normal email to field.
+    subject: '[CoAct] Rejoignez-Nous'
+    lastname: request.body.lastname
+    firstname: request.body.firstname
+    email: request.body.email
+    phone: request.body.phone
+    speach: request.body.speach
   , (error) ->
     if error
       console.log(error);

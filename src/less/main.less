@@ -782,7 +782,15 @@ body{
     margin-bottom: 30px;
   }
 
-  #contact.jumbotron {
+  #contact.jumbotron, #jobs.jumbotron {
+    img.portrait {
+      border-color: rgb(147, 147, 147);
+      border-width: 15px;
+      border-radius: 15px;
+      border-style: solid;
+      margin-top: 25px;
+    }
+
     h2 {
       font-size: 42px;
       margin-top: 15px;
@@ -992,7 +1000,7 @@ body{
     a {
       color : @coactBlue;
     }
-    .links {
+    .links, .company {
       a {
         display: block;
         &.active {
