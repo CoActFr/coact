@@ -55,7 +55,7 @@ angular.module '%module%'
 angular.module '%module%'
 .controller 'seePCMCtrl',  ($scope) ->
   $scope.currentPage = 0
-  $scope.numberOfVideos = numberOfVideos
+  $scope.numberOfPages = numberOfPages
 
   $scope.next = ->
     $scope.currentPage += 1
