@@ -23,6 +23,19 @@
 @phone-and-small-tablet: ~"(max-width: 991px)";
 
 
+// Mixins
+
+.background-position(@x, @y) {
+  -webkit-background-position:@x @y;
+  -moz-background-position:@x @y;
+  -khtml-background-position:@x @y;
+  -o-user-background-position:@x @y;
+  background-position:@x @y;
+}
+
+// End Mixins
+
+
 .space-left {
   margin-left: 5px;
 }
@@ -69,7 +82,7 @@ body{
   &.bg-personnel {
     background: url("../img/bg-personnel.png") no-repeat;
     background-size: 100%;
-    background-position-y: 40px;
+    .background-position(0, 40px);
     background-color: #fff;
     .jumbotron.header .row {
       background-color: rgba(255, 255, 255, 0.7)
@@ -80,8 +93,7 @@ body{
   &.bg-organisation {
     background: url("../img/bg-organisation.png") no-repeat;
     background-size: 70%;
-    background-position-x: 30%;
-    background-position-y: 40px;
+    .background-position(30%, 40px);
     background-color: #fff;
     .jumbotron.header .row {
       background-color: rgba(255, 255, 255, 0.7)
@@ -93,8 +105,7 @@ body{
     background-image: url("../img/bg-technologie.png");
     background-repeat: no-repeat;
     background-size: 45%;
-    background-position-x: 50%;
-    background-position-y: 290px;
+    .background-position(50%, 290px);
     .jumbotron.header .row {
       margin-bottom: 190px;
     }
@@ -152,13 +163,13 @@ body{
           height: 26px;
         }
         .glyph.glyph-personnel {
-          background-position: -21px -3px;
+          .background-position(-21px, -3px);
         }
         .glyph.glyph-technologie {
-          background-position: -21px -28px;
+          .background-position(-21px, -28px);
         }
         .glyph.glyph-organisation {
-          background-position: -50px -1px;
+          .background-position(-50px, -1px);
         }
 
       }
@@ -289,13 +300,13 @@ body{
   }
 
   .glyph.glyph-pillar.glyph-pillar-1 {
-    background-position: -6px -95px;
+    .background-position(-6px, -95px);
   }
   .glyph.glyph-pillar.glyph-pillar-2 {
-    background-position: -53px -95px;
+    .background-position(-53px, -95px);
   }
   .glyph.glyph-pillar.glyph-pillar-3 {
-    background-position: -100px -95px;
+    .background-position(-100px, -95px);
   }
 
   #contact .glyph {
@@ -304,36 +315,36 @@ body{
   }
 
   .glyph.glyph-phone {
-    background-position: 42.143% 98.279%;
+    .background-position(42.143%, 98.279%);
     background-size: 132px 187px;
     width: 28px;
     height: 27px;
   }
 
   .glyph.glyph-mail {
-    background-position: 3.109% 98.433%;
+    .background-position(3.109%,98.433%);
     background-size: 132px 187px;
     width: 36px;
     height: 27px;
   }
 
   .glyph.glyph-email {
-    background-position: 81.053% 98.281%;
+    .background-position(81.053%, 98.281%);
     background-size: 132px 187px;
     width: 38px;
     height: 27px;
   }
 
   .glyph.glyph-personnel {
-    background-position: -65px -10px;
+    .background-position(-65px, -10px);
   }
 
   .glyph.glyph-technologie {
-    background-position: -65px -85px;
+    .background-position(-65px, -85px);
   }
 
   .glyph.glyph-organisation {
-    background-position: -152px -2px;
+    .background-position(-152px, -2px);
   }
 
   .glyph {
