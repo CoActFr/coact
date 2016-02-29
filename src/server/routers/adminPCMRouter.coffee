@@ -197,8 +197,10 @@ adminPCMRouter.post '/destroy/:name', (request, response) ->
 adminPCMRouter.get '/see/:name', (request, response) ->
   pcmTestModel.findOne name: request.params.name
   .exec (error, pcmTest) ->
+    console.log pcmTest
     response.render 'pcmAdmin/see',
       pcmTest: pcmTest
+      byUser: request.query.by == "user"
 
 adminPCMRouter.get '/export-results/:name', (request, response) ->
   pcmTestModel.findOne name: request.params.name
