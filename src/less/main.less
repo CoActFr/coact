@@ -5,6 +5,7 @@
 @coactBlueLight: rgba(77, 188, 233, 1);
 @coactBlueDarker: rgba(23, 158, 213, 1);
 @coactBlueTransparent: rgba(23, 158, 213, 0.7);
+@coactDarkGrey: #666;
 @coactGrey: #999;
 
 @coactHarmoniser: orange;
@@ -552,6 +553,9 @@ body{
     }
   }
 
+  .admin-action>a {
+    margin: 0 20px;
+  }
   .see-test-results {
 
     .video-navigation {
@@ -571,14 +575,18 @@ body{
     &>.container {
       background-color: @coactGrey;
       border-radius: 20px;
-      .small-video {
+      .result-page-header {
         position: relative;
         background-color: @coactBlue;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
+        padding-left: 20px;
+        padding-top: 13px;
+        margin-bottom: 5px;
 
+      }
+      .small-video {
         min-height: 100px;
-
         iframe, h3 {
           position: absolute;
           top: 11px;
@@ -595,51 +603,61 @@ body{
 
       .result-header {
         position: relative;
+        background-color: @coactDarkGrey;
+        border-radius: 20px;
+        padding: 0 20px;
+      }
 
-        .pcm-profile-result {
-          position: absolute;
-          top: -15px;
+      .result-body {
+        position: relative;
+
+        padding-top: 40px;
+
+      }
+
+      .pcm-profile-result {
+        position: absolute;
+        top: -15px;
+        @media @phone-and-tablet {
+          top: 4px;
+        }
+        right: 15px;
+
+        h3 {
+          display: inline-block;
           @media @phone-and-tablet {
-            top: 4px;
+            display: none;
           }
-          right: 15px;
+        }
 
-          h3 {
-            display: inline-block;
-            @media @phone-and-tablet {
-              display: none;
-            }
+        &>div {
+          display: inline-block;
+          width: 50px;
+          @media @phone-and-tablet {
+            width: 15px;
           }
+          height: 25px;
+          border: 2px solid #000;
+          border-radius: 5px;
+          margin-left: 20px;
 
-          &>div {
-            display: inline-block;
-            width: 50px;
-            @media @phone-and-tablet {
-              width: 15px;
-            }
-            height: 25px;
-            border: 2px solid #000;
-            border-radius: 5px;
-            margin-left: 20px;
-
-            &.harmoniser {
-              background-color: @coactHarmoniser;
-            }
-            &.thinker {
-              background-color: @coactThinker;
-            }
-            &.believer {
-              background-color: @coactBeliever;
-            }
-            &.doer {
-              background-color: @coactDoer;
-            }
-            &.dreamer {
-              background-color: @coactDreamer;
-            }
-            &.funster {
-              background-color: @coactFunster;
-            }
+          &.harmoniser {
+            background-color: @coactHarmoniser;
+          }
+          &.thinker {
+            background-color: @coactThinker;
+          }
+          &.believer {
+            background-color: @coactBeliever;
+          }
+          &.doer {
+            background-color: @coactDoer;
+          }
+          &.dreamer {
+            background-color: @coactDreamer;
+          }
+          &.funster {
+            background-color: @coactFunster;
           }
         }
       }
