@@ -1,0 +1,88 @@
+extends ../header.jade
+block head
+  title CoactAdmin - Questionnaires
+block vars
+  - var nav = 'surveys'
+block component
+  script(type='text/javascript').
+    var videos = !{JSON.stringify(videos)};
+    var answers = !{JSON.stringify(user.answers)};
+  .correct(ng-controller='correctPCMCtrl')
+    .jumbotron.correct-header
+      .container
+        .row
+          .col-md-12
+            h2= "PCM Questionnaire : " + name
+            h3= "Utilisateur : " + user.lastname + " " + user.firstname + " (" + user.email + ")"
+    .video-frame
+      .video-placeholder(ng-if="selectedVideo == null")
+      iframe(
+        ng-repeat= "video in videos"
+        ng-if="selectedVideo != null && selectedVideo == $index"
+        width="280"
+        height="157"
+        ng-src="{{getYoutubeUrl($index)}}"
+        frameborder="0"
+        allowfullscreen
+      )
+    .jubotron
+      .container
+        form(
+          name="contactForm"
+          ng-submit="submitCorrection()"
+        )
+          .row
+            .col-md-12(ng-repeat="answer in answers").correct-body
+              h3
+                span {{videos[$index].question}}
+                span &nbsp;
+                .btn.btn-primary(ng-click="changeVideo($index)") revoir la video
+              .pcm-profile-result
+                span Profiles choisis :
+                .harmoniser(ng-if="answer.profile.harmoniser") &nbsp;
+                .thinker(ng-if="answer.profile.thinker") &nbsp;
+                .believer(ng-if="answer.profile.believer") &nbsp;
+                .doer(ng-if="answer.profile.doer") &nbsp;
+                .dreamer(ng-if="answer.profile.dreamer") &nbsp;
+                .funster(ng-if="answer.profile.funster") &nbsp;
+              p.justification {{ answer.justification ? answer.justification : "pas de réponse"}}
+              .pcm-selector
+                  .btn.harmoniser(
+                    ng-class="corrections[$index].profile.harmoniser ? 'checked' : ''"
+                    ng-click="corrections[$index].profile.harmoniser = ! corrections[$index].profile.harmoniser"
+                    ) Empathique
+                  .btn.thinker(
+                    ng-class="corrections[$index].profile.thinker ? 'checked' : ''"
+                    ng-click="corrections[$index].profile.thinker = ! corrections[$index].profile.thinker"
+                    ) Travaillomane
+                  .btn.believer(
+                    ng-class="corrections[$index].profile.believer ? 'checked' : ''"
+                    ng-click="corrections[$index].profile.believer = ! corrections[$index].profile.believer"
+                    ) Persévérant
+                  .btn.doer(
+                    ng-class="corrections[$index].profile.doer ? 'checked' : ''"
+                    ng-click="corrections[$index].profile.doer = ! corrections[$index].profile.doer"
+                    ) Promoteur
+                  .btn.dreamer(
+                    ng-class="corrections[$index].profile.dreamer ? 'checked' : ''"
+                    ng-click="corrections[$index].profile.dreamer = ! corrections[$index].profile.dreamer"
+                    ) Rêveur
+                  .btn.funster(
+                    ng-class="corrections[$index].profile.funster ? 'checked' : ''"
+                    ng-click="corrections[$index].profile.funster = ! corrections[$index].profile.funster"
+                    ) Rebelle
+              textarea(
+                placeholder="correction"
+                ng-model="corrections[$index].comment"
+                required
+              )
+          .row
+            .col-md-12
+              div.alert.alert-success(ng-show="showSuccessAlert")
+                span Correction envoyé avec succès
+                a.close(href="#" type="button" ng-click="showSuccessAlert=false" ) &times;
+              div.alert.alert-danger(ng-show="showFailureAlert")
+                span Une erreur s'est produite lors de l'envoi de la correction.
+                a.close(href="#" type="button" ng-click="showFailureAlert=false" ) &times;
+
+              input.btn.btn-primary(type="submit" value="Envoyer la correction")

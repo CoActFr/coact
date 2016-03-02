@@ -34,6 +34,8 @@ block component
         .container(ng-show="currentPage=="+userNumber)
           .row.result-page-header
             h2= user.lastname + " " + user.firstname + " (" + user.email + ")"
+              span= " "
+              a(href="/admin/pcm/correct/" + pcmTest.name + "?email=" + encodeURIComponent(user.email)) corriger cet utilisateur
           if user.answers.length == 0
             p pas de réponse
 

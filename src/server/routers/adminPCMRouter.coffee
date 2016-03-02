@@ -255,6 +255,30 @@ adminPCMRouter.get '/export-results/:name', (request, response) ->
     .then ->
       response.end()
 
+# Correct Result
+
+adminPCMRouter.get '/correct/:name', (request, response) ->
+  pcmTestModel.findOne name: request.params.name
+  .exec (error, pcmTest) ->
+    removeID = (mongooseObject) ->
+      return _.omit mongooseObject.toObject(), ['_id', '__v']
+    user = _.find pcmTest.users, 'email', request.query.email
+    response.render 'pcmAdmin/correct',
+      name: pcmTest.name
+      videos: _.map pcmTest.videos
+      user:
+        lastname: user.lastname
+        firstname: user.firstname
+        answers: _.map user.answers, removeID
+        email: user.email
+
+adminPCMRouter.post '/correct/:name', (request, response) ->
+  pcmTestModel.findOne name: request.params.name
+  .exec (error, pcmTest) ->
+    user = _.find pcmTest.users, 'email', request.query.email
+    console.log request.body
+    return response.sendStatus(500)
+
 # Example d'excel
 
 adminPCMRouter.get '/inport-pcmtest-example.xlsx', (request, response) ->

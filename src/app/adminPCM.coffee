@@ -52,6 +52,8 @@ angular.module '%module%'
           $scope.errorMsg = "erreur"
 
 
+# SEE
+
 angular.module '%module%'
 .controller 'seePCMCtrl',  ($scope) ->
   $scope.currentPage = 0
@@ -63,7 +65,47 @@ angular.module '%module%'
   $scope.previous = ->
     $scope.currentPage -= 1
 
+# Correct
 
+angular.module '%module%'
+.controller 'correctPCMCtrl',  ($scope, $sce, $http) ->
+  $scope.answers = answers
+  $scope.videos = videos
+  $scope.corrections = []
+  $scope.corrections.push {
+    profile:
+      harmoniser: answer.profile.harmoniser
+      thinker: answer.profile.thinker
+      believer: answer.profile.believer
+      doer: answer.profile.doer
+      dreamer: answer.profile.dreamer
+      funster: answer.profile.funster
+    comment: ""
+    } for answer in answers
+  $scope.selectedVideo = null
+
+  $scope.showSuccessAlert = false
+  $scope.showFailureAlert = false
+
+  $scope.getYoutubeUrl = (index) ->
+    $sce.trustAsResourceUrl "https://www.youtube.com/embed/" + $scope.videos[index].embedCode
+
+  $scope.changeVideo = (index) ->
+    $scope.selectedVideo = index
+
+  $scope.submitCorrection = ->
+    $scope.showSuccessAlert = false
+    $scope.showFailureAlert = false
+    $http
+      method: 'POST'
+      url: window.location.href
+      data: $scope.corrections
+    .then ->
+      $scope.showSuccessAlert = true
+    , (data) ->
+      $scope.showFailureAlert = true
+
+# SEND
 
 angular.module '%module%'
 .controller 'sendPCMCtrl',  ($scope, $http) ->
