@@ -14,13 +14,13 @@ block component
           .col-md-12
             h2= "PCM Questionnaire : " + name
             h3= "Utilisateur : " + user.lastname + " " + user.firstname + " (" + user.email + ")"
-    .video-frame
-      .video-placeholder(ng-if="selectedVideo == null")
+    .video-frame(ng-if="selectedVideo != null")
+      a.close(href="#" type="button" ng-click="closeVideo()" ) &times;
       iframe(
         ng-repeat= "video in videos"
-        ng-if="selectedVideo != null && selectedVideo == $index"
-        width="280"
-        height="157"
+        ng-if="selectedVideo == $index"
+        width="420"
+        height="236"
         ng-src="{{getYoutubeUrl($index)}}"
         frameborder="0"
         allowfullscreen

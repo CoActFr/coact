@@ -93,6 +93,9 @@ angular.module '%module%'
   $scope.changeVideo = (index) ->
     $scope.selectedVideo = index
 
+  $scope.closeVideo = ->
+    $scope.selectedVideo = null
+
   $scope.submitCorrection = ->
     $scope.showSuccessAlert = false
     $scope.showFailureAlert = false
