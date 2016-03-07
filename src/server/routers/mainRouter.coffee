@@ -37,6 +37,7 @@ pagesAccepted = [
   'technologie'
   'contact'
   'jobs'
+  'actu'
 ]
 
 mainRouter.get '/', (request, response) ->

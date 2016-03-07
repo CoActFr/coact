@@ -1,0 +1,33 @@
+extends ../header.jade
+block head
+  title Coact - Contact
+  meta(name="description" content="Découvrez les dernières actualités de CoAct.")
+block vars
+  - var nav = 'actu'
+  - var fb =  true
+block component
+  #actu
+    .jumbotron.blue
+      .container
+        .row
+          .col-md-12
+            h1 Nos actualités
+        .row
+          .col-md-6.actu-feed
+            .fb-page(
+              data-href="https://www.facebook.com/thecollaboractionfactory/"
+              data-tabs="timeline,events"
+              data-width=500
+              data-height=670
+              data-small-header="true"
+              data-adapt-container-width="true"
+              data-hide-cover="false"
+              data-show-facepile="true"
+              )
+                .fb-xfbml-parse-ignore
+                  blockquote(cite="https://www.facebook.com/thecollaboractionfactory/")
+                    a(href="https://www.facebook.com/thecollaboractionfactory/") CoAct - The Collabor&#039;Action Factory
+          .col-md-5.col-md-offset-1
+            .actu-feed.linkedIn-page
+              script(src="//platform.linkedin.com/in.js" type="text/javascript")
+              script(type="IN/CompanyProfile" data-id="10041631" data-format="inline")
