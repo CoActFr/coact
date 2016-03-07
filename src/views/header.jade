@@ -21,6 +21,16 @@ html(lang="fr", ng-app="%module%")
     script(src="/%scripts%/app.js")
   block vars
   body#body.coactcss(class=bgPage)
+    if fb
+      #fb-root
+        script.
+          (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.5";
+          fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
     nav.navbar.navbar-default.navbar-fixed-top
       .container-fluid
         .navbar-header
@@ -48,6 +58,8 @@ html(lang="fr", ng-app="%module%")
                   a(href="/technologie") technologique
             li(class=nav === 'jobs' ? 'active' : '')
               a(href="/jobs") Jobs
+            li(class=nav === 'actu' ? 'active' : '')
+              a(href="/actu") Actualité
             li(class=nav === 'contact' ? 'active' : '')
               a(href="/contact") Contact
 
@@ -79,6 +91,8 @@ html(lang="fr", ng-app="%module%")
             href="/technologie") Technologies
           .col-md-2.company
             h1 Nous
+            a(class=nav === 'actu' ? 'active' : ''
+            href="/actu") Suivre
             a(class=nav === 'jobs' ? 'active' : ''
             href="/jobs") Rejoindre
             a(class=nav === 'contact' ? 'active' : ''
