@@ -200,7 +200,7 @@ adminPCMRouter.get '/see/:name', (request, response) ->
     console.log pcmTest
     response.render 'pcmAdmin/see',
       pcmTest: pcmTest
-      byUser: request.query.by == "user"
+      byUser: not (request.query.by == "video")
 
 adminPCMRouter.get '/export-results/:name', (request, response) ->
   pcmTestModel.findOne name: request.params.name
@@ -230,7 +230,7 @@ adminPCMRouter.get '/export-results/:name', (request, response) ->
         { header: ["", "Travaillomane"], key: "thinker", width: 12 }
         { header: ["", "Persévérant"], key: "believer", width: 12 }
         { header: ["", "Promoteur"], key: "doer", width: 12 }
-        { header: ["", "Réveur"], key: "dreamer", width: 12 }
+        { header: ["", "Rêveur"], key: "dreamer", width: 12 }
         { header: ["", "Rebelle"], key: "funster", width: 12 }
         { header: ["", "Justification"], key: "justification", width: 100 }
       ]
@@ -254,6 +254,183 @@ adminPCMRouter.get '/export-results/:name', (request, response) ->
     workbook.xlsx.write response
     .then ->
       response.end()
+
+# Correct Result
+
+adminPCMRouter.get '/correct/:name', (request, response) ->
+  pcmTestModel.findOne name: request.params.name
+  .exec (error, pcmTest) ->
+    removeID = (mongooseObject) ->
+      return _.omit mongooseObject.toObject(), ['_id', '__v']
+    user = _.find pcmTest.users, 'email', request.query.email
+    response.render 'pcmAdmin/correct',
+      name: pcmTest.name
+      videos: _.map pcmTest.videos
+      user:
+        lastname: user.lastname
+        firstname: user.firstname
+        answers: _.map user.answers, removeID
+        email: user.email
+
+adminPCMRouter.post '/correct/:name', (request, response) ->
+  pcmTestModel.findOne name: request.params.name
+  .exec (error, pcmTest) ->
+    user = _.find pcmTest.users, 'email', request.query.email
+
+    doc = new PDFDocument
+      margin: 0
+    # Generate Document
+    for correction, index in request.body
+      #Boxes
+      doc.rect 0, 0, 612, 100
+      .fill '#ccc'
+
+      doc.rect 0, 382, 612, 310
+      .fill '#26ADE4'
+
+      doc.rect 0, 692, 612, 100
+      .fill '#000'
+
+      # Logo
+      doc.image 'img/CoAct.png', 0, 0, width: 150
+      doc.moveDown()
+
+      # Title
+      doc.fontSize 18
+      doc.fill '#000'
+      doc.text "Correction du questionnaire : ", 200, 15,
+        width: 300
+        align: 'left'
+
+      doc.text pcmTest.name, 200, 40,
+        width: 300
+        align: 'left'
+
+      userName = user.email
+      if user.firstname or user.lastname
+        userName = _.trim user.firstname + " " + user.lastname
+
+      doc.fontSize 14
+      doc.text "réalisé par " + userName, 200, 65,
+        width: 300
+        align: 'left'
+
+      # Question
+      doc.fontSize 18
+      doc.text pcmTest.videos[index].question, 10, 110,
+        width: 410
+        align: 'left'
+        underline: true
+      doc.moveDown()
+
+      # Answer
+
+      doc.fontSize 14
+      user_profiles = []
+      if user.answers[index].profile.harmoniser
+        user_profiles.push "Empathique"
+      if user.answers[index].profile.thinker
+        user_profiles.push "Travaillomane"
+      if user.answers[index].profile.believer
+        user_profiles.push "Persévérant"
+      if user.answers[index].profile.doer
+        user_profiles.push "Promoteur"
+      if user.answers[index].profile.dreamer
+        user_profiles.push "Rêveur"
+      if user.answers[index].profile.funster
+        user_profiles.push "Rebelle"
+
+      doc.text "Votre réponse : ", 10, 150,
+        width: 400
+        align: 'left'
+
+      doc.text user_profiles.join(', '), 110, 150,
+        width: 400
+        align: 'left'
+      doc.moveDown()
+
+      doc.text user.answers[index].justification,
+        width: 400
+        align: 'justify'
+      doc.moveDown()
+
+      # Correction
+
+      correct_profiles = []
+      if correction.profile.harmoniser
+        correct_profiles.push "Empathique"
+      if correction.profile.thinker
+        correct_profiles.push "Travaillomane"
+      if correction.profile.believer
+        correct_profiles.push "Persévérant"
+      if correction.profile.doer
+        correct_profiles.push "Promoteur"
+      if correction.profile.dreamer
+        correct_profiles.push "Rêveur"
+      if correction.profile.funster
+        correct_profiles.push "Rebelle"
+
+      doc.text "Correction : " , 10, 392,
+        width: 400
+        align: 'left'
+
+      doc.text correct_profiles.join(', '), 110, 392,
+        width: 400
+        align: 'left'
+      doc.moveDown()
+
+      doc.text correction.comment,
+        width: 400
+        align: 'justify'
+
+      # Footer
+
+      doc.fill '#fff'
+      doc.text "CoAct", 20, 702,
+        width: 100
+        align: 'left'
+
+      doc.fill '#26ADE4'
+      doc.fontSize 12
+      doc.text "www.coact.fr", 20, 719,
+        width: 100
+        align: 'left'
+        link: 'http://www.coact.fr'
+        underline: true
+
+
+      doc.fill '#ccc'
+      doc.text "c/o La Ruche,\n84 Quai de Jemmapes,\n75010 Paris", 20, 736,
+        width: 150
+        align: 'left'
+
+      unless index == request.body.length - 1
+        doc.addPage()
+
+
+    # End Document
+    doc.end()
+
+    sendMail {
+      template: 'mails/correct.jade'
+      cc: "contact@coact.fr",
+      attachments: [
+        fileName: 'Correction_' + pcmTest.name + '.pdf'
+        streamSource: doc
+        contentType: 'application/pdf'
+      ]
+      },{
+        to: user.email
+        subject: '[CoAct] Questionnaire de Process Communication'
+        user: user
+        testname: pcmTest.name
+      }
+    , (error) ->
+      if error
+        console.log(error);
+
+        return response.sendStatus(500)
+      response.sendStatus(200)
 
 # Example d'excel
 
