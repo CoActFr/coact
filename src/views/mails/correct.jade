@@ -1,0 +1,17 @@
+doctype transitional
+html
+  head
+    meta(http-equiv = 'Content-Type', content = 'text/html; charset=UTF-8')
+    title= subject
+  body
+    if user.firstname
+      h4= "Bonjour " + user.firstname + ","
+    else
+      h4 Bonjour,
+
+    p= "merci d'avoir répondu au questionnaire '" + testname + "'."
+    p Vous trouverez en pièce-jointe une correction personnalisée.
+
+    p Bien Cordialement,
+    p L'équipe CoAct
+

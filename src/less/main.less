@@ -369,7 +369,7 @@ body{
     }
   }
 
-  .pcm-test {
+  .pcm-test{
     form {
       .videos {
         position: relative;
@@ -556,6 +556,50 @@ body{
   .admin-action>a {
     margin: 0 20px;
   }
+
+  .pcm-profile-result(@width: 50px; @height:25px) {
+    position: absolute;
+
+
+    h3 {
+      display: inline-block;
+      @media @phone-and-tablet {
+        display: none;
+      }
+    }
+
+    &>div {
+      display: inline-block;
+      width: @width;
+      @media @phone-and-tablet {
+        width: @width/4;
+      }
+      height: @height;
+      border: 2px solid #000;
+      border-radius: 5px;
+      margin-left: @width*20/50;
+
+      &.harmoniser {
+        background-color: @coactHarmoniser;
+      }
+      &.thinker {
+        background-color: @coactThinker;
+      }
+      &.believer {
+        background-color: @coactBeliever;
+      }
+      &.doer {
+        background-color: @coactDoer;
+      }
+      &.dreamer {
+        background-color: @coactDreamer;
+      }
+      &.funster {
+        background-color: @coactFunster;
+      }
+    }
+  }
+
   .see-test-results {
 
     .video-navigation {
@@ -614,53 +658,15 @@ body{
         padding-top: 40px;
 
       }
-
-      .pcm-profile-result {
-        position: absolute;
+      .pcm-profile-result{
         top: -15px;
         @media @phone-and-tablet {
-          top: 4px;
+          top: 5px;
         }
         right: 15px;
-
-        h3 {
-          display: inline-block;
-          @media @phone-and-tablet {
-            display: none;
-          }
-        }
-
-        &>div {
-          display: inline-block;
-          width: 50px;
-          @media @phone-and-tablet {
-            width: 15px;
-          }
-          height: 25px;
-          border: 2px solid #000;
-          border-radius: 5px;
-          margin-left: 20px;
-
-          &.harmoniser {
-            background-color: @coactHarmoniser;
-          }
-          &.thinker {
-            background-color: @coactThinker;
-          }
-          &.believer {
-            background-color: @coactBeliever;
-          }
-          &.doer {
-            background-color: @coactDoer;
-          }
-          &.dreamer {
-            background-color: @coactDreamer;
-          }
-          &.funster {
-            background-color: @coactFunster;
-          }
-        }
+        .pcm-profile-result();
       }
+
       p.justification {
         background-color: #fff;
         border-radius: 15px;
@@ -669,6 +675,140 @@ body{
       }
     }
   }
+  .correct {
+    margin-bottom: 50px;
+    .correct-header {
+      background-color: @coactBlueTransparent;
+    }
+    .video-placeholder {
+      background-color: @coactGrey;
+      width: 280px;
+      height: 157px;
+      margin-bottom: 20px;
+      border: 3px solid #000;
+    }
+
+    .video-frame {
+      position: fixed;
+      z-index: 2;
+      right: 0;
+      top: 60px;
+      padding: 0 10px 10px 10px;
+      background: rgb(147, 147, 147);
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      width: 440px;
+      height: 280px;
+      border: 1px solid #777;
+    }
+
+    .correct-body {
+      position: relative;
+
+      .pcm-selector {
+        width: 70%;
+        .btn {
+          margin-bottom: 5px;
+          border-radius: 10px;
+          border: 1px solid orange;
+          width: 120px;
+          background-color: #bbb;
+          margin-right: 10px;
+
+          &:active {
+            box-shadow: none;
+          }
+          &.harmoniser {
+            &.checked {
+              background-color: @coactHarmoniser;
+            }
+          }
+          &.thinker {
+            &.checked {
+              background-color: @coactThinker;
+            }
+          }
+          &.believer {;
+            &.checked {
+              background-color: @coactBeliever;
+            }
+          }
+          &.doer {
+            &.checked {
+              background-color: @coactDoer;
+            }
+          }
+          &.dreamer {
+            &.checked {
+              background-color: @coactDreamer;
+            }
+          }
+          &.funster {
+            &.checked {
+              background-color: @coactFunster;
+            }
+          }
+        }
+      }
+
+      h3 {
+        position: relative;
+        background-color: @coactDarkGrey;
+        border-radius: 20px;
+        padding: 0 20px;
+      }
+    }
+    .pcm-profile-result{
+        top: 20px;
+        @media @phone-and-tablet {
+          top: 5px;
+        }
+        left: 100%;
+        width: 80px;
+      .pcm-profile-result(@width: 15px);
+    }
+    p.justification {
+        width: 70%;
+        margin-left: 30%;
+        background-color: #aaa;
+        border-radius: 15px;
+        min-height: 50px;
+        padding: 15px;
+    }
+    textarea {
+      &, &:hover, &:active, &:focus{
+        width: 70%;
+        background-color: #aaa;
+        border-radius: 15px;
+        min-height: 50px;
+        padding: 15px;
+        color: green;
+
+        background-color: #aaa;
+        border: 2px solid orange;
+        outline: 0 !important;
+      }
+      &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+          color: red;
+      }
+      &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+         color:    red;
+         opacity:  1;
+      }
+      &::-moz-placeholder { /* Mozilla Firefox 19+ */
+         color:    red;
+         opacity:  1;
+      }
+      &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+         color:    red;
+      }
+      &:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+        color:   red;
+      }
+    }
+
+  }
+
   .send-pcm-test {
     input {
       margin-right: 20px;
