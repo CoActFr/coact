@@ -32,6 +32,9 @@ server = express()
 server.set 'view engine', 'jade'
 server.set 'views', './views'
 
+# PDFDocument
+global['PDFDocument'] = require 'pdfkit'
+
 # Mailer
 
 mailer = require 'express-mailer'

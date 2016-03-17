@@ -41,7 +41,8 @@
     "lodash": "^3.9.0",
     "mongoose": "~4.1.11",
     "exceljs": "~0.2.3",
-    "connect-busboy": "0.0.2"
+    "connect-busboy": "0.0.2",
+    "pdfkit": "~0.7.2"
   },
   "devDependencies": {
     "chai": "^2.0.0",
