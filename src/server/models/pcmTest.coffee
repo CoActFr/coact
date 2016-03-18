@@ -3,6 +3,7 @@
 pcmVideoSchema = mongoose.Schema
   embedCode: String
   question: String
+  genericAnswer: String
 
 # pcm Answer
 
