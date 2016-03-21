@@ -42,7 +42,10 @@ angular.module '%module%'
       data: $scope.addPcmTest
     $http req
     .then ->
-      $scope.pcmTests.push $scope.addPcmTest.name
+      $scope.pcmTests.push
+        name: $scope.addPcmTest.name
+        numberOfAnswer: 0
+        numberOfCorrection: 0
       $scope.addPcmTestState = 'default'
     , (data) ->
       switch data.status
@@ -58,6 +61,12 @@ angular.module '%module%'
   $scope.answers = answers
   $scope.videos = videos
   $scope.name = name
+
+
+  $scope.corrector =
+    firstname: ""
+    lastname: ""
+    email: ""
 
   $scope.corrections = []
   $scope.corrections.push {
@@ -119,7 +128,9 @@ angular.module '%module%'
     $http
       method: 'POST'
       url: window.location.href
-      data: $scope.corrections
+      data:
+        corrector: $scope.corrector
+        corrections: $scope.corrections
     .then ->
       $scope.showSuccessAlert = true
     , (data) ->
