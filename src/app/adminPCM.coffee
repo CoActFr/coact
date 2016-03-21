@@ -51,20 +51,6 @@ angular.module '%module%'
         else
           $scope.errorMsg = "erreur"
 
-
-# SEE
-
-angular.module '%module%'
-.controller 'seePCMCtrl',  ($scope) ->
-  $scope.currentPage = 0
-  $scope.numberOfPages = numberOfPages
-
-  $scope.next = ->
-    $scope.currentPage += 1
-
-  $scope.previous = ->
-    $scope.currentPage -= 1
-
 # Correct
 
 angular.module '%module%'

@@ -23,6 +23,10 @@ pcmUserSchema = mongoose.Schema
   email: String
   firstname: String
   lastname: String
+  updated:
+    type: Date
+    default: Date.now
+  corrected: Date
   answers: [pcmAnswerSchema]
 
 

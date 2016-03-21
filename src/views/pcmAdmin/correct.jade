@@ -86,10 +86,10 @@ block component
                 ng-model="videos[$index].genericAnswer"
               )
               div.alert.alert-success(ng-show="showGenericSuccessAlert")
-                span Correction envoyé avec succès
+                span Correction générique mise à jour
                 a.close(href="#" type="button" ng-click="showSuccessAlert=false" ) &times;
               div.alert.alert-danger(ng-show="showGenericFailureAlert")
-                span Une erreur s'est produite lors de l'envoi de la correction.
+                span Une erreur s'est produite lors de la mise à jour de la correction générique.
                 a.close(href="#" type="button" ng-click="showFailureAlert=false" ) &times;
           .row
             .col-md-12

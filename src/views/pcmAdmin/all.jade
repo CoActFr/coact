@@ -34,11 +34,11 @@ block component
                 td {{test.name}}
                 td {{test.numberOfAnswer}}
                 td
-                  a.btn.btn-primary(ng-href="/admin/pcm/see/{{test.name}}") Voir réponses
+                  a(ng-href="/admin/pcm/see/{{test.name}}") Voir réponses
                 td
-                  a.btn.btn-primary(ng-href="/admin/pcm/send/{{test.name}}") Envoyer le questionnaire
+                  a(ng-href="/admin/pcm/send/{{test.name}}") Envoyer le questionnaire
                 td
-                  a.btn.btn-primary(ng-href="/admin/pcm/destroy/{{test.name}}") Effacer
+                  a(ng-href="/admin/pcm/destroy/{{test.name}}") Effacer
           form.inport-pcm-test(
             method="post"
             enctype="multipart/form-data"

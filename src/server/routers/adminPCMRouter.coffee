@@ -200,7 +200,6 @@ adminPCMRouter.get '/see/:name', (request, response) ->
     console.log pcmTest
     response.render 'pcmAdmin/see',
       pcmTest: pcmTest
-      byUser: not (request.query.by == "video")
 
 adminPCMRouter.get '/export-results/:name', (request, response) ->
   pcmTestModel.findOne name: request.params.name
@@ -442,9 +441,14 @@ adminPCMRouter.post '/correct/:name', (request, response) ->
     , (error) ->
       if error
         console.log(error);
-
         return response.sendStatus(500)
-      response.sendStatus(200)
+
+      user.corrected = new Date Date.now()
+      user.ownerDocument().save (error) ->
+        if error
+          console.log "Error while saving pcm answer " + request.body.answerNumber + " : " + error
+          return response.sendStatus 500
+        return response.sendStatus 200
 
 # Example d'excel
 
