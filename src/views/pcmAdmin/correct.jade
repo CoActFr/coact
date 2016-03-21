@@ -9,12 +9,6 @@ block component
     var answers = !{JSON.stringify(user.answers)};
     var name = !{JSON.stringify(name)};
   .correct(ng-controller='correctPCMCtrl')
-    .jumbotron.correct-header
-      .container
-        .row
-          .col-md-12
-            h2= "PCM Questionnaire : " + name
-            h3= "Utilisateur : " + user.lastname + " " + user.firstname + " (" + user.email + ")"
     .video-frame(ng-if="selectedVideo != null")
       a.close(href="#" type="button" ng-click="closeVideo()" ) &times;
       iframe(
@@ -26,12 +20,41 @@ block component
         frameborder="0"
         allowfullscreen
       )
-    .jubotron
-      .container
-        form(
-          name="contactForm"
-          ng-submit="submitCorrection()"
-        )
+    form(
+      name="contactForm"
+      ng-submit="submitCorrection()"
+    )
+      .jumbotron.correct-header
+        .container
+          .row
+            .col-md-12
+              h2= "PCM Questionnaire : " + name
+              h3= "Utilisateur : " + user.lastname + " " + user.firstname + " (" + user.email + ")"
+          .row
+            .col-md-12.corrector
+              h3 Correcteur
+              input(
+              type='textbox'
+              name="corrector.firstname"
+              ng-model="corrector.firstname"
+              placeholder="Prénom"
+              required
+              )
+              input(
+              type='textbox'
+              name="corrector.lastname"
+              placeholder="Nom"
+              ng-model="corrector.lastname"
+              required
+              )
+              input(
+              type='email'
+              name="corrector.email"
+              ng-model="corrector.email"
+              placeholder="example@email.com"
+              required)
+      .jubotron
+        .container
           .row
             .col-md-12(ng-repeat="answer in answers").correct-body
               h3

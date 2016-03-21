@@ -13,10 +13,7 @@ block component
     var pcmTests = [];
   each pcmTest in pcmTests
     script(type='text/javascript').
-      pcmTests.push({
-        name:!{JSON.stringify(pcmTest.name)},
-        numberOfAnswer: !{JSON.stringify(pcmTest.users.length)}
-      });
+      pcmTests.push(!{JSON.stringify(pcmTest)});
   .jumbotron(ng-controller='adminPCMCtrl')
     .container(ng-switch on="addPcmTestState")
       .row(ng-switch-default)
@@ -25,7 +22,8 @@ block component
             thead
               tr
                 th Titre
-                th Nombre de réponses
+                th Réponses
+                th Correction
                 th Voir réponses
                 th Envoyer le questionnaire
                 th Effacer
@@ -33,6 +31,7 @@ block component
               tr(ng-repeat="test in pcmTests")
                 td {{test.name}}
                 td {{test.numberOfAnswer}}
+                td {{test.numberOfCorrection}}
                 td
                   a(ng-href="/admin/pcm/see/{{test.name}}") Voir réponses
                 td

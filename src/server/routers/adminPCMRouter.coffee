@@ -9,8 +9,22 @@ adminPCMRouter.use (request, response, next) ->
 adminPCMRouter.get '/all', (request, response) ->
   pcmTestModel.remove _id: "568e3217e18ae1261c889611", (error, pcmTests) ->
     pcmTestModel.find (error, pcmTests) ->
+      formatTest = (pcmTest) ->
+        numberOfAnswer = 0
+        numberOfCorrection = 0
+        for user in pcmTest.users
+          if user.answers.length == pcmTest.videos.length
+            numberOfAnswer += 1
+          if user.corrected
+            numberOfCorrection += 1
+        return {
+          name: pcmTest.name
+          numberOfAnswer: numberOfAnswer
+          numberOfCorrection: numberOfCorrection
+        }
+
       response.render 'pcmAdmin/all',
-        pcmTests: pcmTests
+        pcmTests: _.map pcmTests, formatTest
 
 
 adminPCMRouter.post '/add', (request, response) ->
@@ -290,16 +304,16 @@ adminPCMRouter.post '/correct/:name', (request, response) ->
   .exec (error, pcmTest) ->
     user = _.find pcmTest.users, 'email', request.query.email
 
+    corrections = request.body.corrections
+    corrector = request.body.corrector
+
     doc = new PDFDocument
       margin: 0
     # Generate Document
-    for correction, index in request.body
+    for correction, index in corrections
       #Boxes
       doc.rect 0, 0, 612, 100
       .fill '#ccc'
-
-      doc.rect 0, 382, 612, 310
-      .fill '#26ADE4'
 
       doc.rect 0, 692, 612, 100
       .fill '#000'
@@ -328,15 +342,20 @@ adminPCMRouter.post '/correct/:name', (request, response) ->
         width: 300
         align: 'left'
 
+      doc.text "corrigé par " + corrector.firstname + " " + corrector.lastname,
+        width: 300
+        align: 'left'
+
       # Question
       doc.fontSize 18
       doc.text pcmTest.videos[index].question, 10, 110,
         width: 410
         align: 'left'
         underline: true
-      doc.moveDown()
 
       # Answer
+
+      startAnswerY = doc.y + 5
 
       doc.fontSize 14
       user_profiles = []
@@ -353,11 +372,11 @@ adminPCMRouter.post '/correct/:name', (request, response) ->
       if user.answers[index].profile.funster
         user_profiles.push "Rebelle"
 
-      doc.text "Votre réponse : ", 10, 150,
+      doc.text "Votre réponse : ", 10, startAnswerY,
         width: 400
         align: 'left'
 
-      doc.text user_profiles.join(', '), 110, 150,
+      doc.text user_profiles.join(', '), 110, startAnswerY,
         width: 400
         align: 'left'
       doc.moveDown()
@@ -365,7 +384,6 @@ adminPCMRouter.post '/correct/:name', (request, response) ->
       doc.text user.answers[index].justification,
         width: 400
         align: 'justify'
-      doc.moveDown()
 
       # Correction
 
@@ -383,11 +401,18 @@ adminPCMRouter.post '/correct/:name', (request, response) ->
       if correction.profile.funster
         correct_profiles.push "Rebelle"
 
-      doc.text "Correction : " , 10, 392,
+      startCorrectY = doc.y + 10
+
+      doc.rect 0, startCorrectY, 612, 692 - startCorrectY
+      .fill '#26ADE4'
+
+      doc.fontSize 14
+      .fill '#000'
+      doc.text "Correction : " , 10, startCorrectY + 5,
         width: 400
         align: 'left'
 
-      doc.text correct_profiles.join(', '), 110, 392,
+      doc.text correct_profiles.join(', '), 110, startCorrectY + 5,
         width: 400
         align: 'left'
       doc.moveDown()
@@ -417,7 +442,7 @@ adminPCMRouter.post '/correct/:name', (request, response) ->
         width: 150
         align: 'left'
 
-      unless index == request.body.length - 1
+      unless index == corrections.length - 1
         doc.addPage()
 
 
@@ -426,7 +451,8 @@ adminPCMRouter.post '/correct/:name', (request, response) ->
 
     sendMail {
       template: 'mails/correct.jade'
-      cc: "contact@coact.fr",
+      from: "#{corrector.firstname} #{corrector.lastname} <#{corrector.email}>"
+      cc: "#{corrector.firstname} #{corrector.lastname} <#{corrector.email}>",
       attachments: [
         fileName: 'Correction_' + pcmTest.name + '.pdf'
         streamSource: doc
