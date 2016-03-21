@@ -7,6 +7,7 @@ block component
   script(type='text/javascript').
     var videos = !{JSON.stringify(videos)};
     var answers = !{JSON.stringify(user.answers)};
+    var name = !{JSON.stringify(name)};
   .correct(ng-controller='correctPCMCtrl')
     .jumbotron.correct-header
       .container
@@ -46,6 +47,7 @@ block component
                 .dreamer(ng-if="answer.profile.dreamer") &nbsp;
                 .funster(ng-if="answer.profile.funster") &nbsp;
               p.justification {{ answer.justification ? answer.justification : "pas de réponse"}}
+              h4 Correction
               .pcm-selector
                   .btn.harmoniser(
                     ng-class="corrections[$index].profile.harmoniser ? 'checked' : ''"
@@ -76,6 +78,19 @@ block component
                 ng-model="corrections[$index].comment"
                 required
               )
+              h4 Correction générique
+                .btn.btn-primary.generic(ng-click="pushGeneric($index)") &#61538;
+                .btn.btn-primary.generic(ng-click="pullGeneric($index)") &#61539;
+                .btn.btn-primary.generic(ng-click="updateGeneric($index)") Mettre à jour
+              textarea.generic(
+                ng-model="videos[$index].genericAnswer"
+              )
+              div.alert.alert-success(ng-show="showGenericSuccessAlert")
+                span Correction générique mise à jour
+                a.close(href="#" type="button" ng-click="showSuccessAlert=false" ) &times;
+              div.alert.alert-danger(ng-show="showGenericFailureAlert")
+                span Une erreur s'est produite lors de la mise à jour de la correction générique.
+                a.close(href="#" type="button" ng-click="showFailureAlert=false" ) &times;
           .row
             .col-md-12
               div.alert.alert-success(ng-show="showSuccessAlert")

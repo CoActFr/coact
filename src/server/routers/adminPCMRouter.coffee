@@ -200,7 +200,6 @@ adminPCMRouter.get '/see/:name', (request, response) ->
     console.log pcmTest
     response.render 'pcmAdmin/see',
       pcmTest: pcmTest
-      byUser: not (request.query.by == "video")
 
 adminPCMRouter.get '/export-results/:name', (request, response) ->
   pcmTestModel.findOne name: request.params.name
@@ -265,12 +264,26 @@ adminPCMRouter.get '/correct/:name', (request, response) ->
     user = _.find pcmTest.users, 'email', request.query.email
     response.render 'pcmAdmin/correct',
       name: pcmTest.name
-      videos: _.map pcmTest.videos
+      videos: _.map pcmTest.videos, removeID
       user:
         lastname: user.lastname
         firstname: user.firstname
         answers: _.map user.answers, removeID
         email: user.email
+
+adminPCMRouter.post '/update-generic/:name/:index', (request, response) ->
+  pcmTestModel.findOne name: request.params.name
+  .exec (error, pcmTest) ->
+    if error or pcmTest is null
+      console.log error
+      return response.sendStatus(500)
+    pcmTest.videos[request.params.index].genericAnswer = request.body.genericAnswer
+    pcmTest.save (error) ->
+      if error
+        console.log error
+        return response.sendStatus(500)
+      return response.sendStatus(200)
+
 
 adminPCMRouter.post '/correct/:name', (request, response) ->
   pcmTestModel.findOne name: request.params.name
@@ -428,9 +441,14 @@ adminPCMRouter.post '/correct/:name', (request, response) ->
     , (error) ->
       if error
         console.log(error);
-
         return response.sendStatus(500)
-      response.sendStatus(200)
+
+      user.corrected = new Date Date.now()
+      user.ownerDocument().save (error) ->
+        if error
+          console.log "Error while saving pcm answer " + request.body.answerNumber + " : " + error
+          return response.sendStatus 500
+        return response.sendStatus 200
 
 # Example d'excel
 
