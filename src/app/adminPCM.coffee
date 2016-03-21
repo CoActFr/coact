@@ -51,26 +51,14 @@ angular.module '%module%'
         else
           $scope.errorMsg = "erreur"
 
-
-# SEE
-
-angular.module '%module%'
-.controller 'seePCMCtrl',  ($scope) ->
-  $scope.currentPage = 0
-  $scope.numberOfPages = numberOfPages
-
-  $scope.next = ->
-    $scope.currentPage += 1
-
-  $scope.previous = ->
-    $scope.currentPage -= 1
-
 # Correct
 
 angular.module '%module%'
 .controller 'correctPCMCtrl',  ($scope, $sce, $http) ->
   $scope.answers = answers
   $scope.videos = videos
+  $scope.name = name
+
   $scope.corrections = []
   $scope.corrections.push {
     profile:
@@ -86,6 +74,35 @@ angular.module '%module%'
 
   $scope.showSuccessAlert = false
   $scope.showFailureAlert = false
+  $scope.showGenericSuccessAlert = false
+  $scope.showGenericFailureAlert = false
+
+  $scope.pushGeneric = (index) ->
+    $scope.corrections[index].comment = $scope.videos[index].genericAnswer
+
+  $scope.pullGeneric = (index) ->
+    $scope.videos[index].genericAnswer = $scope.corrections[index].comment
+
+  $scope.updateGeneric = (index) ->
+    url = window.location.href
+    url = _(url).replace '/correct', '/update-generic'
+    questionMark = url.lastIndexOf '?'
+    if questionMark > 0
+      url = url[0..questionMark-1]
+    url += "/" + index
+
+    $scope.showGenericSuccessAlert = false
+    $scope.showGenericFailureAlert = false
+
+    $http
+      method: 'POST'
+      url: url
+      data:
+        genericAnswer: $scope.videos[index].genericAnswer
+    .then ->
+      $scope.showGenericSuccessAlert = true
+    , (data) ->
+      $scope.showGenericFailureAlert = true
 
   $scope.getYoutubeUrl = (index) ->
     $sce.trustAsResourceUrl "https://www.youtube.com/embed/" + $scope.videos[index].embedCode

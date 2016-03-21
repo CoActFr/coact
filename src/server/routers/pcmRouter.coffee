@@ -32,7 +32,10 @@ pcmRouter.post '/update-user/:token', (request, response) ->
 
     user.firstname = request.body.firstname
     user.lastname = request.body.lastname
-    console.log user
+
+    user.updated = new Date Date.now()
+
+
     user.ownerDocument().save (error) ->
       if error
         console.log "Error while saving pcm answer " + request.body.answerNumber + " : " + error
@@ -61,6 +64,9 @@ pcmRouter.post '/:token', (request, response) ->
       , (error) ->
         if error
           console.log(error);
+
+    user.updated = new Date Date.now()
+
 
     user.ownerDocument().save (error) ->
       if error

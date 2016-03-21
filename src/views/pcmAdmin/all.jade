@@ -13,20 +13,32 @@ block component
     var pcmTests = [];
   each pcmTest in pcmTests
     script(type='text/javascript').
-      pcmTests.push(!{JSON.stringify(pcmTest.name)});
+      pcmTests.push({
+        name:!{JSON.stringify(pcmTest.name)},
+        numberOfAnswer: !{JSON.stringify(pcmTest.users.length)}
+      });
   .jumbotron(ng-controller='adminPCMCtrl')
     .container(ng-switch on="addPcmTestState")
       .row(ng-switch-default)
-        .col-md-8
-          .container.all-test(ng-if="pcmTests.length > 0")
-            .row(ng-repeat="testName in pcmTests")
-              .col-md-4 {{testName}}
-              .col-md-2
-                a.btn.btn-primary(ng-href="/admin/pcm/see/{{testName}}") voir les résultats
-              .col-md-2.col-md-offset-1
-                a.btn.btn-primary(ng-href="/admin/pcm/send/{{testName}}") envoyer le questionnaire
-              .col-md-2.col-md-offset-1
-                a.btn.btn-primary(ng-href="/admin/pcm/destroy/{{testName}}") Effacer
+        .col-md-12
+          table.table.table-hover(ng-if="pcmTests.length > 0")
+            thead
+              tr
+                th Titre
+                th Nombre de réponses
+                th Voir réponses
+                th Envoyer le questionnaire
+                th Effacer
+            tbody
+              tr(ng-repeat="test in pcmTests")
+                td {{test.name}}
+                td {{test.numberOfAnswer}}
+                td
+                  a(ng-href="/admin/pcm/see/{{test.name}}") Voir réponses
+                td
+                  a(ng-href="/admin/pcm/send/{{test.name}}") Envoyer le questionnaire
+                td
+                  a(ng-href="/admin/pcm/destroy/{{test.name}}") Effacer
           form.inport-pcm-test(
             method="post"
             enctype="multipart/form-data"
