@@ -31,10 +31,40 @@ block component
                         placeholder='Société Dupond'
                         ng-model='newFormation.client'
                       )
+                  tr
+                    td Date de la formation
+                    td
+                      input(
+                        type='datetime-local'
+                        ng-model='newFormation.date'
+                      )
+                  tr
+                    td Lieu de la formation
+                    td
+                      input(
+                        type='textbox'
+                        placeholder='84, Quai de Jemmapes'
+                        ng-model='newFormation.place'
+                      )
+                  tr
+                    td Honoraire de base
+                    td
+                      .input-group
+                        input.form-control.currency(
+                          type='number'
+                          step='0.01'
+                          data-number-stepfactor="100"
+                          ng-model='newFormation.basePrice'
+                        )
+                        span.input-group-addon €
         .row
           .col-md-12
             input.btn.btn-primary(
               type='submit'
               value='Valider'
+            )
+            a.btn(
+              href='/admin/pcm'
+              value='Annuler'
             )
 
