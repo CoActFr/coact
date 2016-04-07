@@ -1,0 +1,25 @@
+extends ./header.jade
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2 Formations
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          if formations.length > 0
+            table.table.table-hover
+              thead
+                tr
+                  th Titre
+              tbody
+                for formation in formations
+                  tr
+                    td= formation.title
+          else
+            p Il n'y a pas encore de formation sur la plateforme
+      .row
+        .col-md-121
+          a.btn.btn-primary(href='/admin/formation/addForm') Ajoutez une formation

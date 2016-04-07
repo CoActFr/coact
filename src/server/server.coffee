@@ -101,7 +101,7 @@ auth = basicAuth (user, password) ->
 #Routers
 
 server.use '/pcm', require('./%routers%/pcmRouter.js')
-server.use '/admin/pcm', auth, require('./%routers%/adminPCMRouter.js')
+server.use '/admin', auth, require('./%routers%/adminRouter.js')
 server.use '', require('./%routers%/mainRouter.js')
 
 #End

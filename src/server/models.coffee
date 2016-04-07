@@ -9,5 +9,6 @@ db.once 'open', (callback) ->
 
 
   require './%models%/pcmTest.js'
+  require './%models%/formation.js'
 
 module.exports = db

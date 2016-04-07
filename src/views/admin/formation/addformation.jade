@@ -1,0 +1,40 @@
+extends ./header.jade
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2 Ajouter une formation
+  .jumbotron
+    .container(ng-controller='adminAddFormationCtrl')
+      form(
+        name='AddFormationForm'
+        ng-submit='submitFormation()'
+      )
+        .row
+          .col-md-12
+            table.table.table-hover
+              tbody
+                  tr
+                    td Titre
+                    td
+                      input(
+                        type='textbox'
+                        placeholder='Titre'
+                        ng-model='newFormation.title'
+                      )
+                  tr
+                    td Client
+                    td
+                      input(
+                        type='textbox'
+                        placeholder='Société Dupond'
+                        ng-model='newFormation.client'
+                      )
+        .row
+          .col-md-12
+            input.btn.btn-primary(
+              type='submit'
+              value='Valider'
+            )
+
