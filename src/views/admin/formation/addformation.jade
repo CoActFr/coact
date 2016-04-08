@@ -5,66 +5,240 @@ block component
       .row
         .col-md-12
           h2 Ajouter une formation
-  .jumbotron
-    .container(ng-controller='adminAddFormationCtrl')
-      form(
-        name='AddFormationForm'
-        ng-submit='submitFormation()'
-      )
+    script(type='text/javascript').
+      var formation = !{JSON.stringify(formation)};
+    form(
+      ng-controller='adminAddFormationCtrl'
+      name='AddFormationForm'
+      ng-submit='submitFormation()'
+    )
+      .container.add-formation
         .row
           .col-md-12
-            table.table.table-hover
+            h3 Responsable de la formation (Vous)
+        .row
+          .col-md-12
+            table.table.table-hover.split-2.no-lines
               tbody
-                  tr
-                    td Titre
-                    td
-                      input(
-                        type='textbox'
-                        placeholder='Titre'
-                        ng-model='newFormation.title'
-                      )
-                  tr
-                    td Client
-                    td
-                      input(
-                        type='textbox'
-                        placeholder='Société Dupond'
-                        ng-model='newFormation.client'
-                      )
-                  tr
-                    td Date de la formation
-                    td
-                      input(
-                        type='datetime-local'
-                        ng-model='newFormation.date'
-                      )
-                  tr
-                    td Lieu de la formation
-                    td
-                      input(
-                        type='textbox'
-                        placeholder='84, Quai de Jemmapes'
-                        ng-model='newFormation.place'
-                      )
-                  tr
-                    td Honoraire de base
-                    td
-                      .input-group
-                        input.form-control.currency(
-                          type='number'
-                          step='0.01'
-                          data-number-stepfactor="100"
-                          ng-model='newFormation.basePrice'
-                        )
-                        span.input-group-addon €
+                tr
+                  td Nom
+                  td
+                    input.form-control(
+                      type='textbox'
+                      placeholder='Le Pennec'
+                      ng-model='formation.creator.lastname'
+                    )
+                tr
+                  td Prénom
+                  td
+                    input.form-control(
+                      type='textbox'
+                      placeholder='Fredéric'
+                      ng-model='formation.creator.firstname'
+                    )
+                tr
+                  td Email
+                  td
+                    input.form-control(
+                      type='email'
+                      placeholder='frederic.lepennec@coact.fr'
+                      ng-model='formation.creator.email'
+                    )
+      .container.add-formation
         .row
           .col-md-12
-            input.btn.btn-primary(
-              type='submit'
-              value='Valider'
-            )
-            a.btn(
-              href='/admin/pcm'
-              value='Annuler'
-            )
+            h3 Informations générales
+        .row
+          .col-md-12
+            table.table.table-hover.split-2.no-lines
+              tbody
+                tr
+                  td Titre
+                  td
+                    input.form-control(
+                      type='textbox'
+                      placeholder='Titre'
+                      ng-model='formation.title'
+                    )
+                tr
+                  td Client
+                  td
+                    input.form-control(
+                      type='textbox'
+                      placeholder='Société Dupond'
+                      ng-model='formation.client'
+                    )
+                tr
+                  td Lieu de la formation
+                  td
+                    input.form-control(
+                      type='textbox'
+                      placeholder='84, Quai de Jemmapes'
+                      ng-model='formation.place'
+                    )
+                tr
+                  td Honoraire de base (valeur réelle de la formation)
+                  td
+                    .input-group
+                      input.form-control.currency(
+                        type='number'
+                        step='0.01'
+                        data-number-stepfactor="100"
+                        ng-model='formation.basePrice'
+                      )
+                      span.input-group-addon €
+        .row
+          .col-md-12
+            h3 Dates de la formation
+        .row
+          .col-md-12
+            table.table.table-hover.split-4
+              thead
+                tr
+                  th Date
+                  th Début
+                  th Fin
+                  th &nbsp;
+              tbody
+                tr(ng-repeat='day in formation.dates')
+                  td
+                    input.form-control(
+                      type='date'
+                      ng-model='day.date'
+                    )
+                  td
+                    input.form-control(
+                      type='time'
+                      ng-model='day.from'
+                    )
+                  td
+                    input.form-control(
+                      type='time'
+                      ng-model='day.to'
+                    )
+                  td
+                    .btn.btn-primary.form-control(
+                      ng-click='removeDay(day)'
+                      ng-if='formation.dates.length > 1'
+                    ) Retirer
+                tr
+                  td(colspan=4)
+                    .btn.btn-primary.btn-block(
+                      ng-click='addDay()'
+                    ) Ajouter une date
+        .row
+          .col-md-12
+            h3 Participants
+        .row
+          .col-md-12
+            table.table.table-hover.split-4
+              thead
+                tr
+                  th Nom
+                  th Prénom
+                  th Email
+                  th &nbsp;
+              tbody
+                tr(ng-repeat='user in formation.users')
+                  td
+                    input.form-control(
+                      type='textbox'
+                      ng-model='user.lastname'
+                      placeholder='Dupond'
+                    )
+                  td
+                    input.form-control(
+                      type='textbox'
+                      ng-model='user.firstname'
+                      placeholder='Jean'
+                    )
+                  td
+                    input.form-control(
+                      type='email'
+                      ng-model='user.email'
+                      placeholder='jd@dupond.com'
+                    )
+                  td
+                    .btn.btn-primary.form-control(
+                      ng-click='removeUser(user)'
+                    ) Retirer
+                tr
+                  td(colspan=4)
+                    .btn.btn-primary.btn-block(
+                      ng-click='addUser()'
+                    ) Ajouter un participant
+        .row
+          .col-md-12
+            h3 Acheteur de la formation
+        .row
+          .col-md-12
+            table.table.table-hover.split-2.no-lines
+              tbody
+                tr
+                  td Nom
+                  td
+                    input.form-control(
+                      type='textbox'
+                      placeholder='Dupond'
+                      ng-model='formation.buyer.lastname'
+                    )
+                tr
+                  td Prénom
+                  td
+                    input.form-control(
+                      type='textbox'
+                      placeholder='Jean'
+                      ng-model='formation.buyer.firstname'
+                    )
+                tr
+                  td Poste
+                  td
+                    input.form-control(
+                      type='textbox'
+                      placeholder='Président, Directeur...'
+                      ng-model='formation.buyer.job'
+                    )
+                tr
+                  td Email
+                  td
+                    input.form-control(
+                      type='email'
+                      placeholder='jd@dupond.com'
+                      ng-model='formation.buyer.email'
+                    )
+        .row.bottom
+          .col-md-12
+            div.alert.alert-danger(ng-show="failureAlert!=null")
+              span {{failureAlert}}
+              a.close(type="button" ng-click="failureAlert=null" ) &times;
+            if formation
+              table.table.split-4.no-lines
+                tbody
+                  tr
+                    td(colspan=2)
+                      input.btn.btn-primary.btn-block(
+                        type='submit'
+                        value='Valider'
+                      )
+                    td
+                      a.btn.btn-warning.btn-block(
+                        ng-click='destroyFormation()'
+                      ) Détruire la Formation
+                    td
+                      a.btn.btn-default.btn-block(
+                        href='/admin/pcm'
+                      ) Annuler
+            else
+              table.table.split-2.no-lines
+                tbody
+                  tr
+                    td
+                      input.btn.btn-primary.btn-block(
+                        type='submit'
+                        value='Valider'
+                      )
+                    td
+                      a.btn.btn-default.btn-block(
+                        href='/admin/pcm'
+                      ) Annuler
 

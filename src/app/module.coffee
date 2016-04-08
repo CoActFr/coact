@@ -10,4 +10,6 @@
 angular.module '%module%', [
   'ng'
   'ngAnimate'
+  'ui.bootstrap'
+  'angular-confirm'
 ]

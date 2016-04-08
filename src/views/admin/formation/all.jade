@@ -14,10 +14,20 @@ block component
               thead
                 tr
                   th Titre
+                  th Participants
+                  th Jours
+                  th
               tbody
                 for formation in formations
                   tr
                     td= formation.title
+                    td= formation.users.length
+                    td= formation.dates.length
+                    td
+                      a.btn.btn-primary.form-control(
+                        href='/admin/formation/editForm/' + formation._id
+                      ) Editer
+
           else
             p Il n'y a pas encore de formation sur la plateforme
       .row

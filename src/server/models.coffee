@@ -7,7 +7,6 @@ db = mongoose.connection
 db.on 'error', console.error.bind(console, 'connection error:')
 db.once 'open', (callback) ->
 
-
   require './%models%/pcmTest.js'
   require './%models%/formation.js'
 

@@ -374,6 +374,81 @@ body{
   }
 
 
+    /* Admin
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+  .add-formation {
+    padding: 30px 10px;
+    border-radius: 15px;
+
+    h3 {
+      margin: 0
+    }
+
+    .row {
+      background-color: white;
+      padding-bottom: 20px;
+      &:first-child{
+        padding-top: 20px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+      &:last-child{
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+
+      &.bottom {
+        padding: 10px 0;
+        background-color: @coactGrey;
+      }
+    }
+
+    // Tables
+    table{
+      &.no-lines {
+        &>tbody>tr>td {
+          border-top: 0;
+        }
+      }
+
+      th {
+        text-align: left;
+        padding-left: 20px;
+      }
+
+      &.split-2 {
+        td {
+          width: 50%;
+        }
+
+      }
+      &.split-4 {
+        td {
+          width: 25%;
+
+          &[colspan='2'] {
+            width: 50%;
+          }
+        }
+      }
+
+      &.split-2, &.split-4 {
+        td {
+          input.form-control {
+            text-align: left;
+            padding-left: 20px;
+
+            &.currency {
+              text-align: right;
+              padding-right: 10px;
+            }
+          }
+        }
+      }
+    }
+
+  }
 
     /* PCM test
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -1155,7 +1230,7 @@ body{
     /* BTN
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-  .jumbotron {
+  #three-fork .jumbotron, #organisation-cta .jumbotron, .jumbotron.appeal {
     .btn-default {
       &.btn-higlight {
         background-color: #0004AD;
