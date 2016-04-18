@@ -7,6 +7,7 @@
 @coactBlueTransparent: rgba(23, 158, 213, 0.7);
 @coactDarkGrey: #666;
 @coactGrey: #999;
+@coactLightGrey: #bbb;
 
 @coactHarmoniser: orange;
 @coactThinker: #0094FF;
@@ -374,8 +375,63 @@ body{
   }
 
 
-    /* Admin
+    /* Formation
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+  #dashboard-formation {
+    .dashboard-header {
+      background-color: @coactBlue;
+
+    }
+    span.status {
+      font-family: @font-family-icon;
+      &.valid {
+        color: green;
+      }
+      &.waiting {
+        color: orange;
+      }
+      &.not-valid {
+        color: red;
+      }
+    }
+  }
+
+  #send-post-formation {
+    .post-form-option {
+      background-color: @coactGrey;
+      padding: 5px 20px;
+      margin-bottom: 5px;
+      border-radius: 10px;
+
+      border-style: solid;
+      border-width: 1px;
+      border-color: @coactGrey;
+
+      &:hover {
+        background-color: @coactLightGrey;
+      }
+
+      &.selected {
+        border-color: @coactBlueDarker;
+        background-color: @coactBlue;
+        &:hover {
+          border-color: @coactBlue;
+          background-color: @coactBlueLight;
+        }
+      }
+
+      .check-icon {
+        font-family: @font-family-icon;
+        color: white;
+        margin-right: 10px;
+      }
+    }
+
+    input[type='submit'] {
+      margin-top: 15px;
+    }
+  }
 
   .add-formation {
     padding: 30px 10px;
@@ -403,6 +459,9 @@ body{
         background-color: @coactGrey;
       }
     }
+  }
+
+  #dashboard-formation, .add-formation, #send-post-formation {
 
     // Tables
     table{

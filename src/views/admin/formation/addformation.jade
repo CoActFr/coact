@@ -4,7 +4,10 @@ block component
     .container
       .row
         .col-md-12
-          h2 Ajouter une formation
+          if formation
+            h2 Editer la formation
+          else
+            h2 Ajouter une formation
     script(type='text/javascript').
       var formation = !{JSON.stringify(formation)};
     form(
@@ -86,7 +89,18 @@ block component
                         data-number-stepfactor="100"
                         ng-model='formation.basePrice'
                       )
-                      span.input-group-addon €
+                      span.input-group-addon € HT
+                tr
+                  td dont Frais fixes (inventaires PCM...)
+                  td
+                    .input-group
+                      input.form-control.currency(
+                        type='number'
+                        step='0.01'
+                        data-number-stepfactor="100"
+                        ng-model='formation.fixedCosts'
+                      )
+                      span.input-group-addon € HT
         .row
           .col-md-12
             h3 Dates de la formation

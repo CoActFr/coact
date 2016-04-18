@@ -14,6 +14,7 @@ block component
               thead
                 tr
                   th Titre
+                  th Responsable
                   th Participants
                   th Jours
                   th
@@ -21,6 +22,7 @@ block component
                 for formation in formations
                   tr
                     td= formation.title
+                    td= formation.creator.firstname
                     td= formation.users.length
                     td= formation.dates.length
                     td

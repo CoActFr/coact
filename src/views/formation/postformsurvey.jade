@@ -1,0 +1,43 @@
+extends ../header.jade
+block head
+  title CoactAdmin - Questionnaires
+block vars
+  - var nav = 'survey'
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2 Questionnaire de fin de formation
+    .container
+      .row
+        .col-md-12
+          h3 Récapitulatif de la formation
+      .row
+        .col-md-8.col-md-offset-1
+          table.table.table-hover.split-2.no-lines
+            tbody
+              tr
+                td Titre
+                td= formation.title
+              for day, index in formation.dates
+                tr
+                  if index > 0
+                    td
+                  else
+                    td Dates et durée
+                  - var date = moment(day.date).format('DD/MM/YYYY')
+                  - var from = moment(day.from).format('H[h]mm')
+                  - var to = moment(day.to ).format('H[h]mm')
+                  - var duration = moment(day.to).diff(moment(day.from), 'hour')
+                  td= date + ' - '  + from + '/' + to + ' - ' + duration + ' heures'
+              tr
+                td Lieu de la formation
+                td= formation.place
+              tr
+                td Honoraire de base
+                td= formation.basePrice + '€ HT'
+    .container
+      .row
+        .col-md-12
+          h3 Facturation

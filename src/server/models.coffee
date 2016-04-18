@@ -1,6 +1,7 @@
 # DB
 
 global['mongoose'] = require '../node_modules/mongoose/index.js'
+global['ObjectId'] = mongoose.Schema.Types.ObjectId
 mongoose.connect 'mongodb://localhost/coact'
 
 db = mongoose.connection

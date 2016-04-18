@@ -31,6 +31,7 @@ server.set 'views', './views'
 
 ### deps ###
 global['_'] = require '../node_modules/lodash/index.js'
+server.locals._ = _
 server.locals.moment = require('../node_modules/moment/moment.js');
 
 ### ---- ###
@@ -101,6 +102,7 @@ auth = basicAuth (user, password) ->
 #Routers
 
 server.use '/pcm', require('./%routers%/pcmRouter.js')
+server.use '/formation', require('./%routers%/formationRouter.js')
 server.use '/admin', auth, require('./%routers%/adminRouter.js')
 server.use '', require('./%routers%/mainRouter.js')
 

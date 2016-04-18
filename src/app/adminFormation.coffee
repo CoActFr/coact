@@ -21,6 +21,7 @@ angular.module '%module%'
       client: ''
       place: ''
       basePrice: 2500
+      fixedCosts: 300
       dates: [
         date: new Date now.toDate()
         from: new Date now.toDate()
@@ -87,5 +88,50 @@ angular.module '%module%'
       .then ->
         endIndex = window.location.href.lastIndexOf '/editForm'
         window.location.href = window.location.href.substring 0, endIndex
+      , (data) ->
+        $scope.failureAlert = '''Une erreur s'est produite lors de la destruction de la formation. Contactez votre super admin.'''
+
+.controller 'adminSendPostFormationCtrl',  ($scope, $http, $confirm) ->
+  $scope.options =
+    fiftyPercent: true
+    testimony: true
+    recommandation: true
+
+  if postFormationSurveyExist
+    $scope.options = postFormationSurvey.options
+
+  $scope.switchFiftyPercent = ->
+    $scope.options.fiftyPercent = !$scope.options.fiftyPercent
+
+  $scope.switchTestimony = ->
+    $scope.options.testimony = !$scope.options.testimony
+
+  $scope.switchRecommandation = ->
+    $scope.options.recommandation = !$scope.options.recommandation
+
+  $scope.submitSendPostFormationSurvey = ->
+    $scope.failureAlert = null
+    chosenOption = 'Options choisies :'
+    if $scope.options.fiftyPercent
+      chosenOption += '\n 50% ferme + reste au choix'
+    if $scope.options.testimony
+      chosenOption += '\n témoignage'
+    if $scope.options.recommandation
+      chosenOption += '\n la recommandation auprès des partenaire'
+    $confirm
+      title: 'Êtes-vous certain de vouloir envoyer le questionnaire Post-Formation ?'
+      text: chosenOption
+      ok: 'Envoyer le questionnaire'
+      cancel: 'Annuler'
+    .then ()->
+      window.location.href
+      $http
+        method: 'POST'
+        url: window.location.href
+        data:
+          options: $scope.options
+      .then ->
+        location = window.location.href.replace '/sendPostFormation', '/dashboard'
+        window.location.href = location
       , (data) ->
         $scope.failureAlert = '''Une erreur s'est produite lors de la destruction de la formation. Contactez votre super admin.'''
