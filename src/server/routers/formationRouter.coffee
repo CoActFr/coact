@@ -20,11 +20,11 @@ formationRouter.get '/:id/post', (request, response) ->
 
     pfsa = new postFormationSurveyAnswerModel
       validated: false
-      chosenPrice: formation.basePrice
+      chosenPrice: Math.floor(50*formation.basePrice)/100
       testimony:
         chosen: false
         text: ''
-        author: ''
+        author: 0
         quoteCompany: false
       recommandation: false
       commentary:

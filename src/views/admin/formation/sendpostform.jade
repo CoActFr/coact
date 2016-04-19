@@ -9,7 +9,7 @@ block component
             table.table.table-hover.split-2.no-lines
               tbody
                 tr
-                  td Titre
+                  td Intitulé
                   td= formation.title
                 for day, index in formation.dates
                   tr
@@ -26,8 +26,11 @@ block component
                   td Lieu de la formation
                   td= formation.place
                 tr
-                  td Honoraire de base
+                  td Honoraires de base
                   td= formation.basePrice + '€'
+                tr
+                  td Frais fixes
+                  td= formation.fixedCosts + '€'
         if formation.postFormationSurvey
           script(type='text/javascript').
             var postFormationSurvey = !{JSON.stringify(formation.postFormationSurvey)};

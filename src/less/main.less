@@ -461,7 +461,163 @@ body{
     }
   }
 
-  #dashboard-formation, .add-formation, #send-post-formation {
+  #post-formation-survey {
+    .btn-primary {
+      position: relative;
+
+      span.valid-btn-icon {
+        color: @coactBlue;
+        position: absolute;
+        left: 45px;
+        top: -2px;
+        font-size: 30px;
+        font-family: @font-family-icon;
+      }
+    }
+
+    .facturation {
+      .split-price>.box{
+        text-align: center;
+        border-color: @coactBlue;
+        border-width: 2px;
+        border-style: solid;
+        margin: 12px;
+        height: 150px;
+
+        &.fixed-box {
+          background-color: #fff;
+          p {
+            font-size: 25px !important;
+            margin-top: 59px;
+          }
+        }
+
+        &.choose-box {
+          background-color: @coactBlue;
+        }
+
+        .slider {
+          margin-top: 5px;
+          margin-bottom: 15px;
+        }
+
+        input[type='number'] {
+          font-size: 25px;
+          height: 50px;
+          text-align: right;
+        }
+      }
+
+      .total-price {
+        font-size: 25px;
+        text-align: right;
+        margin-bottom: 10px;
+
+        .total-number{
+          min-width: 500px;
+        }
+      }
+
+      border-color: #222;
+      border-width: 4px;
+      border-style: solid;
+    }
+
+    .testimony, .other-proposal {
+      margin-top: 25px;
+
+      .not-chosen {
+        .btn-primary {
+          background-color: @coactBlue;
+          font-size: 18px;
+          color: #000;
+          &:hover {
+            background-color: @coactBlueLight;
+          }
+        }
+      }
+
+      .chosen {
+        background-color: @coactBlue;
+        border-radius: 15px;
+
+        .btn-primary {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          background-color: #fff;
+          font-size: 18px;
+          color: #000;
+        }
+
+        textarea {
+          &, &:hover, &:active, &:focus{
+            width: 90%;
+            margin-left: 5%;
+            background-color: #fff;
+            border-radius: 15px;
+            min-height: 140px;
+            padding: 15px;
+          }
+        }
+        .author-options{
+          margin-bottom: 20px;
+          .author-option {
+            margin-left: 20px;
+            padding: 5px;
+            border-radius: 15px;
+            &.selected {
+              background-color: #fff;
+            }
+          }
+        }
+
+        .quote-company {
+          .btn {
+            margin-left: 25px;
+            border-radius: 15px;
+
+            &.yes.selected {
+              background-color: #fff;
+            }
+            &.no.selected {
+              background-color: @coactGrey;
+            }
+          }
+          input[type='text'] {
+            margin-left: 25px;
+            height: 35px;
+            border-radius: 15px;
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 500px;
+          }
+        }
+      }
+    }
+
+
+    .recommandation {
+      margin-top: 25px;
+
+      .btn-primary {
+        &.not-chosen {
+          background-color: @coactBlue;
+        }
+        &.chosen {
+          background-color: #fff;
+        }
+        font-size: 18px;
+        color: #000;
+        &.not-chosen:hover {
+          background-color: @coactBlueLight;
+        }
+      }
+
+    }
+  }
+
+  #dashboard-formation, .add-formation,
+  #send-post-formation, #post-formation-survey {
 
     // Tables
     table{

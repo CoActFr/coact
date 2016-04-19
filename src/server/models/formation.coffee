@@ -42,7 +42,7 @@ postFormationSurveyAnswerSchema = mongoose.Schema
   testimony:
     chosen: Boolean
     text: String
-    author: String
+    authorOption: Number
     quoteCompany: Boolean
   recommandation: Boolean
   commentary:
