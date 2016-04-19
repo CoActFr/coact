@@ -24,9 +24,11 @@ formationRouter.get '/:id/post', (request, response) ->
       testimony:
         chosen: false
         text: ''
-        author: 0
-        quoteCompany: false
-      recommandation: false
+        authorOption: 0
+        quoteCompany: true
+      recommandation:
+        chosen: false
+        contacts: []
       commentary:
         chosen: false
         text: ''

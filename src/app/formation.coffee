@@ -37,8 +37,39 @@ angular.module '%module%'
   $scope.quoteCompany = (choice) ->
     $scope.answer.testimony.quoteCompany = choice
 
-  $scope.recommand = () ->
-    $scope.answer.recommandation = not $scope.answer.recommandation
+  $scope.recommand =  ->
+    $scope.answer.recommandation.chosen = not $scope.answer.recommandation.chosen
+
+  getEmptyContact = ->
+    return {
+      firstname: ''
+      lastname: ''
+      company: ''
+      job: ''
+      phone: ''
+      email: ''
+    }
+
+  $scope.contactArray = $scope.answer.recommandation.contacts
+  $scope.contactArray.push getEmptyContact()
+  while $scope.contactArray.length < 3
+    $scope.contactArray.push getEmptyContact()
+
+  $scope.addContact = (index) ->
+    if index == $scope.contactArray.length - 1
+      $scope.contactArray.push getEmptyContact()
 
   $scope.comment = ->
     $scope.answer.commentary.chosen = not $scope.answer.commentary.chosen
+
+  $scope.submitPostFormationSurvey = ->
+    $scope.answer.recommandation.contacts = _.reject $scope.contactArray, (contact)->
+      return not (contact.firstname or
+       contact.lastname or
+       contact.company or
+       contact.job or
+       contact.phone or
+       contact.email)
+
+    console.log $scope.answer
+

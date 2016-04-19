@@ -47,122 +47,198 @@ block component
       var answer = !{JSON.stringify(answer)};
       var buyer = !{JSON.stringify(formation.buyer)};
     .container(ng-controller='postFormationCtrl')
-      .row
-        .col-md-12
-          h3 Facturation
-      .row
-        .col-md-12
-          .container.facturation
-            .row.split-price
-              .col-md-3.box.fixed-box
-                h4 50% fixe
-                p {{fixedFiftyPrice}} € HT
-              .col-md-3.box.fixed-box
-                h4 Frais fixes
-                p {{fixedCosts}} € HT
-              .col-md-5.box.choose-box
-                h4 50% +/- votre estimation
-                slider(
-                  ng-model="answer.chosenPrice"
-                  min="0"
-                  ng-max='maxChosenPrice'
-                  on-stop-slide='updateMaxChosenPrice()'
-                  step="0.01"
-                  value= "" + Math.floor(formation.basePrice/2)
-                )
-                .input-group
-                  input.form-control.currency(
-                    type='number'
+      form(ng-submit='submitPostFormationSurvey()'
+        name='PostFormationSurvey'
+      )
+        .row
+          .col-md-12
+            h3 Facturation
+        .row
+          .col-md-12
+            .container.facturation
+              .row.split-price
+                .col-md-3.box.fixed-box
+                  h4 50% fixe
+                  p {{fixedFiftyPrice}} € HT
+                .col-md-3.box.fixed-box
+                  h4 Frais fixes
+                  p {{fixedCosts}} € HT
+                .col-md-5.box.choose-box
+                  h4 50% +/- votre estimation
+                  slider(
+                    ng-model="answer.chosenPrice"
                     min="0"
+                    ng-max='maxChosenPrice'
+                    on-stop-slide='updateMaxChosenPrice()'
                     step="0.01"
-                    ng-change='updateMaxChosenPrice()'
-                    ng-model='answer.chosenPrice'
+                    value= "" + Math.floor(formation.basePrice/2)
                   )
-                  span.input-group-addon € HT
-            .row
-              .col-md-12.total-price
-                span Honoraires totals :&nbsp;
-                span.total-number {{getTotal()}} € HT
-      .row
-        .col-md-12.testimony
-          .not-chosen(
-            ng-hide='answer.testimony.chosen')
-            .btn.btn-primary.btn-block(
-              ng-click="testify()"
-            ) Faire un témoignage sur notre site internet
-          .container.chosen(ng-show='answer.testimony.chosen')
-            .row
-              .col-md-12
-                .btn.btn-primary.btn-block(
-                  ng-click="testify()"
-                ) Faire un témoignage sur notre site internet
-                  span.valid-btn-icon &#61533;
-            .row
-              .col-md-12
-                textarea(
-                placeholder="Tapez votre témoignage ici."
-                cols=60
-                rows=5
-                ng-model="answer.testimony.text")
-            .row
-              .col-md-12.author-options
-                h4 Votre nom tel qu’il apparaîtra sur le site
-                .author-option(
-                  ng-class='answer.testimony.authorOption == 0 ? "selected" : ""'
-                  ng-click='selectAuthorOption(0)'
-                ) {{getAuthorOption(0)}}
-                .author-option(
-                  ng-class='answer.testimony.authorOption == 1 ? "selected" : ""'
-                  ng-click='selectAuthorOption(1)'
-                ) {{getAuthorOption(1)}}
-                .author-option(
-                  ng-class='answer.testimony.authorOption == 2 ? "selected" : ""'
-                  ng-click='selectAuthorOption(2)'
-                ) {{getAuthorOption(2)}}
-                .author-option(
-                  ng-class='answer.testimony.authorOption == 3 ? "selected" : ""'
-                  ng-click='selectAuthorOption(3)'
-                ) {{getAuthorOption(3)}}
-            .row
-              .col-md-12.quote-company
-                h4 Citer votre entreprise :
-                  .btn.yes(
-                    ng-class='answer.testimony.quoteCompany ? "selected" : ""'
-                    ng-click='quoteCompany(true)') Oui
-                  .btn.no(
-                    ng-class='answer.testimony.quoteCompany ? "" : "selected"'
-                    ng-click='quoteCompany(false)') Non
-                  input(
-                    type='text'
-                    ng-model='client'
-                    ng-disabled='!answer.testimony.quoteCompany'
+                  .input-group
+                    input.form-control.currency(
+                      type='number'
+                      min="0"
+                      step="0.01"
+                      ng-change='updateMaxChosenPrice()'
+                      ng-model='answer.chosenPrice'
                     )
-      .row
-        .col-md-12.recommandation
-          .btn.btn-primary.btn-block(
-            ng-click="recommand()"
-            ng-class='answer.recommandation ? "chosen" : "not-chosen"'
-          ) Nous recommander auprès de vos partenaires.
-            span.valid-btn-icon(ng-show='answer.recommandation') &#61533;
-      .row
-        .col-md-12.other-proposal
-          .not-chosen(
-            ng-hide='answer.commentary.chosen')
-            .btn.btn-primary.btn-block(
-              ng-click="comment()"
-            ) Autre(s) proposition(s) / Commentaire(s)
-          .container.chosen(ng-show='answer.commentary.chosen')
-            .row
-              .col-md-12
-                .btn.btn-primary.btn-block(
-                  ng-click="comment()"
-                ) Autre(s) proposition(s) / Commentaire(s)
-                  span.valid-btn-icon &#61533;
-            .row
-              .col-md-12
-                textarea(
-                placeholder="Tapez votre proposition / commentaire ici."
-                cols=60
-                rows=5
-                ng-model="answer.commentary.text")
-            .row
+                    span.input-group-addon € HT
+              .row
+                .col-md-12.total-price
+                  span Honoraires totals :&nbsp;
+                  span.total-number {{getTotal()}} € HT
+        .row
+          .col-md-12.testimony
+            .not-chosen(
+              ng-hide='answer.testimony.chosen')
+              .btn.btn-primary.btn-block(
+                ng-click="testify()"
+              ) Faire un témoignage sur notre site internet
+            .container.chosen(ng-show='answer.testimony.chosen')
+              .row
+                .col-md-12
+                  .btn.btn-primary.btn-block(
+                    ng-click="testify()"
+                  ) Faire un témoignage sur notre site internet
+                    span.valid-btn-icon &#61533;
+              .row
+                .col-md-12
+                  textarea(
+                  placeholder="Rédiger votre témoignage ici."
+                  cols=60
+                  rows=5
+                  ng-model="answer.testimony.text")
+              .row
+                .col-md-12.author-options
+                  h4 Votre nom tel qu’il apparaîtra sur le site
+                  .author-option(
+                    ng-class='answer.testimony.authorOption == 0 ? "selected" : ""'
+                    ng-click='selectAuthorOption(0)'
+                  ) {{getAuthorOption(0)}}
+                    span.author-icon(ng-show='answer.testimony.authorOption == 0') &#61533;
+                  .author-option(
+                    ng-class='answer.testimony.authorOption == 1 ? "selected" : ""'
+                    ng-click='selectAuthorOption(1)'
+                  ) {{getAuthorOption(1)}}
+                    span.author-icon(ng-show='answer.testimony.authorOption == 1') &#61533;
+                  .author-option(
+                    ng-class='answer.testimony.authorOption == 2 ? "selected" : ""'
+                    ng-click='selectAuthorOption(2)'
+                  ) {{getAuthorOption(2)}}
+                    span.author-icon(ng-show='answer.testimony.authorOption == 2') &#61533;
+                  .author-option(
+                    ng-class='answer.testimony.authorOption == 3 ? "selected" : ""'
+                    ng-click='selectAuthorOption(3)'
+                  ) {{getAuthorOption(3)}}
+                    span.author-icon(ng-show='answer.testimony.authorOption == 3') &#61533;
+              .row
+                .col-md-12.quote-company
+                  h4 Citer votre entreprise :
+                    .btn.yes(
+                      ng-class='answer.testimony.quoteCompany ? "selected" : ""'
+                      ng-click='quoteCompany(true)') Oui
+                    .btn.no(
+                      ng-class='answer.testimony.quoteCompany ? "" : "selected"'
+                      ng-click='quoteCompany(false)') Non
+                    input(
+                      type='text'
+                      ng-model='client'
+                      ng-disabled='!answer.testimony.quoteCompany'
+                      )
+        .row
+          .col-md-12.recommandation
+            .not-chosen(
+              ng-hide='answer.recommandation.chosen')
+              .btn.btn-primary.btn-block(
+                ng-click="recommand()"
+              ) Nous recommander auprès de vos partenaires.
+            .container.chosen(ng-show='answer.recommandation.chosen')
+              .row
+                .col-md-12
+                  .btn.btn-primary.btn-block(
+                    ng-click="recommand()"
+                  ) Nous recommander auprès de vos partenaires.
+                    span.valid-btn-icon &#61533;
+              .row
+                .col-md-12
+                  table.table.table-hover.split-6.no-lines
+                    thead
+                      tr
+                        th Prénom
+                        th Nom
+                        th Organisation
+                        th Fonction
+                        th Téléphone
+                        th Email
+                    tbody
+                      tr(ng-repeat='contact in contactArray')
+                        td
+                          input.form-control(
+                            type='text'
+                            ng-model='contact.firstname'
+                            placeholder='Prénom'
+                            ng-change='addContact($index)'
+                            )
+                        td
+                          input.form-control(
+                            type='text'
+                            ng-model='contact.lastname'
+                            placeholder='Nom'
+                            ng-change='addContact($index)'
+                            )
+                        td
+                          input.form-control(
+                            type='text'
+                            ng-model='contact.company'
+                            placeholder='Organisation'
+                            ng-change='addContact($index)'
+                            )
+                        td
+                          input.form-control(
+                            type='text'
+                            ng-model='contact.job'
+                            placeholder='Fonction'
+                            ng-change='addContact($index)'
+                            )
+                        td
+                          input.form-control(
+                            type='tel'
+                            ng-model='contact.phone'
+                            placeholder='0X XX XX XX XX'
+                            ng-change='addContact($index)'
+                            )
+                        td
+                          input.form-control(
+                            type='email'
+                            ng-model='contact.email'
+                            placeholder='email@email.com'
+                            ng-change='addContact($index)'
+                            )
+
+
+        .row
+          .col-md-12.other-proposal
+            .not-chosen(
+              ng-hide='answer.commentary.chosen')
+              .btn.btn-primary.btn-block(
+                ng-click="comment()"
+              ) Autre(s) proposition(s) / Commentaire(s)
+            .container.chosen(ng-show='answer.commentary.chosen')
+              .row
+                .col-md-12
+                  .btn.btn-primary.btn-block(
+                    ng-click="comment()"
+                  ) Autre(s) proposition(s) / Commentaire(s)
+                    span.valid-btn-icon &#61533;
+              .row
+                .col-md-12
+                  textarea(
+                  placeholder="Rédiger votre proposition / commentaire ici."
+                  cols=60
+                  rows=5
+                  ng-model="answer.commentary.text")
+        .row.footer
+          .col-md-12
+            input.btn.btn-primary(
+              type='submit'
+              value='Valider le questionnaire'
+            )

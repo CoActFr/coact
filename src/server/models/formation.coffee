@@ -44,7 +44,16 @@ postFormationSurveyAnswerSchema = mongoose.Schema
     text: String
     authorOption: Number
     quoteCompany: Boolean
-  recommandation: Boolean
+  recommandation:
+    chosen: Boolean
+    contacts: [
+      firstname: String
+      lastname: String
+      company: String
+      job: String
+      phone: String
+      email: String
+    ]
   commentary:
     chosen: Boolean
     text: String

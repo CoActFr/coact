@@ -523,7 +523,7 @@ body{
       border-style: solid;
     }
 
-    .testimony, .other-proposal {
+    .testimony, .recommandation, .other-proposal {
       margin-top: 25px;
 
       .not-chosen {
@@ -565,8 +565,20 @@ body{
             margin-left: 20px;
             padding: 5px;
             border-radius: 15px;
+            cursor: pointer;
             &.selected {
               background-color: #fff;
+              padding-left: 20px;
+              position: relative;
+
+              span.author-icon {
+                color: @coactBlue;
+                position: absolute;
+                right: 10px;
+                top:0px;
+                font-size: 25px;
+                font-family: @font-family-icon;
+              }
             }
           }
         }
@@ -595,22 +607,20 @@ body{
       }
     }
 
-
     .recommandation {
-      margin-top: 25px;
+      tr {
+        border-radius: 5px;
+      }
+    }
 
-      .btn-primary {
-        &.not-chosen {
-          background-color: @coactBlue;
-        }
-        &.chosen {
-          background-color: #fff;
-        }
+    .footer {
+      margin-top: 25px;
+      text-align: center;
+
+      input[type='submit'].btn-primary {
+        background-color: #fff;
         font-size: 18px;
         color: #000;
-        &.not-chosen:hover {
-          background-color: @coactBlueLight;
-        }
       }
 
     }
@@ -647,8 +657,17 @@ body{
           }
         }
       }
+      &.split-6 {
+        td {
+          width: 100%/6;
 
-      &.split-2, &.split-4 {
+          &[colspan='2'] {
+            width: 100%/3;
+          }
+        }
+      }
+
+      &.split-2, &.split-4, &.split-6 {
         td {
           input.form-control {
             text-align: left;
