@@ -70,14 +70,14 @@ block component
                     min="0"
                     ng-max='maxChosenPrice'
                     on-stop-slide='updateMaxChosenPrice()'
-                    step="0.01"
+                    step="5"
                     value= "" + Math.floor(formation.basePrice/2)
                   )
                   .input-group
                     input.form-control.currency(
                       type='number'
                       min="0"
-                      step="0.01"
+                      step="1"
                       ng-change='updateMaxChosenPrice()'
                       ng-model='answer.chosenPrice'
                     )
