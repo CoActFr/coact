@@ -111,18 +111,25 @@ angular.module '%module%'
 
   $scope.submitSendPostFormationSurvey = ->
     $scope.failureAlert = null
-    chosenOption = 'Options choisies :'
+    chosenOption = []
     if $scope.options.fiftyPercent
-      chosenOption += '\n 50% ferme + reste au choix'
+      chosenOption.push '50% ferme + reste au choix'
     if $scope.options.testimony
-      chosenOption += '\n témoignage'
+      chosenOption.push 'témoignage'
     if $scope.options.recommandation
-      chosenOption += '\n la recommandation auprès des partenaire'
-    $confirm
-      title: 'Êtes-vous certain de vouloir envoyer le questionnaire Post-Formation ?'
-      text: chosenOption
-      ok: 'Envoyer le questionnaire'
-      cancel: 'Annuler'
+      chosenOption.push 'la recommandation auprès des partenaire'
+    $confirm chosenOption: chosenOption,
+      template: '''<div class="modal-header"><h3 class="modal-title">Êtes-vous certain de vouloir envoyer le questionnaire Post-Formation ?</h3></div>
+        <div class="modal-body">
+          <h4>Options choisi : </h4>
+          <ul>
+            <li ng-repeat="option in data.chosenOption">{{option}}</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">Envoyer le questionnaire</button>
+        <button class="btn btn-default" ng-click="cancel()">Annuler</button>
+        </div>'''
     .then ()->
       window.location.href
       $http

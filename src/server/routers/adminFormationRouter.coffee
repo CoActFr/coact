@@ -61,11 +61,16 @@ adminFormationRouter.post '/sendPostFormation/:id', (request, response) ->
     unless formation
       response.sendStatus 404
 
-    sendMail 'mails/postformationsurvey.jade',
-      to: formation.buyer.email, # REQUIRED. This can be a comma delimited string just like a normal email to field.
-      subject: '[CoAct] Questionnaire de facturation', # REQUIRED.
-      connexionCode: formation.id
-      firstname: formation.buyer.firstname
+    sendMail {
+      template: 'mails/postformationsurvey.jade'
+      from: "#{formation.creator.firstname} #{formation.creator.lastname} <#{formation.creator.email}>"
+      cc: "#{formation.creator.firstname} #{formation.creator.lastname} <#{formation.creator.email}>",
+      },{
+        to: "#{formation.buyer.firstname} #{formation.buyer.lastname} <#{formation.buyer.email}>"
+        subject: '[CoAct] Questionnaire de facturation'
+        connexionCode: formation.id
+        firstname: formation.buyer.firstname
+      }
     , (error) ->
       if error
         console.log(error);

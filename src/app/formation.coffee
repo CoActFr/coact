@@ -1,6 +1,6 @@
 angular.module '%module%'
 .controller 'postFormationCtrl',  ($scope, $http, $confirm) ->
-  $scope.fixedFiftyPrice = Math.floor(50*basePrice)/100
+  $scope.fixedFiftyPrice = Math.floor(basePrice/2)
   $scope.maxChosenPrice = 2*basePrice
   $scope.fixedCosts = fixedCosts
   $scope.answer = answer
@@ -12,7 +12,7 @@ angular.module '%module%'
       $scope.maxChosenPrice = $scope.answer.chosenPrice + $scope.fixedFiftyPrice
 
   $scope.getTotal = ->
-    return Math.floor(100*($scope.fixedFiftyPrice + $scope.fixedCosts + $scope.answer.chosenPrice))/100
+    return Math.floor($scope.fixedFiftyPrice + $scope.fixedCosts + $scope.answer.chosenPrice)
 
   $scope.testify = ->
     $scope.answer.testimony.chosen = not $scope.answer.testimony.chosen

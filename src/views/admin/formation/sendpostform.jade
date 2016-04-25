@@ -68,6 +68,10 @@ block component
                 span Proposer la recommandation auprès des partenaire
           .row
             .col-md-12
+              h3 Le questionnaire sera envoyé à :
+              p= formation.buyer.firstname + ' ' + formation.buyer.lastname + ' ' + formation.buyer.email
+          .row
+            .col-md-12
               div.alert.alert-danger(ng-show="failureAlert!=null")
                 span {{failureAlert}}
                 a.close(type="button" ng-click="failureAlert=null" ) &times;
