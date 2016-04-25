@@ -10,6 +10,8 @@ block component
               var formation = !{JSON.stringify(formation)};
           else
             h2 Ajouter une formation
+            script(type='text/javascript').
+              var formation = false;
     form(
       ng-controller='adminAddFormationCtrl'
       name='AddFormationForm'
