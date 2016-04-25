@@ -62,7 +62,9 @@ angular.module '%module%'
   $scope.comment = ->
     $scope.answer.commentary.chosen = not $scope.answer.commentary.chosen
 
+  $scope.failureAlert = false
   $scope.submitPostFormationSurvey = ->
+    #remove empty recommandations
     $scope.answer.recommandation.contacts = _.reject $scope.contactArray, (contact)->
       return not (contact.firstname or
        contact.lastname or
@@ -71,5 +73,14 @@ angular.module '%module%'
        contact.phone or
        contact.email)
 
-    console.log $scope.answer
-
+    $scope.failureAlert = false
+    $http
+      method: 'POST'
+      url: window.location.href
+      data:
+        answer: $scope.answer
+        client: $scope.client
+    .then ->
+      window.location.href = window.location.href.replace 'post', 'thanks'
+    , (data) ->
+      $scope.failureAlert = true

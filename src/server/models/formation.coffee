@@ -26,7 +26,9 @@ formationSchema = mongoose.Schema
     firstname: String
     job: String
     email: String
-  postFormationSurvey: ObjectId
+  postFormationSurvey:
+    type: ObjectId
+    ref: 'PostFormationSurvey'
 
 postFormationSurveySchema = mongoose.Schema
   sent: Boolean
@@ -34,7 +36,9 @@ postFormationSurveySchema = mongoose.Schema
     fiftyPercent: Boolean
     recommandation: Boolean
     testimony: Boolean
-  answer: ObjectId
+  answer:
+    type: ObjectId
+    ref: 'PostFormationSurveyAnswer'
 
 postFormationSurveyAnswerSchema = mongoose.Schema
   validated: Boolean
