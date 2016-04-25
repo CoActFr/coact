@@ -6,25 +6,27 @@ adminPCMRouter.use (request, response, next) ->
 
 # ALL
 
-adminPCMRouter.get '/all', (request, response) ->
-  pcmTestModel.remove _id: "568e3217e18ae1261c889611", (error, pcmTests) ->
-    pcmTestModel.find (error, pcmTests) ->
-      formatTest = (pcmTest) ->
-        numberOfAnswer = 0
-        numberOfCorrection = 0
-        for user in pcmTest.users
-          if user.answers.length == pcmTest.videos.length
-            numberOfAnswer += 1
-          if user.corrected
-            numberOfCorrection += 1
-        return {
-          name: pcmTest.name
-          numberOfAnswer: numberOfAnswer
-          numberOfCorrection: numberOfCorrection
-        }
+adminPCMRouter.get '/', (request, response) ->
+  response.redirect '/admin/pcm/all'
 
-      response.render 'pcmAdmin/all',
-        pcmTests: _.map pcmTests, formatTest
+adminPCMRouter.get '/all', (request, response) ->
+  pcmTestModel.find (error, pcmTests) ->
+    formatTest = (pcmTest) ->
+      numberOfAnswer = 0
+      numberOfCorrection = 0
+      for user in pcmTest.users
+        if user.answers.length == pcmTest.videos.length
+          numberOfAnswer += 1
+        if user.corrected
+          numberOfCorrection += 1
+      return {
+        name: pcmTest.name
+        numberOfAnswer: numberOfAnswer
+        numberOfCorrection: numberOfCorrection
+      }
+
+    response.render 'admin/pcmAdmin/all',
+      pcmTests: _.map pcmTests, formatTest
 
 
 adminPCMRouter.post '/add', (request, response) ->
@@ -99,7 +101,7 @@ adminPCMRouter.post '/inport-test', busboy(), (request, response) ->
 adminPCMRouter.get '/send/:name', (request, response) ->
   pcmTestModel.findOne name: request.params.name
   .exec (error, pcmTest) ->
-    response.render 'pcmAdmin/send',
+    response.render 'admin/pcmAdmin/send',
       pcmTest: pcmTest
 
 adminPCMRouter.post '/send/:name', (request, response) ->
@@ -187,7 +189,7 @@ adminPCMRouter.post '/send-to-multiple-users/:name', busboy(), (request, respons
               console.log(error);
 
             if index == emailToSend.length - 1
-              response.render 'pcmAdmin/inportusers',
+              response.render 'admin/pcmAdmin/inportusers',
                 users: emailToSend
 
   request.pipe request.busboy
@@ -195,7 +197,7 @@ adminPCMRouter.post '/send-to-multiple-users/:name', busboy(), (request, respons
 # Destroy
 
 adminPCMRouter.get '/destroy/:name', (request, response) ->
-  response.render 'pcmAdmin/destroy',
+  response.render 'admin/pcmAdmin/destroy',
     name: request.params.name
 
 adminPCMRouter.post '/destroy/:name', (request, response) ->
@@ -212,7 +214,7 @@ adminPCMRouter.get '/see/:name', (request, response) ->
   pcmTestModel.findOne name: request.params.name
   .exec (error, pcmTest) ->
     console.log pcmTest
-    response.render 'pcmAdmin/see',
+    response.render 'admin/pcmAdmin/see',
       pcmTest: pcmTest
 
 adminPCMRouter.get '/export-results/:name', (request, response) ->
@@ -276,7 +278,7 @@ adminPCMRouter.get '/correct/:name', (request, response) ->
     removeID = (mongooseObject) ->
       return _.omit mongooseObject.toObject(), ['_id', '__v']
     user = _.find pcmTest.users, 'email', request.query.email
-    response.render 'pcmAdmin/correct',
+    response.render 'admin/pcmAdmin/correct',
       name: pcmTest.name
       videos: _.map pcmTest.videos, removeID
       user:

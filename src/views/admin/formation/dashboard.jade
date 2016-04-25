@@ -1,0 +1,75 @@
+extends ./header.jade
+block component
+  #dashboard-formation
+    .jumbotron.dashboard-header
+      .container
+        .row
+          .col-md-12
+            h2= formation.title
+            table.table
+              thead
+                tr
+                  th Client
+                  th Honoraires de base
+                  th Frais fixes
+              tbody
+                tr
+                  td= formation.client
+                  td= formation.basePrice + ' € HT'
+                  td= formation.fixedCosts + ' € HT'
+            h3 Status
+            .container
+              .row
+                .col-md-6
+                  span Formation réalisée :&nbsp;
+                  - var dayCount = _.countBy(formation.dates, function(day){return moment(day.date).isBefore(moment())})
+                  - var dayDone = dayCount['true'] ? dayCount['true'] : 0
+                  if (dayDone == formation.dates.length)
+                    span.status.valid totalement &#61452;
+                  else
+                    span.status.waiting= 'à ' + Math.floor(100*dayDone/formation.dates.length) + '%'
+                    span.status.waiting &nbsp;&#61683;
+                .col-md-6
+                  span Questionnaire post-formation :&nbsp;
+                  case postFormationStatus
+                    when 2
+                      span.status.valid répondu &#61452;
+                    when 1
+                      span.status.waiting envoyé &#61683;
+                    when 0
+                      span.status.not-valid non envoyé &#61453;
+    .jumbotron
+      .container
+        .row
+          .col-md-12
+            h3 Actions
+            table.table
+              tbody
+                tr
+                  td
+                    a.btn.btn-primary.btn-block(
+                        href='/admin/formation/editForm/' + formation._id
+                      ) Editer la formation
+                  td
+                    a.btn.btn-primary.btn-block(
+                        href='/admin/formation/sendPostFormation/' + formation._id
+                      ) Envoyer le questionnaire post-formation
+            h3 Dates de formations
+            table.table.table-hover
+              thead
+                tr
+                  th Date de la formation
+                  th Début
+                  th Fin
+                  th Réalisé
+              tbody
+                for day in formation.dates
+                  tr
+                    td=moment(day.date).format('DD/MM/YYYY')
+                    td=moment(day.from).format('HH:mm')
+                    td=moment(day.to).format('HH:mm')
+                    td
+                      if (moment(day.date).isBefore(moment()))
+                        span.status.valid réalisé &#61452;
+                      else
+                        span.status.waiting à venir &#61683;

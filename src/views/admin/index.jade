@@ -1,0 +1,17 @@
+extends ../header.jade
+block head
+  title CoactAdmin - Questionnaires
+block vars
+  - var nav = 'surveys'
+  - var admin = true
+block component
+  .jumbotron
+    .container.admin
+      .row
+        .col-md-12
+          h1 Plateforme d'administration
+      .row
+        .col-md-6
+          a.btn.btn-primary(href='/admin/pcm') Questionnaires de Process Com
+        .col-md-6
+          a.btn.btn-primary(href='/admin/formation') Formations

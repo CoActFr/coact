@@ -4,7 +4,7 @@ module.exports = function (shipit) {
     shipit.initConfig({
         default: {
             workspace: '/tmp/coact',
-            repositoryUrl: 'git@github.com:AubryH/coact.git',
+            repositoryUrl: 'git@github.com:CoActFr/coact.git',
             ignores: ['.git', 'node_modules'],
             shallowClone: true,
         },

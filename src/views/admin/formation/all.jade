@@ -1,0 +1,37 @@
+extends ./header.jade
+block component
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          h2 Formations
+  .jumbotron
+    .container
+      .row
+        .col-md-12
+          if formations.length > 0
+            table.table.table-hover
+              thead
+                tr
+                  th Titre
+                  th Responsable
+                  th Participants
+                  th Jours
+                  th
+              tbody
+                for formation in formations
+                  tr
+                    td= formation.title
+                    td= formation.creator.firstname
+                    td= formation.users.length
+                    td= formation.dates.length
+                    td
+                      a.btn.btn-primary.form-control(
+                        href='/admin/formation/editForm/' + formation._id
+                      ) Editer
+
+          else
+            p Il n'y a pas encore de formation sur la plateforme
+      .row
+        .col-md-121
+          a.btn.btn-primary(href='/admin/formation/addForm') Ajoutez une formation
