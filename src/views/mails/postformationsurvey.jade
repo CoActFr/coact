@@ -1,0 +1,30 @@
+doctype transitional
+html
+  head
+    meta(http-equiv = 'Content-Type', content = 'text/html; charset=UTF-8')
+    title= subject
+  body
+
+    if firstname
+      p="Bonjour " + firstname +","
+    else
+      p Bonjour,
+
+    p Pour finaliser la session de formations réalisés par CoAct pour vos collaborateurs, nous vous invitons à réalisé le questionnaire suivant :
+
+    a(href='http://www.coact.fr/formation/' + connexionCode + '/post')="www.coact.fr/formation/" + connexionCode + "/post"
+
+    br
+    br
+
+    p Merci beaucoup,
+
+    p L’équipe CoAct
+
+    a(href="http://www.coact.fr")
+      img(src="http://www.coact.fr/img/CoAct.png"
+        widht=170
+        height=120
+        alt="CoAct")
+
+    p PS 1 : notre plateforme étant encore en cours de développement, toute remarque ou suggestion sera la bienvenue pour améliorer ce service. Votre contact : Aubry Hervé (aubry.herve@coact.fr)

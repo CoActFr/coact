@@ -7,6 +7,7 @@
 @coactBlueTransparent: rgba(23, 158, 213, 0.7);
 @coactDarkGrey: #666;
 @coactGrey: #999;
+@coactLightGrey: #bbb;
 
 @coactHarmoniser: orange;
 @coactThinker: #0094FF;
@@ -356,6 +357,332 @@ body{
   }
 
 
+    /* Admin
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+  .admin {
+    text-align: center;
+    min-height: 400px;
+    h1 {
+      margin-bottom: 100px;
+    }
+    .btn-primary {
+      font-size: 30px;
+      line-height: 85px;
+      width: 100%;
+      height: 100px;
+    }
+  }
+
+
+    /* Formation
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+  #dashboard-formation {
+    .dashboard-header {
+      background-color: @coactBlue;
+
+    }
+    span.status {
+      font-family: @font-family-icon;
+      &.valid {
+        color: green;
+      }
+      &.waiting {
+        color: orange;
+      }
+      &.not-valid {
+        color: red;
+      }
+    }
+  }
+
+  #send-post-formation {
+    .post-form-option {
+      background-color: @coactGrey;
+      padding: 5px 20px;
+      margin-bottom: 5px;
+      border-radius: 10px;
+
+      border-style: solid;
+      border-width: 1px;
+      border-color: @coactGrey;
+
+      &:hover {
+        background-color: @coactLightGrey;
+      }
+
+      &.selected {
+        border-color: @coactBlueDarker;
+        background-color: @coactBlue;
+        &:hover {
+          border-color: @coactBlue;
+          background-color: @coactBlueLight;
+        }
+      }
+
+      .check-icon {
+        font-family: @font-family-icon;
+        color: white;
+        margin-right: 10px;
+      }
+    }
+
+    input[type='submit'] {
+      margin-top: 15px;
+    }
+  }
+
+  .add-formation {
+    padding: 30px 10px;
+    border-radius: 15px;
+
+    h3 {
+      margin: 0
+    }
+
+    .row {
+      background-color: white;
+      padding-bottom: 20px;
+      &:first-child{
+        padding-top: 20px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+      &:last-child{
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+
+      &.bottom {
+        padding: 10px 0;
+        background-color: @coactGrey;
+      }
+    }
+  }
+
+  #post-formation-survey {
+    .btn-primary {
+      position: relative;
+
+      span.valid-btn-icon {
+        color: @coactBlue;
+        position: absolute;
+        left: 45px;
+        top: -2px;
+        font-size: 30px;
+        font-family: @font-family-icon;
+      }
+    }
+
+    .facturation {
+      .split-price>.box{
+        text-align: center;
+        border-color: @coactBlue;
+        border-width: 2px;
+        border-style: solid;
+        margin: 12px;
+        height: 150px;
+
+        &.fixed-box {
+          background-color: #fff;
+          p {
+            font-size: 25px !important;
+            margin-top: 59px;
+          }
+        }
+
+        &.choose-box {
+          background-color: @coactBlue;
+        }
+
+        .slider {
+          margin-top: 5px;
+          margin-bottom: 15px;
+        }
+
+        input[type='number'] {
+          font-size: 25px;
+          height: 50px;
+          text-align: right;
+        }
+      }
+
+      .total-price {
+        font-size: 25px;
+        text-align: right;
+        margin-bottom: 10px;
+
+        .total-number{
+          min-width: 500px;
+        }
+      }
+
+      border-color: #222;
+      border-width: 4px;
+      border-style: solid;
+    }
+
+    .testimony, .recommandation, .other-proposal {
+      margin-top: 25px;
+
+      .not-chosen {
+        .btn-primary {
+          background-color: @coactBlue;
+          font-size: 18px;
+          color: #000;
+          &:hover {
+            background-color: @coactBlueLight;
+          }
+        }
+      }
+
+      .chosen {
+        background-color: @coactBlue;
+        border-radius: 15px;
+
+        .btn-primary {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          background-color: #fff;
+          font-size: 18px;
+          color: #000;
+        }
+
+        textarea {
+          &, &:hover, &:active, &:focus{
+            width: 90%;
+            margin-left: 5%;
+            background-color: #fff;
+            border-radius: 15px;
+            min-height: 140px;
+            padding: 15px;
+          }
+        }
+        .author-options{
+          margin-bottom: 20px;
+          .author-option {
+            margin-left: 20px;
+            padding: 5px;
+            border-radius: 15px;
+            cursor: pointer;
+            &.selected {
+              background-color: #fff;
+              padding-left: 20px;
+              position: relative;
+
+              span.author-icon {
+                color: @coactBlue;
+                position: absolute;
+                right: 10px;
+                top:0px;
+                font-size: 25px;
+                font-family: @font-family-icon;
+              }
+            }
+          }
+        }
+
+        .quote-company {
+          .btn {
+            margin-left: 25px;
+            border-radius: 15px;
+
+            &.yes.selected {
+              background-color: #fff;
+            }
+            &.no.selected {
+              background-color: @coactGrey;
+            }
+          }
+          input[type='text'] {
+            margin-left: 25px;
+            height: 35px;
+            border-radius: 15px;
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 500px;
+          }
+        }
+      }
+    }
+
+    .recommandation {
+      tr {
+        border-radius: 5px;
+      }
+    }
+
+    .footer {
+      margin-top: 25px;
+      text-align: center;
+
+      input[type='submit'].btn-primary {
+        background-color: #fff;
+        font-size: 18px;
+        color: #000;
+      }
+
+    }
+  }
+
+  #dashboard-formation, .add-formation,
+  #send-post-formation, #post-formation-survey {
+
+    // Tables
+    table{
+      &.no-lines {
+        &>tbody>tr>td {
+          border-top: 0;
+        }
+      }
+
+      th {
+        text-align: left;
+        padding-left: 20px;
+      }
+
+      &.split-2 {
+        td {
+          width: 50%;
+        }
+
+      }
+      &.split-4 {
+        td {
+          width: 25%;
+
+          &[colspan='2'] {
+            width: 50%;
+          }
+        }
+      }
+      &.split-6 {
+        td {
+          width: 100%/6;
+
+          &[colspan='2'] {
+            width: 100%/3;
+          }
+        }
+      }
+
+      &.split-2, &.split-4, &.split-6 {
+        td {
+          input.form-control {
+            text-align: left;
+            padding-left: 20px;
+
+            &.currency {
+              text-align: right;
+              padding-right: 10px;
+            }
+          }
+        }
+      }
+    }
+
+  }
 
     /* PCM test
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -1137,7 +1464,7 @@ body{
     /* BTN
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-  .jumbotron {
+  #three-fork .jumbotron, #organisation-cta .jumbotron, .jumbotron.appeal {
     .btn-default {
       &.btn-higlight {
         background-color: #0004AD;

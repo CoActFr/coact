@@ -1,0 +1,74 @@
+extends ./header.jade
+block component
+  #send-post-formation
+    .jumbotron.dashboard-header
+      .container
+        .row
+          .col-md-12
+            h2= formation.title
+            table.table.table-hover.split-2.no-lines
+              tbody
+                tr
+                  td Intitulé
+                  td= formation.title
+                for day, index in formation.dates
+                  tr
+                    if index > 0
+                      td
+                    else
+                      td Dates et durée
+                    - var date = moment(day.date).format('DD/MM/YYYY')
+                    - var from = moment(day.from).format('H[h]mm')
+                    - var to = moment(day.to ).format('H[h]mm')
+                    - var duration = moment(day.to).diff(moment(day.from), 'hour')
+                    td= date + ' - '  + from + '/' + to + ' - ' + duration + ' heures'
+                tr
+                  td Lieu de la formation
+                  td= formation.place
+                tr
+                  td Honoraires de base
+                  td= formation.basePrice + '€'
+                tr
+                  td Frais fixes
+                  td= formation.fixedCosts + '€'
+        if formation.postFormationSurvey
+          script(type='text/javascript').
+            var postFormationSurvey = !{JSON.stringify(formation.postFormationSurvey)};
+            var postFormationSurveyExist = true;
+        else
+          script(type='text/javascript').
+            var postFormationSurveyExist = false;
+        form(
+          ng-controller='adminSendPostFormationCtrl'
+          name='SendPostForm'
+          ng-submit='submitSendPostFormationSurvey()')
+          .row
+            .col-md-12
+              h3 Options
+              .post-form-option(
+                ng-class='options.fiftyPercent ? "selected" : ""'
+                ng-click='switchFiftyPercent()'
+              )
+                span.check-icon(ng-show='options.fiftyPercent') &#61452;
+                span.check-icon(ng-hide='options.fiftyPercent') &#61590;
+                span Proposer 50% ferme + reste au choix
+              .post-form-option(
+                ng-class='options.testimony ? "selected" : ""'
+                ng-click='switchTestimony()'
+              )
+                span.check-icon(ng-show='options.testimony') &#61452;
+                span.check-icon(ng-hide='options.testimony') &#61590;
+                span Proposer témoignage
+              .post-form-option(
+                ng-class='options.recommandation ? "selected" : ""'
+                ng-click='switchRecommandation()'
+              )
+                span.check-icon(ng-show='options.recommandation') &#61452;
+                span.check-icon(ng-hide='options.recommandation') &#61590;
+                span Proposer la recommandation auprès des partenaire
+          .row
+            .col-md-12
+              div.alert.alert-danger(ng-show="failureAlert!=null")
+                span {{failureAlert}}
+                a.close(type="button" ng-click="failureAlert=null" ) &times;
+              input.form-control(type='submit' value='Envoyer le Questionnaire')

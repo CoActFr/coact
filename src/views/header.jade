@@ -43,25 +43,31 @@ html(lang="fr", ng-app="%module%")
             a.social-icon(href="https://www.facebook.com/thecollaboractionfactory" target="_blank")
               img(src="/img/facebook-icon.png" width="25" height="25" alt="LinkedIn" border="0")
           ul.nav.navbar-nav.navbar-right
-            li(class=nav === 'landing' ? 'active' : '')
-              a(href="/") Accueil
-            li.dropdown(class=nav === 'personnel' || nav === 'organisation' || nav === 'technologie' ? 'active' : '')
-              a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
-                | Collaboration
-                span.caret
-              ul.dropdown-menu
-                li(class=nav === 'personnel' ? 'active' : '')
-                  a(href="/personnel") humaine
-                li(class=nav === 'organisation' ? 'active' : '')
-                  a(href="/organisation") organisationnelle
-                li(class=nav === 'technologie' ? 'active' : '')
-                  a(href="/technologie") technologique
-            li(class=nav === 'jobs' ? 'active' : '')
-              a(href="/jobs") Jobs
-            li(class=nav === 'actu' ? 'active' : '')
-              a(href="/actu") Actualité
-            li(class=nav === 'contact' ? 'active' : '')
-              a(href="/contact") Contact
+            if admin
+              li(class=nav === 'pcm' ? 'active' : '')
+                a(href="/admin/pcm") Process Com
+              li(class=nav === 'formation' ? 'active' : '')
+                a(href="/admin/formation") Formations
+            else
+              li(class=nav === 'landing' ? 'active' : '')
+                a(href="/") Accueil
+              li.dropdown(class=nav === 'personnel' || nav === 'organisation' || nav === 'technologie' ? 'active' : '')
+                a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
+                  | Collaboration
+                  span.caret
+                ul.dropdown-menu
+                  li(class=nav === 'personnel' ? 'active' : '')
+                    a(href="/personnel") humaine
+                  li(class=nav === 'organisation' ? 'active' : '')
+                    a(href="/organisation") organisationnelle
+                  li(class=nav === 'technologie' ? 'active' : '')
+                    a(href="/technologie") technologique
+              li(class=nav === 'jobs' ? 'active' : '')
+                a(href="/jobs") Jobs
+              li(class=nav === 'actu' ? 'active' : '')
+                a(href="/actu") Actualité
+              li(class=nav === 'contact' ? 'active' : '')
+                a(href="/contact") Contact
 
     block component
 
