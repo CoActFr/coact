@@ -30,6 +30,7 @@ block component
                       type='textbox'
                       placeholder='Le Pennec'
                       ng-model='formation.creator.lastname'
+                      required
                     )
                 tr
                   td Prénom
@@ -38,6 +39,7 @@ block component
                       type='textbox'
                       placeholder='Fredéric'
                       ng-model='formation.creator.firstname'
+                      required
                     )
                 tr
                   td Email
@@ -46,6 +48,7 @@ block component
                       type='email'
                       placeholder='frederic.lepennec@coact.fr'
                       ng-model='formation.creator.email'
+                      required
                     )
       .container.add-formation
         .row

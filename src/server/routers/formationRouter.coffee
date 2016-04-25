@@ -72,5 +72,16 @@ formationRouter.post '/:id/post', (request, response) ->
           return response.sendStatus 500
         return response.sendStatus 200
 
+formationRouter.get '/:id/thanks', (request, response) ->
+  formationModel.findById request.params.id
+  .exec (error, formation) ->
+    if error
+      return response.sendStatus 500
+    unless formation
+      return response.sendStatus 404
+
+    return response.render 'formation/thanks.jade',
+      user: formation.client
+
 
 module.exports = formationRouter
