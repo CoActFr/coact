@@ -84,6 +84,11 @@ server.use (request, response, next) ->
   # Implement other HTTP methods.
     next()
 
+# Passport
+passport = require '../node_modules/passport/lib/index.js'
+#GoogleStrategy = require('../node_modules/passport-google/lib/passport-google/index.js').Strategy
+
+
 # Database
 
 require './models.js'

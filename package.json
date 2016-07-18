@@ -38,12 +38,13 @@
     "basic-auth-connect": "~1.0.0",
     "body-parser": "~1.14.1",
     "jade": "~1.10.0",
-    "lodash": "^3.9.0",
     "mongoose": "~4.1.11",
     "exceljs": "~0.2.3",
     "connect-busboy": "0.0.2",
     "pdfkit": "~0.7.2",
-    "moment": "~2.12.0"
+    "moment": "~2.12.0",
+    "passport": "~0.3.2",
+    "lodash": "~4.13.1"
   },
   "devDependencies": {
     "chai": "^2.0.0",

@@ -10,22 +10,50 @@ block component
               href="/admin/pcm/export-results/" + pcmTest.name
             ) exporter en .xlsx
 
-    .container
+    .container.see-answers
       .row
         .col-md-12
           table.table.table-hover
             thead
               tr
-                th Nom
-                th Prénom
-                th Email
-                th Questions répondues
-                th Dernière modification
-                th Correction
+                th
+                  if sort == "lastname"
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=lastname&order=asc") Nom
+                  else
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=lastname&order=desc") Nom
+                th
+                  if sort == "firstname"
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=firstname&order=asc") Prénom
+                  else
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=firstname&order=desc") Prénom
+                th
+                  if sort == "email"
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=email&order=asc") Email
+                  else
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=email&order=desc") Email
+                th
+                  if sort == "answers"
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=answers&order=asc") Questions répondues
+                  else
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=answers&order=desc") Questions répondues
+                th
+                  if sort == "updated"
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=updated&order=asc") Dernière modification
+                  else
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=updated&order=desc") Dernière modification
+                th
+                  if sort == "corrected"
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=corrected&order=asc") Correction
+                  else
+                    a(href="/admin/pcm/see/"+pcmTest.name + "?sort=corrected&order=desc") Correction
                 th Corriger
             tbody
-              for user in pcmTest.users
-                tr
+              unless sort
+                - sort = "updated"
+              unless order
+                - sort = "desc"
+              for user in _.orderBy(pcmTest.users, sort, order)
+                tr.answer(class= (user.answers.length == pcmTest.videos.length ? "fully-answered" : "") + " " + (user.corrected ? "corrected" : ""))
                   td= user.lastname
                   td= user.firstname
                   td= user.email
