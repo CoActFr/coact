@@ -216,6 +216,8 @@ adminPCMRouter.get '/see/:name', (request, response) ->
     console.log pcmTest
     response.render 'admin/pcmAdmin/see',
       pcmTest: pcmTest
+      sort: request.query.sort
+      order: request.query.order
 
 adminPCMRouter.get '/export-results/:name', (request, response) ->
   pcmTestModel.findOne name: request.params.name
